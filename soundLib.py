@@ -113,6 +113,20 @@ Octave3_4 = [c3_4, cSharp3_4, d3_4, dSharp3_4, e3_4, f3_4, fSharp3_4, g3_4, gSha
 ###########################################
 #                Octave 4                 #
 ###########################################
+c4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * c4Freq / fs ) ).astype( np.float32 )
+cSharp4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * cSharp4Freq / fs ) ).astype( np.float32 )
+d4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * d4Freq / fs ) ).astype( np.float32 )
+dSharp4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * dSharp4Freq / fs ) ).astype( np.float32 )
+e4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * e4Freq / fs ) ).astype( np.float32 )
+f4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * f4Freq / fs ) ).astype( np.float32 )
+fSharp4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * fSharp4Freq / fs ) ).astype( np.float32 )
+g4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * g4Freq / fs ) ).astype( np.float32 )
+gSharp4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * gSharp4Freq / fs ) ).astype( np.float32 )
+a4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * a4Freq / fs ) ).astype( np.float32 )
+aSharp4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * aSharp4Freq / fs ) ).astype( np.float32 )
+b4_16 = ( np.sin( 2 * np.pi * np.arange( fs * sixteenth ) * b4Freq / fs ) ).astype( np.float32 )
+Octave4_16 = [c4_16, cSharp4_16, d4_16, dSharp4_16, e4_16, f4_16, fSharp4_16, g4_16, gSharp4_16, a4_16, aSharp4_16, b4_16]
+
 c4_8 = ( np.sin( 2 * np.pi * np.arange( fs * eighth ) * c4Freq / fs ) ).astype( np.float32 )
 cSharp4_8 = ( np.sin( 2 * np.pi * np.arange( fs * eighth ) * cSharp4Freq / fs ) ).astype( np.float32 )
 d4_8 = ( np.sin( 2 * np.pi * np.arange( fs * eighth ) * d4Freq / fs ) ).astype( np.float32 )
@@ -177,11 +191,15 @@ def test_chromatic( octave ):
         beat = note
         stream.write( volume * beat )
 
-#test_chromatic( Octave3_16 )
-#test_chromatic( Octave3_8 )
-#test_chromatic( Octave3_4 )
+test_chromatic( Octave3_16 )
+test_chromatic( Octave4_16 )
 
-test_chords()
+test_chromatic( Octave3_8 )
+test_chromatic( Octave4_8 )
+
+test_chromatic( Octave3_4 )
+
+#test_chords()
 
 stream.stop_stream()
 stream.close()

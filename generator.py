@@ -1,4 +1,5 @@
 from random import randint, seed
+from soundLib import *
 
 
 class Generate:

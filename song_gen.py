@@ -8,9 +8,9 @@ chord_4 = 'IV'
 
 percent_16 = 40
 percent_8 = 40
-percent_4 = 17
-percent_2 = 2
-percent_1 = 1 
+percent_4 = 20
+percent_2 = 0
+percent_1 = 0
 
 song1 = Generate(key_name, chord_1, chord_2, chord_3, chord_4, percent_16, percent_8, percent_4, percent_2, percent_1)
 
