@@ -64,6 +64,11 @@ class Generate:
         print('Notes in Chords: ' + str(self.chord_notes))
 
     def one_measure(self, measure_num):
+
+        testLib = SoundLibrary(2)
+
+        print(testLib.key)
+
         subdivisions = []
         subdivided_name = []
         beats = 1.0
