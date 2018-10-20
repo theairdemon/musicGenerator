@@ -1,6 +1,5 @@
 from random import randint, seed
-from soundLib import *
-
+from noteLib import NoteLibrary
 
 class Generate:
 
@@ -16,6 +15,8 @@ class Generate:
         self.percent4 = percent4
         self.percent2 = percent2
         self.percent1 = percent1
+
+        self.musicNote = NoteLibrary(self.key, self.chord1, self.chord2, self.chord3, self.chord4)
 
         #                   0       1      2      3       4    5      6       7      8       9      10      11
         self.note_names = ['C', 'C_sharp', 'D', 'E_flat', 'E', 'F', 'F_sharp', 'G', 'G_sharp', 'A', 'B_flat', 'B']
@@ -64,11 +65,6 @@ class Generate:
         print('Notes in Chords: ' + str(self.chord_notes))
 
     def one_measure(self, measure_num):
-
-        testLib = SoundLibrary(2)
-
-        print(testLib.key)
-
         subdivisions = []
         subdivided_name = []
         beats = 1.0
@@ -119,7 +115,7 @@ class Generate:
                 subdivisions.append(note_val)
                 subdivided_name.append(note_name)
 
-            # 1/2 notes: 5%
+            # 1/2 notes
             elif rand1 <= self.percent16 + self.percent8 + self.percent4 + self.percent2 and beats - 0.5 >= 0:
                 note_val = 0.5
                 note_name = '1/2'
@@ -129,7 +125,7 @@ class Generate:
                 subdivisions.append(note_val)
                 subdivided_name.append(note_name)
 
-            # 1/1 notes: 3%
+            # 1/1 notes
             elif rand1 <= 100 and beats - 1.0 >= 0:
                 note_val = 1.0
                 note_name = '1/1'
@@ -186,4 +182,9 @@ class Generate:
         # print('| Subdivided measure: ' + str(subdivided_name))
 
         for i in range(0, len(subdivisions)):
+            #play note using playNote( chordNum, noteName, subdivision)
+            self.musicNote.playNote( str(self.chords[c_num]),  note_subdivisions[i], subdivided_name[i])
+
+            #self.musicNote.testPlay()
+
             print("   " + subdivided_name[i] + " - " + note_subdivisions[i])
