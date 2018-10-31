@@ -5,6 +5,7 @@ class SoundLibrary:
 
     def __init__(self):
 
+        #set volume to 0.1 for headphone use, and 0.15-0.2 for computer speaker use
         self.volume = 0.1     # range [0.0, 1.0]
         self.fs = 44100       # sampling rate, Hz, must be integer
         concertA = 440.0        # sine frequency, Hz, may be float
@@ -216,6 +217,17 @@ class SoundLibrary:
         self.Octave45_8 = Octave4_8 + Octave5_8
         self.Octave45_4 = Octave4_4 + Octave5_4
 
+        ###########################################
+        #          Sound Global Variables         #
+        ###########################################
+        self.p = pyaudio.PyAudio()
+
+        # for paFloat32 sample values must be in range [-1.0, 1.0]
+        self.stream = self.p.open(format = pyaudio.paFloat32,
+                            channels = 1,
+                            rate = self.fs,
+                            output = True)
+
 
     #sum chords, return total value
     def chordSum( self, chordName ):
@@ -226,44 +238,20 @@ class SoundLibrary:
             self.chordBeat += i
         return self.chordBeat
 
-
-    def test_chromatic( self, octave ):
-        self.octave = octave
-
-        p = pyaudio.PyAudio()
-        # for paFloat32 sample values must be in range [-1.0, 1.0]
-        stream = p.open(format = pyaudio.paFloat32,
-                            channels = 1,
-                            rate = self.fs,
-                            output = True)
-        for note in self.octave:
-            beat = note
-            stream.write( self.volume * beat )
-
-        stream.stop_stream()
-        stream.close()
-
-        p.terminate()
-
+    #this is what play the sounds when referenced in noteLib.py
     def playBeat( self, chord, note ):
         self.chord = chord
         self.note = note
 
-        p = pyaudio.PyAudio()
-        # for paFloat32 sample values must be in range [-1.0, 1.0]
-        stream = p.open(format = pyaudio.paFloat32,
-                            channels = 1,
-                            rate = self.fs,
-                            output = True)
-
         beat = self.chordSum(self.chord) + self.note
 
-        stream.write( self.volume * beat )
+        self.stream.write( self.volume * beat )
 
-        stream.stop_stream()
-        stream.close()
+    def __exit__(self):
+        self.stream.stop_stream()
+        self.stream.close()
 
-        p.terminate()
+        self.p.terminate()
 
 
 

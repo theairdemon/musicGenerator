@@ -182,9 +182,9 @@ class Generate:
         # print('| Subdivided measure: ' + str(subdivided_name))
 
         for i in range(0, len(subdivisions)):
+            print("   " + subdivided_name[i] + " - " + note_subdivisions[i])
+            
             #play note using playNote( chordNum, noteName, subdivision)
             self.musicNote.playNote( str(self.chords[c_num]),  note_subdivisions[i], subdivided_name[i])
 
             #self.musicNote.testPlay()
-
-            print("   " + subdivided_name[i] + " - " + note_subdivisions[i])
