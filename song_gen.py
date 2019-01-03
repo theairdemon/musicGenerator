@@ -10,7 +10,7 @@ four_chords2 = ['VI', 'IV', 'I', 'V']
 songChords = []
 
 for i in epic_chords1:
-    songChords.append(i) 
+    songChords.append(i)
 
 percent_16 = 10
 percent_8 = 40
