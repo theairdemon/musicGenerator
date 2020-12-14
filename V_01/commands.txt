@@ -1,0 +1,16 @@
+
+Java compiling
+
+export PATH=$PATH:"/C/Program Files/Java/jdk1.8.0_111/bin/"
+javac PlanetaryDatabase.java
+
+-----------------------------------------------------------------
+
+Git Commands
+
+git status = check the status of unadded/uncommitted files
+git add . = add all unadded files to commit queue
+git commit -am "msg" = commit all files in queue with a msg attached
+git branch = check the branch you're on
+git branch -m master [name] = swap to name of the other branch from master
+git push -u origin [name] = push all commits to the branch, will be published on GitHub 

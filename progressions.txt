@@ -1,2 +1,0 @@
-II, VI, I, V
-I, V, VI, IV
