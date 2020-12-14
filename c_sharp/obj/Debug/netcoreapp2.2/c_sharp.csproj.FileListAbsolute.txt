@@ -1,0 +1,11 @@
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\bin\Debug\netcoreapp2.2\c_sharp.deps.json
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\bin\Debug\netcoreapp2.2\c_sharp.runtimeconfig.json
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\bin\Debug\netcoreapp2.2\c_sharp.runtimeconfig.dev.json
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\bin\Debug\netcoreapp2.2\c_sharp.dll
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\bin\Debug\netcoreapp2.2\c_sharp.pdb
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.csprojAssemblyReference.cache
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.csproj.CoreCompileInputs.cache
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.AssemblyInfoInputs.cache
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.AssemblyInfo.cs
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.dll
+C:\Users\hgall\Documents\GitHub\musicGenerator\c_sharp\obj\Debug\netcoreapp2.2\c_sharp.pdb
