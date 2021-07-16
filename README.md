@@ -4,7 +4,7 @@ A Python project aimed at making a music generator that creates actual music.
 ## Published Music
 
 ["One Small Step"](https://distrokid.com/hyperfollow/huntergallant/one-small-step)
-- First album created using this code
+- First album created using this program
 - Song setup: verse1-chorus-verse2-chorus-bridge-chorus-chorus
 - Tracklist:
 	- "No Fear": minor key, arpeggiators, instrumental vocals
