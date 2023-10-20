@@ -1,19 +1,19 @@
 Verse 1
 E major
-['I', 'vi', 'ii', 'V']
+['I', 'vi', 'ii', 'vii']
 
 Chorus
 E major
-['I', 'vi', 'IV', 'V']
+['I', 'vi', 'IV', 'vii']
 
 Verse 2
 E major
-['I', 'vi', 'IV', 'vii']
+['I', 'vi', 'ii', 'vii']
 
 Bridge
 E major
-['I', 'ii', 'vii', 'I', 'IV', 'vii', 'iii']
+['I', 'ii', 'vii', 'I', 'ii', 'V', 'I']
 
 Minor Bridge
 C# minor
-['i', 'V', 'i', 'VI', 'iv', 'V', 'i']
+['i', 'V', 'i', 'VI', 'ii', 'V', 'i']

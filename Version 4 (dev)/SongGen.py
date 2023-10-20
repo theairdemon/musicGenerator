@@ -5,44 +5,34 @@ import os
 
 # Custom Classes
 from GenChords import *
+from GenRhythm import *
 
 
 class SongGeneration:
 
-    def __init__(self, key, style='major', length=4, verses=1, verse_type="verse", rhythm=[], startRoot=True, file_name="test", file_location="", folder_location=""):
-        self.key = key
-        self.style = style  # 'major' or 'minor'
-        self.length = length  # default is 4 chords
-        self.verses = verses  # default is 1 verse
-        self.verse_type = verse_type  # default is verse
-        self.startRoot = startRoot  # default is to start on the root chord
-        self.file_name = file_name  # maximum recommended length: 9
-        self.file_location = file_location  # where to save the midi file
-        self.folder_location = folder_location  # the full OS path to the folder
+    def __init__(self, song_dict):
+        # song key
+        self.key = song_dict["key"]
+        # 'major' or 'minor'
+        self.style = song_dict["style"]
+        # default is 4 chords
+        self.length = song_dict["length"]
+        # default is 1 verse
+        self.verses = song_dict["verses"]
+        # default is verse
+        self.verse_type = song_dict["verse_type"]
+        # default is to start on the root chord
+        self.startRoot = song_dict["startRoot"]
+        # maximum recommended length: 9
+        self.file_name = song_dict["file_name"]
+        # where to save the midi file
+        self.file_location = song_dict["file_location"]
+        # the full OS path to the folder
+        self.folder_location = song_dict["folder_location"]
 
         # ================== #
         # DEFINING CONSTANTS #
         # ================== #
-        # Chord Progression Dictionaries
-        self.chord_prog_maj = {'I': [['V', 'vii'], ['ii', 'IV'], ['vi'], ['iii']],
-                               'ii': ['V', 'vii'],
-                               'iii': ['vi'],
-                               'IV': ['V', 'vii'],
-                               'V': ['I'],
-                               'vi': ['ii', 'IV'],
-                               'vii': ['iii', 'I']}
-
-        self.chord_prog_min = {'i': [['V'], ['ii', 'iv'], ['VI'], ['III'], ['VII']],
-                               'ii': ['V'],
-                               'III': ['VI'],
-                               'iv': ['V'],
-                               'V': ['i'],
-                               'VI': ['ii', 'iv'],
-                               'VII': ['III']}
-        # select which chord_prog to use depending on major or minor input
-        self.chord_prog = self.chord_prog_maj if self.style == 'major' else self.chord_prog_min
-        self.one_cycle = 4 if self.style == 'major' else 5  # for use in chord prog picking
-
         # List of all possible notes, rhythms, and rhythm weights
         self.all_notes = ['C', 'C#', 'D', 'D#', 'E',
                           'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
@@ -70,7 +60,6 @@ class SongGeneration:
         self.chords = []
         self.chord_notes = []
         self.melody = []
-        self.rhythm_intro = rhythm
         self.rhythm = []
         self.harmony_names = ["3rd_down", "3rd_up",
                               "4th_up", "5th_up", "8_up", "8_down"]
@@ -99,10 +88,12 @@ class SongGeneration:
             self.startRoot
         )
         self.chords, self.chord_notes = chordGenerator.build()
-        for i in range(self.verses):
-            self.gen_rhythm()
-            self.gen_melody()
-            # self.gen_harmony()
+
+        # Rhythm Generation
+        rhythmGenerator = GenRhythm(len(self.chords))
+        self.gen_rhythm()
+        self.gen_melody()
+        # self.gen_harmony()
         self.gen_MIDI()
 
     # =========== #
@@ -134,82 +125,39 @@ class SongGeneration:
     def gen_rhythm(self):
         prob_1_3_same, prob_2_4_same = self.prob_same()
 
-        if len(self.rhythm_intro) == 0:
-            for i in range(len(self.chords)):
-                # chance of skipping generation and repeating the rhythm
-                if i > 1 and len(self.chords) == 4:
-                    r_same = random.uniform(0, 1)
-                    if (i == 2 and r_same < prob_1_3_same) or (i == 3 and r_same < prob_2_4_same):
-                        self.rhythm.append(self.rhythm[i-2])
-                        continue
-                chord = self.chords[i]
-                total = 0
-                measure = []
-                while total < 4:
-                    # pick a weighted random note
-                    r1 = random.uniform(0, 1)
-                    new_note = self.all_rhythms[-1]
-                    for i in range(0, len(self.all_rhythm_weights)):
-                        if self.all_rhythm_weights[i] <= r1:
-                            new_note = self.all_rhythms[i]
+        for i in range(len(self.chords)):
+            # chance of skipping generation and repeating the rhythm
+            if i > 1 and len(self.chords) == 4:
+                r_same = random.uniform(0, 1)
+                if (i == 2 and r_same < prob_1_3_same) or (i == 3 and r_same < prob_2_4_same):
+                    self.rhythm.append(self.rhythm[i-2])
+                    continue
+            chord = self.chords[i]
+            total = 0
+            measure = []
+            while total < 4:
+                # pick a weighted random note
+                r1 = random.uniform(0, 1)
+                new_note = self.all_rhythms[-1]
+                for i in range(0, len(self.all_rhythm_weights)):
+                    if self.all_rhythm_weights[i] <= r1:
+                        new_note = self.all_rhythms[i]
 
-                    # only add note size that fits inside the measure
-                    if total + new_note > 4:
-                        new_note = 4 - total
-                    measure.append(new_note)
-                    total += new_note
+                # only add note size that fits inside the measure
+                if total + new_note > 4:
+                    new_note = 4 - total
+                measure.append(new_note)
+                total += new_note
 
-                    # some percent chance to replicate the same note, creating runs of the same size
-                    # only if the note is < one beat long
-                    if new_note < 1 and total + new_note <= 4:
-                        r2 = random.uniform(0, 1)
-                        if r2 < 0.5:
-                            measure.append(new_note)
-                            total += new_note
+                # some percent chance to replicate the same note, creating runs of the same size
+                # only if the note is < one beat long
+                if new_note < 1 and total + new_note <= 4:
+                    r2 = random.uniform(0, 1)
+                    if r2 < 0.5:
+                        measure.append(new_note)
+                        total += new_note
 
-                self.rhythm.append(measure)
-
-        else:
-            for i in range(0, len(self.chords)):
-                # chance of skipping generation and repeating the rhythm
-                if i > 1 and len(self.chords) == 4:
-                    r_same = random.uniform(0, 1)
-                    if (i == 2 and r_same < prob_1_3_same) or (i == 3 and r_same < prob_2_4_same):
-                        self.rhythm.append(self.rhythm[i-2])
-                        continue
-
-                num_notes = self.rhythm_intro[i]
-                total = 4
-                rough_notes = total / num_notes
-                raw_measure = [rough_notes for i in range(0, num_notes)]
-                measure = []
-                for note in raw_measure:
-                    #self.all_rhythms = [0.25, 0.5, 1, 2]
-                    closest_two = [0.25, 0.5]
-                    if note > 0.5:
-                        closest_two[0] = 1
-                    if note > 1:
-                        closest_two[1] = 2
-
-                    measure.append(random.choice(closest_two))
-
-                if sum(measure) > 4:
-                    while sum(measure) > 4:
-                        max_note = max(measure)
-                        note_loc = measure.index(max_note)
-                        if max_note > sum(measure) - 4:
-                            new_note = max_note - (sum(measure) - 4)
-                        else:
-                            new_note = max_note / 2
-                        measure[note_loc] = new_note
-                elif sum(measure) < 4:
-                    while sum(measure) < 4:
-                        min_note = min(measure)
-                        note_loc = measure.index(min_note)
-                        new_note = min_note + (4 - sum(measure))
-                        measure[note_loc] = new_note
-
-                self.rhythm.append(measure)
+            self.rhythm.append(measure)
 
     # ============ #
     # BUILD MELODY #
@@ -453,68 +401,3 @@ class SongGeneration:
             prob_1_3_same = 0.3
             prob_2_4_same = 0.0
         return prob_1_3_same, prob_2_4_same
-
-# Generate a complete song
-
-
-def fullSongGen(key, minorKey, folder, song_style, script_dir, startRoot=True):
-    song_info_file = "song_info.txt"
-    f = open(script_dir + folder + song_info_file, "w")
-
-    # Writing verse 1 to the folder
-    verse1 = SongGeneration(key, style=song_style, length=4, verses=1,
-                            verse_type="verse", startRoot=startRoot, file_name="verse1", file_location=folder, folder_location=script_dir)
-    verse1.gen_song()
-    f.write("Verse 1\n")
-    f.write(str(verse1))
-
-    # Writing chorus to the folder
-    chorus = SongGeneration(key, style=song_style, length=4, verses=1,
-                            verse_type="chorus", startRoot=startRoot, file_name="chorus", file_location=folder, folder_location=script_dir)
-    chorus.gen_song()
-    f.write("\nChorus\n")
-    f.write(str(chorus))
-
-    # Writing verse 2 to the folder
-    verse2 = SongGeneration(key, style=song_style, length=4, verses=1,
-                            verse_type="verse", startRoot=startRoot, file_name="verse2", file_location=folder, folder_location=script_dir)
-    verse2.gen_song()
-    f.write("\nVerse 2\n")
-    f.write(str(verse2))
-
-    # Writing the bridge to the folder
-    bridge = SongGeneration(key, style=song_style, length=7, verses=1,
-                            verse_type="bridge", startRoot=startRoot, file_name="bridge", file_location=folder, folder_location=script_dir)
-    bridge.gen_song()
-    f.write("\nBridge\n")
-    f.write(str(bridge))
-
-    if song_style == "major":
-        minorBridge = SongGeneration(minorKey, style="minor", length=7, verses=1,
-                                     verse_type="bridge", startRoot=startRoot, file_name="minorBridge", file_location=folder, folder_location=script_dir)
-        minorBridge.gen_song()
-        f.write("\nMinor Bridge\n")
-        f.write(str(minorBridge))
-
-    f.close()
-
-
-if __name__ == "__main__":
-    note_list = ['C', 'C#', 'D', 'D#', 'E',
-                 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    # key = random.choice(note_list)
-    key = 'F#'
-    minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
-    # print(key, minorKey)
-
-    # test_song = SongGeneration(key, style='minor', rhythm = [7, 8, 7, 8], length=4, verses=1)
-    # test_song.gen_song()
-    # print(test_song.scale)
-
-    # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
-    script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_oct_2023_4\\"
-    song_style = "major"
-    startRoot = False
-    fullSongGen(key, minorKey, folder, song_style,
-                script_dir, startRoot=startRoot)
