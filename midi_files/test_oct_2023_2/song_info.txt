@@ -1,0 +1,15 @@
+Verse 1
+F# minor
+['VI', 'iv', 'V', 'i']
+
+Chorus
+F# minor
+['VI', 'ii', 'V', 'i']
+
+Verse 2
+F# minor
+['VI', 'iv', 'V', 'i']
+
+Bridge
+F# minor
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']

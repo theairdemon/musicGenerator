@@ -1,0 +1,7 @@
+Verse 1
+A# minor
+['i', 'VI', 'iv', 'V']
+
+Chorus
+A# minor
+['i', 'VI', 'iv', 'V']

@@ -1,0 +1,19 @@
+Verse 1
+E major
+['I', 'vi', 'IV', 'vii']
+
+Chorus
+E major
+['I', 'vi', 'IV', 'V']
+
+Verse 2
+E major
+['I', 'vi', 'IV', 'V']
+
+Bridge
+E major
+['I', 'IV', 'vii', 'I', 'IV', 'vii', 'iii']
+
+Minor Bridge
+C# minor
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']
