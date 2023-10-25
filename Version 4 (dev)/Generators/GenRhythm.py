@@ -1,19 +1,32 @@
 import random
 
+from Genres.DefineGenres import *
+
 
 class GenRhythm:
 
-    def __init__(self, length):
+    def __init__(self, length, genre):
         self.length = length
+        self.genre = genre
+
         self.all_rhythms = [0.25, 0.5, 1, 2]
         self.all_rhythm_weights = [0.1, 0.4, 0.95, 1.0]
 
     def build(self):
+        self.set_rhythm_values()
         self.gen_rhythm()
+
+    # ============== #
+    # SET GENRE INFO #
+    # ============== #
+    def set_rhythm_values(self):
+        genre_details = DefineGenre(self.genre)
+        rhythm_info = genre_details.genre_info()["Rhythm"]
 
     # ============ #
     # BUILD RHYTHM #
     # ============ #
+
     def gen_rhythm(self):
         prob_1_3_same, prob_2_4_same = self.prob_same()
 

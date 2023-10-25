@@ -1,11 +1,12 @@
 import random
+
 from midiutil.MidiFile import MIDIFile
 from datetime import datetime
 import os
 
 # Custom Classes
-from GenChords import *
-from GenRhythm import *
+from Generators.GenRhythm import GenRhythm
+from Generators.GenChords import GenChords
 
 
 class SongGeneration:
