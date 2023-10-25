@@ -23,7 +23,7 @@ Taking Version 3 and converting it to a series of classes that are imported into
 ## Version 3 (stable)
 Expanded on Version 2 by pulling the Jupyter notebook into a python file. Cleaned up chord generation and overall improved efficiency, adding a complete "full song generator" that performed successive generations to make all the components of a full song - verses, chords, and bridge (with a minor scale variation for a song that is normally in a major key).
 
-This version, while not feature-rich
+This version, while not feature-rich, is able to deliver on creating a complete song. It is recommended to generate several samples and store them in different folders, and then compare-and-contrast the variations.
 
 ## Version 2 (deprecated)
 Process:
