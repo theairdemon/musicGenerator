@@ -6,6 +6,7 @@ class DefineGenre:
     def __init__(self, genre="random"):
         self.genre = genre
 
+        # Defining genre strings here
         self.potential_genres = [
             "anime",
             "classical",
@@ -17,11 +18,16 @@ class DefineGenre:
             self.genre = random.choice(self.potential_genres)
 
     def genre_info(self):
-        match self.genre: # type: ignore 
+        match self.genre:  # type: ignore
             case "anime":
-                print("anime")
+                self.anime_info()
             case default:
                 print("Error")
+    
+    def anime_info(self):
+        print("anime")
+
+
 
 
 if __name__ == "__main__":

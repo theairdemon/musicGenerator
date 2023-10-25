@@ -84,24 +84,24 @@ class GenChords:
         # adding the specific notes for each chord
         # if adding more chords, add the notes for those chords here
         for chord in self.chords:
-            if chord == 'I' or chord == 'i':
+            if chord == 'I' or chord == 'i':  # 1, 3, 5
                 self.chord_notes.append(
                     [self.scale[0], self.scale[2], self.scale[4]])
-            elif chord == 'ii':
+            elif chord == 'ii':  # 2, 4, 6
                 self.chord_notes.append(
                     [self.scale[1], self.scale[3], self.scale[5]])
-            elif chord == 'iii' or chord == 'III':
+            elif chord == 'iii' or chord == 'III':  # 3, 5, 7
                 self.chord_notes.append(
                     [self.scale[2], self.scale[4], self.scale[6]])
-            elif chord == 'IV' or chord == 'iv':
+            elif chord == 'IV' or chord == 'iv':  # 4, 6, 1
                 self.chord_notes.append(
                     [self.scale[3], self.scale[5], self.scale[0]])
-            elif chord == 'V':
+            elif chord == 'V':  # 5, 7, 2
                 self.chord_notes.append(
                     [self.scale[4], self.scale[6], self.scale[1]])
-            elif chord == 'vi' or chord == 'VI':
+            elif chord == 'vi' or chord == 'VI':  # 6, 1, 3
                 self.chord_notes.append(
                     [self.scale[5], self.scale[0], self.scale[2]])
-            elif chord == 'vii' or chord == 'VII':
+            elif chord == 'vii' or chord == 'VII':  # 7, 2, 4
                 self.chord_notes.append(
                     [self.scale[6], self.scale[1], self.scale[3]])
