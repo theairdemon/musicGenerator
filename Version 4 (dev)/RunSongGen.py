@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_oct_2023_4\\"
+    folder = "test_2023_12_1\\"
     song_style = "major"
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
