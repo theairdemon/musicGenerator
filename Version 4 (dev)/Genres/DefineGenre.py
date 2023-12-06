@@ -1,37 +1,29 @@
 import random
 
-from RhythmInfo import RhythmInfo
+from Genres.RhythmInfo import *
 
 
 class DefineGenre:
 
-    def __init__(self, genre="random"):
+    def __init__(self, genre=""):
         self.genre = genre
 
         # Defining genre strings here
-        self.potential_genres = [
-            "anime",
-            "classical",
-            "fantasy",
-            "cyberpunk"
-        ]
+        self.genre_dict = {
+            "anime": self.anime_info,
+            "classical": self.classical_info,
+            "cyberpunk": self.cyberpunk_info,
+            "fantasy": self.fantasy_info,
+            "lofi": self.lofi_info
+        }
 
         self.return_dict = {"Rhythm": None, "Melody": None}
 
-        if self.genre == "random":
+        if self.genre not in self.genre_dict.keys():
             self.genre = random.choice(self.potential_genres)
 
     def genre_info(self):
-        if self.genre == "anime":
-            self.anime_info()
-        elif self.genre == "classical":
-            self.classical_info()
-        elif self.genre == "fantasy":
-            self.fantasy_info()
-        elif self.genre == "cyberpunk":
-            self.cyberpunk_info()
-        else:
-            print("Error, genre undefined")
+        self.genre_dict[self.genre]()
         return self.return_dict
 
     # GENRE INFO FUNCTIONS
@@ -43,7 +35,7 @@ class DefineGenre:
 
     def anime_info(self):
         anime_rhythm_info = RhythmInfo()
-        anime_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.1, 0.45, 0.45])
+        anime_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.25, 0.45, 0.3])
         probabilities = {
             'full': {
                 (1, 3): 0,
@@ -64,11 +56,14 @@ class DefineGenre:
     def classical_info(self):
         print("classical")
 
-    def fantasy_info(self):
-        print("fantasy")
-
     def cyberpunk_info(self):
         print("cyberpunk")
+
+    def fantasy_info(self):
+        print("fantasy")
+    
+    def lofi_info(self):
+        print("lofi")
 
 
 if __name__ == "__main__":

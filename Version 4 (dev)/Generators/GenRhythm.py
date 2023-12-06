@@ -1,6 +1,9 @@
 import random
+import sys
+sys.path.append('D:\Documents\Github\musicGenerator\Version 4 (dev)')
 
-from ..Genres.DefineGenre import *
+# Custom module imports
+from Genres.DefineGenre import *
 
 
 class GenRhythm:
@@ -17,12 +20,13 @@ class GenRhythm:
     def build(self):
         self.setRhythmValues()
         self.genRhythm()
+        return self.rhythm
 
     # ============== #
     # SET GENRE INFO #
     # ============== #
     def setRhythmValues(self):
-        genre_details = DefineGenre(self.genre)
+        genre_details = DefineGenre(genre=self.genre)
         self.rhythm_info = genre_details.genre_info()["Rhythm"]
         self.repetition = self.rhythm_info.probabilities
         self.setRepetition()
@@ -32,7 +36,7 @@ class GenRhythm:
     # ============ #
 
     def genRhythm(self):
-        for i in range(self.length):
+        for i in range(1, self.length+1):
             self.genMeasure(i)
             # chance of skipping generation and repeating the rhythm
             # this applies to the entire measure
@@ -74,7 +78,7 @@ class GenRhythm:
         total = 0
         measure = []
 
-        if idx != 1:
+        if idx > 1:
             total, measure = self.copyMeasure(idx)
 
         while total < 4:
@@ -83,9 +87,12 @@ class GenRhythm:
             rhythms, weights = self.rhythm_info.all_rhythms, self.rhythm_info.all_rhythm_weights
             new_note = rhythms[-1]  # need a default value i think
             for i in range(0, len(weights)):
-                if weights[i] <= r1:
+                # current weight is equal to sum of weights so far
+                current_weight = sum(weights[:i+1])
+                if r1 <= current_weight:
                     new_note = rhythms[i]
-
+                    break
+                
             # only add note size that fits inside the measure
             if total + new_note > 4:
                 new_note = 4 - total
@@ -99,33 +106,32 @@ class GenRhythm:
                 if r2 < 0.5:
                     measure.append(new_note)
                     total += new_note
+                    
         self.rhythm.append(measure)
 
     # ================ #
     # HELPER FUNCTIONS #
     # ================ #
-    def copyMeasure(self, idx):
-        # first, check if our measures are gonna fully be the same
-        # if so, return full total and the corresponding measure
-        if idx == 2 and self.full_1_2_3_same:
-            return 4, self.rhythm[0]
-        elif idx == 3 and (self.full_1_3_same or self.full_1_2_3_same):
-            return 4, self.rhythm[0]
-        elif idx == 4 and self.full_2_4_same:
-            return 4, self.rhythm[1]
-
-        # if not the same, check if half is gonna be the same
-        # chop that up and set it here as well, along with the correct total
-        if idx == 2 and self.half_1_2_3_same:
-            return sum(self.rhythm[0][:int(len(self.rhythm[0])/2)]), self.rhythm[0][:int(len(self.rhythm[0])/2)]
-        elif idx == 3 and (self.half_1_3_same or self.half_1_2_3_same):
-            return sum(self.rhythm[0][:int(len(self.rhythm[0])/2)]), self.rhythm[0][:int(len(self.rhythm[0])/2)]
-        elif idx == 4 and (self.half_2_4_same or self.half_1_2_3_4_same):
-            return sum(self.rhythm[1][:int(len(self.rhythm[1])/2)]), self.rhythm[1][:int(len(self.rhythm[1])/2)]
+    def copyMeasure(self, idx):        
+        # looping over our repetition dictionaries
+        for measure_set in self.repetition['full']:
+            if idx in measure_set and self.repetition['full'][measure_set]:
+                measure = self.rhythm[0] if 1 in measure_set else self.rhythm[1]
+                return 4, measure
+        
+        for measure_set in self.repetition['half']:
+            if idx in measure_set and self.repetition['half'][measure_set]:
+                rhythm_idx = measure_set[0] - 1
+                measure = self.rhythm[rhythm_idx][:int(len(self.rhythm[rhythm_idx])/2)]
+                total = sum(measure)
+                return total, measure
+        
+        return 0, []
 
     def setRepetition(self):
         # loop over our dictionaries
-        for measure_size in list(self.probabilities.keys()):
-            for measure_set in list(self.probabilities[measure_set].keys()):
+        for measure_size in list(self.repetition.keys()):
+            for measure_set in list(self.repetition[measure_size].keys()):
                 r = random.uniform(0, 1)
-                self.probabilities[measure_size][measure_set] = self.rhythm_info.probabilities[measure_size][measure_set] <= r
+                # r <= probability, so prob of 0 is always false, and 1 is always true
+                self.repetition[measure_size][measure_set] = r <= self.rhythm_info.probabilities[measure_size][measure_set]

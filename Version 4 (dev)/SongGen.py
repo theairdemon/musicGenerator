@@ -12,6 +12,7 @@ from Generators.GenChords import GenChords
 class SongGeneration:
 
     def __init__(self, song_dict):
+        # BASIC SONG INFORMATION
         # song key
         self.key = song_dict["key"]
         # 'major' or 'minor'
@@ -24,6 +25,10 @@ class SongGeneration:
         self.verse_type = song_dict["verse_type"]
         # default is to start on the root chord
         self.startRoot = song_dict["startRoot"]
+        # genre name - no default, since we always want a name
+        self.genre = song_dict["genre"]
+        
+        # FILE INFORMATION
         # maximum recommended length: 9
         self.file_name = song_dict["file_name"]
         # where to save the midi file
@@ -91,8 +96,9 @@ class SongGeneration:
         self.chords, self.chord_notes = chordGenerator.build()
 
         # Rhythm Generation
-        rhythmGenerator = GenRhythm(len(self.chords))
-        self.gen_rhythm()
+        rhythmGenerator = GenRhythm(len(self.chords), self.genre)
+        self.rhythm = rhythmGenerator.build()
+
         self.gen_melody()
         # self.gen_harmony()
         self.gen_MIDI()

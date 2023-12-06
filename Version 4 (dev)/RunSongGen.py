@@ -22,6 +22,7 @@ def fullSongGen(key, minorKey, folder, song_style, script_dir, startRoot=True):
         "verses": 1,
         "verse_type": "verse",
         "startRoot": startRoot,
+        "genre": "anime",
         "file_name": "verse1",
         "file_location": folder,
         "folder_location": script_dir
