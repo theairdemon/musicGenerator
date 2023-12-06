@@ -1,6 +1,6 @@
 import random
 
-from ..Genres.RhythmInfo import RhythmInfo
+from RhythmInfo import RhythmInfo
 
 
 class DefineGenre:

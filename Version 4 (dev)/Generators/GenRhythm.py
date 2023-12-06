@@ -1,6 +1,6 @@
 import random
 
-from ..Genres.DefineGenres import *
+from ..Genres.DefineGenre import *
 
 
 class GenRhythm:
