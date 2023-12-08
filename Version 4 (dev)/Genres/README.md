@@ -25,7 +25,7 @@ The more important repetition for the classical *genre* will appear in the melod
 A difficult and amorphous genre to define, *cyberpunk* in this project will encompass a wide variety of electronic ambient music. Directly inspired by the music of the movie *Blade Runner* and the game *Ghostrunner*, our genre of *cyberpunk* will be synthesizer-heavy with a sturdy percussive backbone. We want ambient, morphing synths for chords (changing in anything but pitch), with a lean towards clean synths for our melody. 
 
 ### Cyberpunk - Rhythm 
-It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a small chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere.
+It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a small chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere. The notes that we want to be played quickly will be repetitive arpeggios, so our "melody" rhythm should be slower, for better atmosphere and ambience.
 
 
 ## Fantasy
