@@ -17,7 +17,7 @@ Sisyphean endeavor. Instead, we'll define a general "feeling" of classical
 music, where a song could sound similar to the pop-culture concept of a 
 classical piece. For me, this genre of *classical* music could have either long flowing runs, or short, staccato notes - potentially both in the same song. A key component is in the instrumentation; we can have any single instrument (or rotation of instruments) taking the lead melody, but we want a full orchestral mix for harmonies and chords. A suite of pianos, strings, woodwinds, brass, and percussion  instruments will create the sense of space that this genre needs.
 
-## Classical - Rhythm
+### Classical - Rhythm
 The more important repetition for the classical *genre* will appear in the melody; but to allow that to flourish, we should have some chance of repeating the first half of measures 1, 2, or 3, in any combination. Of course, this shouldn't be a guarantee, and there will be some variation amongst the generated pieces. In general, we want movement and charisma throughout the piece; thus, less quarter notes and more eighth notes.
 
 

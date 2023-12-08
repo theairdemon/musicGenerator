@@ -4,7 +4,7 @@ E major
 
 Chorus
 E major
-['I', 'vi', 'ii', 'vii']
+['I', 'vi', 'ii', 'V']
 
 Verse 2
 E major
@@ -12,7 +12,7 @@ E major
 
 Bridge
 E major
-['I', 'IV', 'vii', 'I', 'IV', 'vii', 'I']
+['I', 'IV', 'V', 'I', 'ii', 'vii', 'I']
 
 Minor Bridge
 C# minor

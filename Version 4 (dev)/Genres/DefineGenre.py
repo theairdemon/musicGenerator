@@ -35,7 +35,7 @@ class DefineGenre:
 
     def anime_info(self):
         anime_rhythm_info = RhythmInfo()
-        anime_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.25, 0.45, 0.3])
+        anime_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.15, 0.5, 0.35])
         probabilities = {
             'full': {
                 (1, 3): 0,

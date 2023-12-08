@@ -24,6 +24,8 @@ class RhythmInfo:
     def set_rhythms(self, rhythms, rhythm_weights):
         self.all_rhythms = rhythms
         self.all_rhythm_weights = rhythm_weights
+        if sum(self.all_rhythm_weights) != 1.0:
+            raise Exception("Need all rhythm weights to sum to 1.")
 
     def set_probabilities(self, new_probabilities):
         self.probabilities = new_probabilities

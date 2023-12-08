@@ -101,9 +101,10 @@ class GenRhythm:
 
             # some percent chance to replicate the same note, creating runs of the same size
             # only if the note is < one beat long
+            # 1/16th notes should be guaranteed to double up
             if new_note < 1 and total + new_note <= 4:
-                r2 = random.uniform(0, 1)
-                if r2 < 0.5:
+                r2 = random.uniform(0, 4)
+                if r2 <= (1 / new_note) + 1:
                     measure.append(new_note)
                     total += new_note
                     
