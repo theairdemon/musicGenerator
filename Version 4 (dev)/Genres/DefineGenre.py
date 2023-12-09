@@ -26,14 +26,11 @@ class DefineGenre:
         self.genre_dict[self.genre]()
         return self.return_dict
 
-    # GENRE INFO FUNCTIONS
-    # Return type: Dictionary, structured as follows
-    # {
-    #   "Rhythm": RhythmInfo
-    #   "Melody": MelodyInfo
-    # }
-
+    # ==================== #
+    # GENRE INFO FUNCTIONS #
+    # ==================== #
     def anime_info(self):
+        # Rhythm Definitions
         anime_rhythm_info = RhythmInfo()
         anime_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.15, 0.5, 0.35])
         probabilities = {
@@ -50,8 +47,18 @@ class DefineGenre:
             },
         }
         anime_rhythm_info.set_probabilities(probabilities)
-
         self.return_dict["Rhythm"] = anime_rhythm_info
+        
+        # Melody Definitions
+        anime_melody_info = MelodyInfo()
+        adjustment_probabilities = {
+            "perfect": 0.15,
+            "inverted": 0.0,
+            "chord": 0.25,
+            "slight": 0.8
+        }
+        anime_melody_info.set_melodic_choices(adjustment_probabilities)
+        self.return_dict["Melody"] = anime_melody_info
 
     def classical_info(self):
         print("classical")

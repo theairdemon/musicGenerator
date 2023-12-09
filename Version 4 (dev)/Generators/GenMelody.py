@@ -123,16 +123,25 @@ class GenMelody:
     # Begins at starting note, adjusts all others accordingly
     # Returns the adjusted measure in the measure-array format
     def adjustMeasure(self, previous_idx, idx, ratio):
-        ref_measure = self.melody[previous_idx][:int(len(self.melody[previous_idx])/ratio)]
-        working_measure = self.melody[previous_idx][:int(len(self.melody[previous_idx])/ratio)]
+        cut_length = int(len(self.melody[previous_idx])/ratio)
+        # reference measure, for easy comparison
+        ref_measure = self.melody[previous_idx][:cut_length]
+        # working measure, to be changed throughout the adjustments
+        working_measure = self.melody[previous_idx][:cut_length]
         
         # Compare notes, one at a time, with the chords underneath
         # Do this for both the ref and the working measure
+        # 
+        # if perfect replication, then return measure as-is, no changes
+        # if inverted, then invert the direction of the notes, and continue
+        # if chord, then set the starting note to the same chord position as the ref_measure and adjust all other notes correspondingly, and return
+        # if slight, then go through and adjust starting note and any >= 1/4th notes to the closest chord note in the trending direction, adjusting the following notes correspondingly
+        
         
         return working_measure
     
     # Compares a given index against all previous measures of rhythm
-    # Return value: integer, boolean, integer = index of found measure, "True" if either are the same, and the ratio that the length of the measure was
+    # Return value: integer, boolean, integer = index of found measure, "True" if either are the same, and the ratio for the cut length
     def comparePreviousMeasures(self, idx):
         for i in range(0, idx):
             if self.compareOneMeasure(i, idx, 1):
@@ -143,10 +152,15 @@ class GenMelody:
     def compareOneMeasure(self, previous_idx, idx, ratio):
         current_measure = self.rhythm[i]
         previous_measure = self.rhythm[previous_idx]
-        if len(current_measure) <= int(len(previous_measure)/ratio):
+        cut_length = int(len(previous_measure)/ratio)
+        
+        # if full measure is the same (ratio = 1), lengths should be the same
+        # if half measure is the same (ratio = 2), then length >= cut_length
+        if len(current_measure) < cut_length:
             return False
         
-        cut_current_measure = current_measure[:int(len(previous_measure)/ratio)]
-        cut_previous_measure = previous_measure[:int(len(previous_measure)/ratio)]
+        # index won't run over due to previous if statement
+        cut_current_measure = current_measure[:cut_length]
+        cut_previous_measure = previous_measure[:cut_length]
         
         return cut_current_measure == cut_previous_measure
