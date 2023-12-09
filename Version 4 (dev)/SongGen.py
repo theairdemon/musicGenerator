@@ -5,8 +5,9 @@ from datetime import datetime
 import os
 
 # Custom Classes
-from Generators.GenRhythm import GenRhythm
 from Generators.GenChords import GenChords
+from Generators.GenMelody import GenMelody
+from Generators.GenRhythm import GenRhythm
 
 
 class SongGeneration:
@@ -42,8 +43,6 @@ class SongGeneration:
         # List of all possible notes, rhythms, and rhythm weights
         self.all_notes = ['C', 'C#', 'D', 'D#', 'E',
                           'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-        self.all_rhythms = [0.25, 0.5, 1, 2]
-        self.all_rhythm_weights = [0.1, 0.4, 0.95, 1.0]
 
         # ====================== #
         #  MIDI FILE CONVERSIONS #
@@ -85,6 +84,7 @@ class SongGeneration:
     # ============================ #
     def gen_song(self):
         self.gen_scale()
+        
         # Chord Generation
         chordGenerator = GenChords(
             self.scale,
@@ -99,7 +99,10 @@ class SongGeneration:
         rhythmGenerator = GenRhythm(len(self.chords), self.genre)
         self.rhythm = rhythmGenerator.build()
 
-        self.gen_melody()
+        # Melody Generation
+        # self.gen_melody()
+        melodyGenerator = GenMelody(self.genre, self.scale, self.chords, self.chord_notes, self.rhythm)
+        
         # self.gen_harmony()
         self.gen_MIDI()
 
@@ -125,46 +128,6 @@ class SongGeneration:
             self.scale.append(self.all_notes[(i + 7) % l])
             self.scale.append(self.all_notes[(i + 8) % l])
             self.scale.append(self.all_notes[(i + 10) % l])
-
-    # ============ #
-    # BUILD RHYTHM #
-    # ============ #
-    def gen_rhythm(self):
-        prob_1_3_same, prob_2_4_same = self.prob_same()
-
-        for i in range(len(self.chords)):
-            # chance of skipping generation and repeating the rhythm
-            if i > 1 and len(self.chords) == 4:
-                r_same = random.uniform(0, 1)
-                if (i == 2 and r_same < prob_1_3_same) or (i == 3 and r_same < prob_2_4_same):
-                    self.rhythm.append(self.rhythm[i-2])
-                    continue
-            chord = self.chords[i]
-            total = 0
-            measure = []
-            while total < 4:
-                # pick a weighted random note
-                r1 = random.uniform(0, 1)
-                new_note = self.all_rhythms[-1]
-                for i in range(0, len(self.all_rhythm_weights)):
-                    if self.all_rhythm_weights[i] <= r1:
-                        new_note = self.all_rhythms[i]
-
-                # only add note size that fits inside the measure
-                if total + new_note > 4:
-                    new_note = 4 - total
-                measure.append(new_note)
-                total += new_note
-
-                # some percent chance to replicate the same note, creating runs of the same size
-                # only if the note is < one beat long
-                if new_note < 1 and total + new_note <= 4:
-                    r2 = random.uniform(0, 1)
-                    if r2 < 0.5:
-                        measure.append(new_note)
-                        total += new_note
-
-            self.rhythm.append(measure)
 
     # ============ #
     # BUILD MELODY #

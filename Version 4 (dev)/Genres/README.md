@@ -9,6 +9,9 @@ The *anime* genre should rhythmically have some repetition between measures, but
 
 To keep things moving, we don't want any 1/2 notes at all. We can retain 1/16 notes, but they shouldn't appear very frequently. 1/4 and 1/8 notes can appear with the same frequency, since we know we'll be trying to double-up 1/8 notes.
 
+### Anime - Melody
+Lorem ipsum
+
 
 ## Classical
 The genre of *classical* music has so much variation, so much history, that
@@ -29,8 +32,10 @@ It's okay to space out the notes, and we don't need much repetition throughout. 
 
 
 ## Fantasy
+Powerful strings, deep horns, beautiful flutes; this *fantasy* genre evokes images of riding across vast plains, setting sail into a glorious sunset, or otherwise beginning to weave a tale of magic and wonder. We want notes to flow naturally from one another, like a stream in an elven forest. 
 
 ### Fantasy - Rhythm
+
 
 
 ## Lofi

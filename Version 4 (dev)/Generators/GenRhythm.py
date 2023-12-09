@@ -34,45 +34,9 @@ class GenRhythm:
     # ============ #
     # BUILD RHYTHM #
     # ============ #
-
     def genRhythm(self):
         for i in range(1, self.length+1):
             self.genMeasure(i)
-            # chance of skipping generation and repeating the rhythm
-            # this applies to the entire measure
-            # TODO: breakout generation and compare parts of measures, not just the whole
-            # if i > 1 and self.length == 4:
-            #     r_same = random.uniform(0, 1)
-            #     if (i == 2 and r_same < prob_1_3_same) or (i == 3 and r_same < prob_2_4_same):
-            #         self.rhythm.append(self.rhythm[i-2])
-            #         continue
-
-            # # random generation section
-            # total = 0
-            # measure = []
-            # while total < 4:
-            #     # pick a weighted random note
-            #     r1 = random.uniform(0, 1)
-            #     new_note = self.all_rhythms[-1]
-            #     for i in range(0, len(self.all_rhythm_weights)):
-            #         if self.all_rhythm_weights[i] <= r1:
-            #             new_note = self.all_rhythms[i]
-
-            #     # only add note size that fits inside the measure
-            #     if total + new_note > 4:
-            #         new_note = 4 - total
-            #     measure.append(new_note)
-            #     total += new_note
-
-            #     # some percent chance to replicate the same note, creating runs of the same size
-            #     # only if the note is < one beat long
-            #     if new_note < 1 and total + new_note <= 4:
-            #         r2 = random.uniform(0, 1)
-            #         if r2 < 0.5:
-            #             measure.append(new_note)
-            #             total += new_note
-
-            # self.rhythm.append(measure)
 
     def genMeasure(self, idx):
         total = 0
@@ -115,11 +79,15 @@ class GenRhythm:
     # ================ #
     def copyMeasure(self, idx):        
         # looping over our repetition dictionaries
+        # first check if we're repeating the full measure
         for measure_set in self.repetition['full']:
             if idx in measure_set and self.repetition['full'][measure_set]:
-                measure = self.rhythm[0] if 1 in measure_set else self.rhythm[1]
+                # get index of the measure to copy from
+                rhythm_idx = measure_set[0] - 1
+                measure = self.rhythm[rhythm_idx]
                 return 4, measure
         
+        # next, check if we want half of our measures repeated
         for measure_set in self.repetition['half']:
             if idx in measure_set and self.repetition['half'][measure_set]:
                 rhythm_idx = measure_set[0] - 1
@@ -127,6 +95,7 @@ class GenRhythm:
                 total = sum(measure)
                 return total, measure
         
+        # if there's no repetition, then we just return 0 and an empty array
         return 0, []
 
     def setRepetition(self):

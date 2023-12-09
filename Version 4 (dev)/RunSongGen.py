@@ -9,8 +9,6 @@ from SongGen import *
 # ========= #
 # FULL SONG #
 # ========= #
-
-
 def fullSongGen(key, minorKey, folder, song_style, script_dir, startRoot=True):
     song_info_file = "song_info.txt"
     f = open(script_dir + folder + song_info_file, "w")
