@@ -5,8 +5,7 @@ class RhythmInfo:
         self.all_rhythms = []
         self.all_rhythm_weights = []
 
-        # probability that our rhythm repeats for these sets of measures:
-        # 1/3, 2/4, 1/2/3
+        # probability that our rhythm repeats for these sets of measures
         self.probabilities = {
             'full': {
                 (1, 3): 0,

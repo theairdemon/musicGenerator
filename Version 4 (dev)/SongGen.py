@@ -102,6 +102,7 @@ class SongGeneration:
         # Melody Generation
         # self.gen_melody()
         melodyGenerator = GenMelody(self.genre, self.scale, self.chords, self.chord_notes, self.rhythm)
+        self.melody = melodyGenerator.build()
         
         # self.gen_harmony()
         self.gen_MIDI()

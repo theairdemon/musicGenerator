@@ -1,23 +1,24 @@
 import random
 
 from Genres.RhythmInfo import *
+from Genres.MelodyInfo import *
 
 
 class DefineGenre:
 
-    def __init__(self, genre=""):
+    def __init__(self, genre=''):
         self.genre = genre
 
         # Defining genre strings here
         self.genre_dict = {
-            "anime": self.anime_info,
-            "classical": self.classical_info,
-            "cyberpunk": self.cyberpunk_info,
-            "fantasy": self.fantasy_info,
-            "lofi": self.lofi_info
+            'anime': self.anime_info,
+            'classical': self.classical_info,
+            'cyberpunk': self.cyberpunk_info,
+            'fantasy': self.fantasy_info,
+            'lofi': self.lofi_info
         }
 
-        self.return_dict = {"Rhythm": None, "Melody": None}
+        self.return_dict = {'Rhythm': None, 'Melody': None}
 
         if self.genre not in self.genre_dict.keys():
             self.genre = random.choice(self.potential_genres)
@@ -47,32 +48,41 @@ class DefineGenre:
             },
         }
         anime_rhythm_info.set_probabilities(probabilities)
-        self.return_dict["Rhythm"] = anime_rhythm_info
+        self.return_dict['Rhythm'] = anime_rhythm_info
         
         # Melody Definitions
         anime_melody_info = MelodyInfo()
         adjustment_probabilities = {
-            "perfect": 0.15,
-            "inverted": 0.0,
-            "chord": 0.25,
-            "slight": 0.8
+            'perfect': 0.35,
+            'inverted': 0.0,
+            'chord': 0.5,
+            'slight': 0.8
         }
-        anime_melody_info.set_melodic_choices(adjustment_probabilities)
-        self.return_dict["Melody"] = anime_melody_info
+        progressions = {
+            'in-measure': 0.4, # odds of continuing progression throughout a measure
+            'inverted': 0.0 # will be implemented later
+        }
+        note_weights = {
+            0: 0.1,
+            1: 0.8,
+            2: 0.1
+        }
+        anime_melody_info.set_melodic_choices(adjustment_probabilities, progressions, note_weights)
+        self.return_dict['Melody'] = anime_melody_info
 
     def classical_info(self):
-        print("classical")
+        print('classical')
 
     def cyberpunk_info(self):
-        print("cyberpunk")
+        print('cyberpunk')
 
     def fantasy_info(self):
-        print("fantasy")
+        print('fantasy')
     
     def lofi_info(self):
-        print("lofi")
+        print('lofi')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     genreDefinition = DefineGenre()
     genreDefinition.genre_info()
