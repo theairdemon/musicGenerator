@@ -10,7 +10,7 @@ The *anime* genre should rhythmically have some repetition between measures, but
 To keep things moving, we don't want any 1/2 notes at all. We can retain 1/16 notes, but they shouldn't appear very frequently. 1/4 and 1/8 notes can appear with the same frequency, since we know we'll be trying to double-up 1/8 notes.
 
 ### Anime - Melody
-Lorem ipsum
+Repetition is desired but not required; whenever we have a repeating rhythm, we should have a decent chance of repeating it exactly, with high probability of at least copying the shape with 'chord' and 'slight' variations. We want movement, and we don't want high jumps between the measures, so we push for having `note_weights` of 1 being the highest.
 
 
 ## Classical
@@ -28,7 +28,9 @@ The more important repetition for the classical *genre* will appear in the melod
 A difficult and amorphous genre to define, *cyberpunk* in this project will encompass a wide variety of electronic ambient music. Directly inspired by the music of the movie *Blade Runner* and the game *Ghostrunner*, our genre of *cyberpunk* will be synthesizer-heavy with a sturdy percussive backbone. We want ambient, morphing synths for chords (changing in anything but pitch), with a lean towards clean synths for our melody. 
 
 ### Cyberpunk - Rhythm 
-It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a small chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere. The notes that we want to be played quickly will be repetitive arpeggios, so our "melody" rhythm should be slower, for better atmosphere and ambience.
+It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a small chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere. The notes that we want to be played quickly will be repetitive arpeggios, so our "main" rhythm should be slower, for better atmosphere and ambience.
+
+### Cyberpunk - Melody
 
 
 ## Fantasy

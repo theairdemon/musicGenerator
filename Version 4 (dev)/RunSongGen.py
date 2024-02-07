@@ -9,7 +9,7 @@ from SongGen import *
 # ========= #
 # FULL SONG #
 # ========= #
-def fullSongGen(key, minorKey, folder, song_style, script_dir, startRoot=True):
+def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=True):
     song_info_file = "song_info.txt"
     f = open(script_dir + folder + song_info_file, "w")
 
@@ -20,7 +20,7 @@ def fullSongGen(key, minorKey, folder, song_style, script_dir, startRoot=True):
         "verses": 1,
         "verse_type": "verse",
         "startRoot": startRoot,
-        "genre": "anime",
+        "genre": genre,
         "file_name": "verse1",
         "file_location": folder,
         "folder_location": script_dir
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     # key = random.choice(note_list)
-    key = 'E'
+    key = 'D#'
     minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
     # print(key, minorKey)
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
     folder = "test_2023_12_2\\"
-    song_style = "major"
+    song_style = "minor"
+    genre = "cyberpunk"
     startRoot = True
-    fullSongGen(key, minorKey, folder, song_style,
-                script_dir, startRoot=startRoot)
+    fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=startRoot)

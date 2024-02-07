@@ -74,7 +74,44 @@ class DefineGenre:
         print('classical')
 
     def cyberpunk_info(self):
-        print('cyberpunk')
+        # Rhythm Definitions
+        cyberpunk_rhythm_info = RhythmInfo()
+        cyberpunk_rhythm_info.set_rhythms([0.5, 1], [0.45, 0.55])
+        probabilities = {
+            'full': {
+                (1, 3): 0,
+                (2, 4): 0.2,
+                (1, 2, 3): 0
+            },
+            'half': {
+                (1, 3): 0,
+                (2, 4): 0.4,
+                (1, 2, 3): 0.2,
+                (1, 2, 3, 4): 0.4
+            },
+        }
+        cyberpunk_rhythm_info.set_probabilities(probabilities)
+        self.return_dict['Rhythm'] = cyberpunk_rhythm_info
+        
+        # Melody Definitions
+        cyberpunk_melody_info = MelodyInfo()
+        adjustment_probabilities = {
+            'perfect': 0,
+            'inverted': 0.0,
+            'chord': 0.8,
+            'slight': 0.2
+        }
+        progressions = {
+            'in-measure': 0.5, # odds of continuing progression throughout a measure
+            'inverted': 0.0 # will be implemented later
+        }
+        note_weights = {
+            0: 0.1,
+            1: 0.8,
+            2: 0.1
+        }
+        cyberpunk_melody_info.set_melodic_choices(adjustment_probabilities, progressions, note_weights)
+        self.return_dict['Melody'] = cyberpunk_melody_info
 
     def fantasy_info(self):
         print('fantasy')

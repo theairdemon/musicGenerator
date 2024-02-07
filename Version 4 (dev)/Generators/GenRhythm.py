@@ -81,7 +81,7 @@ class GenRhythm:
         # looping over our repetition dictionaries
         # first check if we're repeating the full measure
         for measure_set in self.repetition['full']:
-            if idx in measure_set and self.repetition['full'][measure_set]:
+            if idx in measure_set[1:] and self.repetition['full'][measure_set]:
                 # get index of the measure to copy from
                 rhythm_idx = measure_set[0] - 1
                 measure = self.rhythm[rhythm_idx]
@@ -89,7 +89,7 @@ class GenRhythm:
         
         # next, check if we want half of our measures repeated
         for measure_set in self.repetition['half']:
-            if idx in measure_set and self.repetition['half'][measure_set]:
+            if idx in measure_set[1:] and self.repetition['half'][measure_set]:
                 rhythm_idx = measure_set[0] - 1
                 measure = self.rhythm[rhythm_idx][:int(len(self.rhythm[rhythm_idx])/2)]
                 total = sum(measure)
