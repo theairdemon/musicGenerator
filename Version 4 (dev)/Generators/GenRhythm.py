@@ -1,9 +1,9 @@
+from Genres.DefineGenre import *
 import random
 import sys
 sys.path.append('D:\Documents\Github\musicGenerator\Version 4 (dev)')
 
 # Custom module imports
-from Genres.DefineGenre import *
 
 
 class GenRhythm:
@@ -56,7 +56,7 @@ class GenRhythm:
                 if r1 <= current_weight:
                     new_note = rhythms[i]
                     break
-                
+
             # only add note size that fits inside the measure
             if total + new_note > 4:
                 new_note = 4 - total
@@ -71,13 +71,13 @@ class GenRhythm:
                 if r2 <= (1 / new_note) + 1:
                     measure.append(new_note)
                     total += new_note
-                    
+
         self.rhythm.append(measure)
 
     # ================ #
     # HELPER FUNCTIONS #
     # ================ #
-    def copyMeasure(self, idx):        
+    def copyMeasure(self, idx):
         # looping over our repetition dictionaries
         # first check if we're repeating the full measure
         for measure_set in self.repetition['full']:
@@ -86,15 +86,16 @@ class GenRhythm:
                 rhythm_idx = measure_set[0] - 1
                 measure = self.rhythm[rhythm_idx]
                 return 4, measure
-        
+
         # next, check if we want half of our measures repeated
         for measure_set in self.repetition['half']:
             if idx in measure_set[1:] and self.repetition['half'][measure_set]:
                 rhythm_idx = measure_set[0] - 1
-                measure = self.rhythm[rhythm_idx][:int(len(self.rhythm[rhythm_idx])/2)]
+                measure = self.rhythm[rhythm_idx][:int(
+                    len(self.rhythm[rhythm_idx])/2)]
                 total = sum(measure)
                 return total, measure
-        
+
         # if there's no repetition, then we just return 0 and an empty array
         return 0, []
 

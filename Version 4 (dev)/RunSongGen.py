@@ -9,6 +9,8 @@ from SongGen import *
 # ========= #
 # FULL SONG #
 # ========= #
+
+
 def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=True):
     song_info_file = "song_info.txt"
     f = open(script_dir + folder + song_info_file, "w")
@@ -83,8 +85,9 @@ if __name__ == "__main__":
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_2023_12_2\\"
+    folder = "test_2024_11_3\\"
     song_style = "minor"
     genre = "cyberpunk"
     startRoot = True
-    fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=startRoot)
+    fullSongGen(key, minorKey, folder, song_style,
+                genre, script_dir, startRoot=startRoot)
