@@ -26,8 +26,7 @@ class GenRhythm:
     # SET GENRE INFO #
     # ============== #
     def setRhythmValues(self):
-        genre_details = DefineGenre(genre=self.genre)
-        self.rhythm_info = genre_details.genre_info()["Rhythm"]
+        self.rhythm_info = self.genre.get('Rhythm')
         self.repetition = self.rhythm_info.probabilities
         self.setRepetition()
 

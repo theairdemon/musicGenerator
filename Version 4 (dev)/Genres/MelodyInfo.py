@@ -10,6 +10,8 @@ class MelodyInfo:
         # 2. strictness of progressions (tending to move up or down)
         #   a. How often should we tend to keep our direction of movement the same w/in 1 measure?
         #   b. How often should we invert progression from one measure to the next?
+        # 3. weight of note jumps
+        #   a. What distance should we move between notes?
 
         # sequential, don't need to sum to 1
         self.measure_adjustments = {

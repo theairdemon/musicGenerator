@@ -5,6 +5,8 @@ import os
 
 # Custom Class Imports
 from SongGen import *
+from Generators.GenMidi import GenMidi
+from Genres.DefineGenre import DefineGenre
 
 # ========= #
 # FULL SONG #
@@ -15,6 +17,20 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     song_info_file = "song_info.txt"
     f = open(script_dir + folder + song_info_file, "w")
 
+    genreInfo = DefineGenre(genre)
+    genreInfo.build()
+
+    full_song_dict = {
+        "file_name": "fullSong",
+        "file_location": folder,
+        "folder_location": script_dir,
+        "melody": [],
+        "notes_dict": {},
+        "verses": 1,
+        "chord_notes": [],
+        "harmonies": []
+    }
+
     song_input_dict = {
         "key": key,
         "style": song_style,
@@ -22,7 +38,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         "verses": 1,
         "verse_type": "verse",
         "startRoot": startRoot,
-        "genre": genre,
+        "genre": genreInfo,
         "file_name": "verse1",
         "file_location": folder,
         "folder_location": script_dir
@@ -59,6 +75,12 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     f.write("\nBridge\n")
     f.write(str(bridge))
 
+    # Writing chorus to the folder
+    song_input_dict["verse_type"] = "chorus"
+    song_input_dict["file_name"] = "baseMeasure"
+    base_measure = SongGeneration(song_input_dict)
+    base_measure.gen_base_measure()
+
     if song_style == "major":
         song_input_dict["key"] = minorKey
         song_input_dict["style"] = "minor"
@@ -67,6 +89,23 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         minorBridge.gen_song()
         f.write("\nMinor Bridge\n")
         f.write(str(minorBridge))
+
+    # Build our full song, start to finish, one midi file
+    for part in genreInfo.get('Structure').getOrderList():
+        if part == "verse1":
+            full_song_dict = verse1.add_SongDict(full_song_dict)
+        elif part == "verse2":
+            full_song_dict = verse2.add_SongDict(full_song_dict)
+        elif part == "bridge":
+            full_song_dict = bridge.add_SongDict(full_song_dict)
+            full_song_dict = base_measure.add_SongDict(full_song_dict)
+        elif part == "chorus":
+            full_song_dict = chorus.add_SongDict(full_song_dict)
+        elif part == "finalChorus":
+            full_song_dict = chorus.add_SongDict(full_song_dict)
+            full_song_dict = base_measure.add_SongDict(full_song_dict)
+    midiGenerator = GenMidi(full_song_dict)
+    midiGenerator.build()
 
     f.close()
 
@@ -77,17 +116,12 @@ if __name__ == "__main__":
     # key = random.choice(note_list)
     key = 'D#'
     minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
-    # print(key, minorKey)
-
-    # test_song = SongGeneration(key, style='minor', rhythm = [7, 8, 7, 8], length=4, verses=1)
-    # test_song.gen_song()
-    # print(test_song.scale)
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
     folder = "test_2024_11_3\\"
-    song_style = "minor"
-    genre = "cyberpunk"
+    song_style = "major"
+    genre = "anime"
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)

@@ -23,14 +23,18 @@ classical piece. For me, this genre of *classical* music could have either long 
 ### Classical - Rhythm
 The more important repetition for the classical *genre* will appear in the melody; but to allow that to flourish, we should have some chance of repeating the first half of measures 1, 2, or 3, in any combination. Of course, this shouldn't be a guarantee, and there will be some variation amongst the generated pieces. In general, we want movement and charisma throughout the piece; thus, less quarter notes and more eighth notes.
 
+### Classical - Melody
+This will be one of the most open and flowing melody infos here; keep it loose and open for a wide variety of sounds. Classical is all over the place with the melodies, so let it go wild with the melody.
+
 
 ## Cyberpunk
-A difficult and amorphous genre to define, *cyberpunk* in this project will encompass a wide variety of electronic ambient music. Directly inspired by the music of the movie *Blade Runner* and the game *Ghostrunner*, our genre of *cyberpunk* will be synthesizer-heavy with a sturdy percussive backbone. We want ambient, morphing synths for chords (changing in anything but pitch), with a lean towards clean synths for our melody. 
+A difficult and amorphous genre to define, *cyberpunk* in this project will encompass a wide variety of electronic ambient music. Directly inspired by the music of the movie *Blade Runner* and the game *Ghostrunner*, our genre of *cyberpunk* will be synthesizer-heavy with a sturdy percussive backbone. We want ambient, morphing synths for chords (changing in anything but pitch), with a lean towards clean synths for our melody. Slow down the tempo too.
 
 ### Cyberpunk - Rhythm 
-It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a small chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere. The notes that we want to be played quickly will be repetitive arpeggios, so our "main" rhythm should be slower, for better atmosphere and ambience.
+It's okay to space out the notes, and we don't need much repetition throughout. Maybe we have a medium chance of repeating measures 2/4, but otherwise each measure can stand on its own. We can repeat the first half of measures 2 and 4, we don't need repetition elsewhere. The notes that we want to be played quickly will be repetitive arpeggios, so our "main" rhythm should be slower, for better atmosphere and ambience.
 
 ### Cyberpunk - Melody
+We want pretty solid chord melodies here; nothing too off the beaten path. Maybe a small chance of inverted repetition, but mostly just focusing on pulling notes around to the relative chords. 
 
 
 ## Fantasy
@@ -41,5 +45,6 @@ Powerful strings, deep horns, beautiful flutes; this *fantasy* genre evokes imag
 
 
 ## Lofi
+This should be much, *much* slower than other genres. Spacing and slow notes are the name of the game here; conbine with pianos, guitars, and synth pads for optimal impact. Add in a vinyl record overlay, and this is a golden song. 
 
 ### Lofi - Rhythm
