@@ -85,6 +85,7 @@ class GenMelody:
         return [note, self.rhythm[measure_idx][idx]]
 
     def genVolume(self, idx):
+        # TODO: redo this generation!! it's wayyy to jarring
         volumes = []
         measure = self.melody[idx]
         rest_weights = self.melody_info.rest_weights

@@ -49,9 +49,9 @@ class DefineGenre:
             },
             'half': {
                 (1, 3): 0,
-                (2, 4): 0,
+                (2, 4): 0.4,
                 (1, 2, 3): 0.8,
-                (1, 2, 3, 4): 0.3
+                (1, 2, 3, 4): 0.7
             },
         }
         anime_rhythm_info.set_probabilities(probabilities)
@@ -60,9 +60,9 @@ class DefineGenre:
         # Melody Definitions
         anime_melody_info = MelodyInfo()
         adjustment_probabilities = {
-            'perfect': 0.35,
+            'perfect': 0.7,
             'inverted': 0.0,
-            'chord': 0.5,
+            'chord': 0.6,
             'slight': 0.8
         }
         progressions = {
@@ -74,7 +74,7 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
-        rest_weights = [0, 0.05, 0.2]
+        rest_weights = [0, 0, 0]
         anime_melody_info.set_melodic_choices(
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = anime_melody_info
@@ -87,12 +87,12 @@ class DefineGenre:
             'full': {
                 (1, 3): 0,
                 (2, 4): 0.2,
-                (1, 2, 3): 0.4
+                (1, 2, 3): 0.5
             },
             'half': {
                 (1, 3): 0.5,
-                (2, 4): 0,
-                (1, 2, 3): 0.9,
+                (2, 4): 0.4,
+                (1, 2, 3): 0.7,
                 (1, 2, 3, 4): 0.3
             },
         }
@@ -116,7 +116,7 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
-        rest_weights = [0.05, 0.05, 0.1]
+        rest_weights = [0, 0, 0]
         classical_melody_info.set_melodic_choices(
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = classical_melody_info
@@ -158,7 +158,7 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
-        rest_weights = [0, 0, 0.2]
+        rest_weights = [0, 0, 0]
         cyberpunk_melody_info.set_melodic_choices(
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = cyberpunk_melody_info

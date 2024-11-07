@@ -1,6 +1,8 @@
 # Genres
 To better create specific variations among the music that is generation, it makes sense to make different weighted probabilities for a few genres of music, which will hopefully make it easier to feel like that's the type of song we're listening to.
 
+---
+
 ## Anime
 To me, the *anime* genre means something in-between pop, classical, and indie rock. The primary instrument for the melody would be piano and/or violins, with cellos for the harmonies/chords and woodwinds playing secondary melodies on top.
 
@@ -12,6 +14,9 @@ To keep things moving, we don't want any 1/2 notes at all. We can retain 1/16 no
 ### Anime - Melody
 Repetition is desired but not required; whenever we have a repeating rhythm, we should have a decent chance of repeating it exactly, with high probability of at least copying the shape with 'chord' and 'slight' variations. We want movement, and we don't want high jumps between the measures, so we push for having `note_weights` of 1 being the highest.
 
+### Anime - Instrumentation
+
+---
 
 ## Classical
 The genre of *classical* music has so much variation, so much history, that
@@ -26,6 +31,9 @@ The more important repetition for the classical *genre* will appear in the melod
 ### Classical - Melody
 This will be one of the most open and flowing melody infos here; keep it loose and open for a wide variety of sounds. Classical is all over the place with the melodies, so let it go wild with the melody.
 
+### Classical - Instrumentation
+
+---
 
 ## Cyberpunk
 A difficult and amorphous genre to define, *cyberpunk* in this project will encompass a wide variety of electronic ambient music. Directly inspired by the music of the movie *Blade Runner* and the game *Ghostrunner*, our genre of *cyberpunk* will be synthesizer-heavy with a sturdy percussive backbone. We want ambient, morphing synths for chords (changing in anything but pitch), with a lean towards clean synths for our melody. Slow down the tempo too.
@@ -36,15 +44,30 @@ It's okay to space out the notes, and we don't need much repetition throughout. 
 ### Cyberpunk - Melody
 We want pretty solid chord melodies here; nothing too off the beaten path. Maybe a small chance of inverted repetition, but mostly just focusing on pulling notes around to the relative chords. 
 
+### Cyberpunk - Instrumentation
+
+---
 
 ## Fantasy
 Powerful strings, deep horns, beautiful flutes; this *fantasy* genre evokes images of riding across vast plains, setting sail into a glorious sunset, or otherwise beginning to weave a tale of magic and wonder. We want notes to flow naturally from one another, like a stream in an elven forest. 
 
 ### Fantasy - Rhythm
+The fantasy rhythm is similar to cyberpunk in how it can be a bit slower than others, but we still want the ability for openness and flowing sounds like in anime. Fantasy will differ more from anime in its ambience and instrumentation (covered below). We certainly want rhythms to be repeated sometimes.
 
+## Fantasy - Melody
+Definitely high chances of repeated melodies here! Tying back into the rhythm, we want to only have half-measures that are repeated, so we can be more "perfect" than with other genres. More so than in any other genre, fantasy should try and build out leitmotifs in the song.
 
+### Fantasy - Instrumentation
+Horns, woodwinds, bells, strings, violin, flute; these are work excellent for fantasy music! Possibly even include drums for the arps too, something to think about.
+
+---
 
 ## Lofi
 This should be much, *much* slower than other genres. Spacing and slow notes are the name of the game here; conbine with pianos, guitars, and synth pads for optimal impact. Add in a vinyl record overlay, and this is a golden song. 
 
 ### Lofi - Rhythm
+Unlike the others so far, lofi is a great genre for having exact repetition. I think there should be some solid full measures-worth of repetition for sure, and high chances of repetition elsewhere.
+
+### Lofi - Melody
+
+### Lofi - Instrumentation

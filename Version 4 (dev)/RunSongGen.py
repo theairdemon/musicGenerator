@@ -118,7 +118,7 @@ if __name__ == "__main__":
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     styles = ['major', 'minor']
-    # genres = ['anime', 'classical', 'cyberpunk']
+    genres = ['anime', 'classical', 'cyberpunk']
 
     key = random.choice(note_list)
     # key = 'D#'
@@ -129,7 +129,8 @@ if __name__ == "__main__":
     folder = "test_2024_11_6\\"
     # song_style = "major"
     song_style = random.choice(styles)
-    genre = "anime"
+    # genre = "anime"
+    genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)

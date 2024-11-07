@@ -1,0 +1,15 @@
+Verse 1
+C minor
+['i', 'VI', 'iv', 'V']
+
+Chorus
+C minor
+['i', 'VI', 'ii', 'V']
+
+Verse 2
+C minor
+['i', 'VI', 'ii', 'V']
+
+Bridge
+C minor
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']
