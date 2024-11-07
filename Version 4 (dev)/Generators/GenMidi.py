@@ -78,6 +78,9 @@ class GenMidi:
                     measure_time += duration
                     last_pitch = pitch
 
+            # default volume for chords and arps
+            support_volume = 65
+
             # CHORDS
             overall_chord_time = 0
             for i in range(0, len(self.chord_notes)):
@@ -88,12 +91,17 @@ class GenMidi:
                 duration = 4
                 for pitch in pitches:
                     mf.addNote(tracks[1], channel, pitch,
-                               chord_time, duration, 65)
+                               chord_time, duration, support_volume)
             overall_chord_time += len(self.chord_notes) * 4
 
             # 1/4 ARP
             overall_chord_time = 0
             for i in range(0, len(self.chord_notes)):
+                # silence arpeggios if we're in a 1 measure verse
+                if len(self.melody[i]) == 1:
+                    support_volume = 0
+                else:
+                    support_volume = 65
                 chord = self.chord_notes[i]
                 chord_time = overall_chord_time + i * 4
                 pitches = [self.notes_dict[chord[0]][0],
@@ -102,7 +110,7 @@ class GenMidi:
                 duration = 1
                 for i in range(4):
                     mf.addNote(tracks[2], channel, pitches[i],
-                               chord_time, duration, 65)
+                               chord_time, duration, support_volume)
                     chord_time += duration
             overall_chord_time += len(self.chord_notes) * 4
 
@@ -117,7 +125,7 @@ class GenMidi:
                 duration = 0.5
                 for i in range(8):
                     mf.addNote(tracks[3], channel, pitches[i %
-                                                           4], chord_time, duration, 65)
+                                                           4], chord_time, duration, support_volume)
                     chord_time += duration
             overall_chord_time += len(self.chord_notes) * 4
 
