@@ -18,11 +18,12 @@ class GenMelody:
 
         self.melody = []
         self.melody_info = None
+        self.volumes = []
 
     def build(self):
         self.melody_info = self.genre.get('Melody')
         self.genMelody()
-        return self.melody
+        return self.melody, self.volumes
 
     # ============ #
     # BUILD MELODY #
@@ -30,6 +31,7 @@ class GenMelody:
     def genMelody(self):
         for i in range(0, self.length):
             self.melody.append(self.genMeasure(i))
+            self.volumes.append(self.genVolume(i))
 
     def genMeasure(self, idx):
         starting_note = random.choice(self.chord_notes[idx])
@@ -82,12 +84,47 @@ class GenMelody:
 
         return [note, self.rhythm[measure_idx][idx]]
 
+    def genVolume(self, idx):
+        volumes = []
+        measure = self.melody[idx]
+        rest_weights = self.melody_info.rest_weights
+
+        running_total = 0
+        skip_next = False
+        for i in range(len(measure)):
+            note = measure[i][1]
+            running_total += note
+            if skip_next:
+                skip_next = False
+                continue
+
+            if running_total > 3:
+                if random.uniform(0, 1) < rest_weights[2]:
+                    volumes.append(0)
+                else:
+                    volumes.append(100)
+            elif running_total > 2:
+                if random.uniform(0, 1) < rest_weights[1]:
+                    volumes.append(0)
+                else:
+                    volumes.append(100)
+            else:
+                if random.uniform(0, 1) < rest_weights[0]:
+                    volumes.append(0)
+                else:
+                    volumes.append(100)
+            if i < len(measure) - 1 and note < 1 and volumes[-1] == 0:
+                skip_next = True
+                volumes.append(0)
+        return volumes
+
     # ================ #
     # HELPER FUNCTIONS #
     # ================ #
 
     # Determine a particular measure's progression
     # Return -1, 0, or 1 for down, random, or up, respectively
+
     def determineProgression(self):
         r = random.uniform(0, 1)
         if r <= self.melody_info.progressions['in-measure']:

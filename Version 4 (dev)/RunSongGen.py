@@ -20,11 +20,15 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     genreInfo = DefineGenre(genre)
     genreInfo.build()
 
+    print("This is a song in the key of " + key + " " +
+          song_style + ", in the genre of " + genre + ".")
+
     full_song_dict = {
         "file_name": "fullSong",
         "file_location": folder,
         "folder_location": script_dir,
         "melody": [],
+        "volumes": [],
         "notes_dict": {},
         "verses": 1,
         "chord_notes": [],
@@ -113,14 +117,18 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
 if __name__ == "__main__":
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    # key = random.choice(note_list)
-    key = 'D#'
+    styles = ['major', 'minor']
+    # genres = ['anime', 'classical', 'cyberpunk']
+
+    key = random.choice(note_list)
+    # key = 'D#'
     minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_2024_11_3\\"
-    song_style = "major"
+    folder = "test_2024_11_6\\"
+    # song_style = "major"
+    song_style = random.choice(styles)
     genre = "anime"
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,

@@ -12,6 +12,7 @@ class MelodyInfo:
         #   b. How often should we invert progression from one measure to the next?
         # 3. weight of note jumps
         #   a. What distance should we move between notes?
+        # 4. How often should we have rests?
 
         # sequential, don't need to sum to 1
         self.measure_adjustments = {
@@ -34,9 +35,15 @@ class MelodyInfo:
             2: 0.0
         }
 
-    def set_melodic_choices(self, adjustment_probabilities, progressions, note_weights):
+        # first value is the odds of rests anywhere in a measure
+        # if first value is 0, then we check second value, for rests in the second half
+        # if that's 0 as well, then we check the third value, for rests on the final beat(s)
+        self.rest_weights = [0, 0, 0]
+
+    def set_melodic_choices(self, adjustment_probabilities, progressions, note_weights, rest_weights=[0, 0, 0]):
         self.measure_adjustments = adjustment_probabilities
         self.progressions = progressions
         self.note_weights = note_weights
+        self.rest_weights = rest_weights
         if sum(list(self.note_weights.values())) != 1.0:
             raise Exception("Need all note weights to sum to 1.")

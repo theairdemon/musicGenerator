@@ -1,4 +1,5 @@
 from midiutil.MidiFile import MIDIFile
+import random
 
 
 class GenMidi:
@@ -14,6 +15,7 @@ class GenMidi:
 
         # The GOOD stuff
         self.melody = song_dict["melody"]
+        self.volumes = song_dict["volumes"]
         self.notes_dict = song_dict["notes_dict"]
         self.chord_notes = song_dict["chord_notes"]
         self.harmonies = song_dict["harmonies"]
@@ -47,9 +49,11 @@ class GenMidi:
             # MELODY
             for i in range(0, len(self.melody)):
                 measure = self.melody[i]
+                volumes = self.volumes[i]
                 measure_time = i * 4
 
                 for j in range(0, len(measure)):
+                    volume = volumes[j]
                     note = measure[j][0]
                     pitch1 = self.notes_dict[note][1]
                     pitch2 = self.notes_dict[note][2]
@@ -67,6 +71,7 @@ class GenMidi:
                     else:
                         pitch = pitch3
                     duration = measure[j][1]
+
                     mf.addNote(tracks[0], channel, pitch,
                                measure_time, duration, volume)
 

@@ -64,6 +64,7 @@ class SongGeneration:
         self.chords = []
         self.chord_notes = []
         self.melody = []
+        self.volumes = []
         self.rhythm = []
         self.harmony_names = ["3rd_down", "3rd_up",
                               "4th_up", "5th_up", "8_up", "8_down"]
@@ -101,7 +102,7 @@ class SongGeneration:
         # Melody Generation
         melodyGenerator = GenMelody(
             self.genre, self.scale, self.chords, self.chord_notes, self.rhythm)
-        self.melody = melodyGenerator.build()
+        self.melody, self.volumes = melodyGenerator.build()
 
         self.run_MIDI()
 
@@ -121,6 +122,7 @@ class SongGeneration:
         self.chords = self.chords[:1]
         self.chord_notes = self.chord_notes[:1]
         self.melody = [[[self.key, 4]]]
+        self.volumes = [[100]]
         self.run_MIDI()
 
     # =========== #
@@ -198,6 +200,7 @@ class SongGeneration:
 
         # The GOOD stuff
         new_song_dict["melody"] = self.melody
+        new_song_dict["volumes"] = self.volumes
         new_song_dict["notes_dict"] = self.notes_dict
         new_song_dict["chord_notes"] = self.chord_notes
         new_song_dict["harmonies"] = self.harmonies
@@ -208,6 +211,7 @@ class SongGeneration:
 
     def add_SongDict(self, song_dict):
         song_dict["melody"] += self.melody
+        song_dict["volumes"] += self.volumes
         song_dict["notes_dict"] = self.notes_dict
         song_dict["chord_notes"] += self.chord_notes
         song_dict["harmonies"] += self.harmonies

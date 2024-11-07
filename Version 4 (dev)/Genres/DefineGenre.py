@@ -74,8 +74,9 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
+        rest_weights = [0, 0.05, 0.2]
         anime_melody_info.set_melodic_choices(
-            adjustment_probabilities, progressions, note_weights)
+            adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = anime_melody_info
 
     def classical_info(self):
@@ -115,8 +116,9 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
+        rest_weights = [0.05, 0.05, 0.1]
         classical_melody_info.set_melodic_choices(
-            adjustment_probabilities, progressions, note_weights)
+            adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = classical_melody_info
 
     def cyberpunk_info(self):
@@ -156,8 +158,9 @@ class DefineGenre:
             1: 0.8,
             2: 0.1
         }
+        rest_weights = [0, 0, 0.2]
         cyberpunk_melody_info.set_melodic_choices(
-            adjustment_probabilities, progressions, note_weights)
+            adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = cyberpunk_melody_info
 
     def fantasy_info(self):
