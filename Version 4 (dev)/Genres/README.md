@@ -15,6 +15,7 @@ To keep things moving, we don't want any 1/2 notes at all. We can retain 1/16 no
 Repetition is desired but not required; whenever we have a repeating rhythm, we should have a decent chance of repeating it exactly, with high probability of at least copying the shape with 'chord' and 'slight' variations. We want movement, and we don't want high jumps between the measures, so we push for having `note_weights` of 1 being the highest.
 
 ### Anime - Instrumentation
+Woodwinds, piano, strings, and bells. Nothing brassy here, maybe some electronic sounds occasionally.
 
 ---
 
@@ -32,6 +33,7 @@ The more important repetition for the classical *genre* will appear in the melod
 This will be one of the most open and flowing melody infos here; keep it loose and open for a wide variety of sounds. Classical is all over the place with the melodies, so let it go wild with the melody.
 
 ### Classical - Instrumentation
+Keep it light and classy - stick with piano, violins, and woodwinds. If we end up increasing number of chord layers, then maybe add horns as another chords possibility.
 
 ---
 
@@ -45,6 +47,7 @@ It's okay to space out the notes, and we don't need much repetition throughout. 
 We want pretty solid chord melodies here; nothing too off the beaten path. Maybe a small chance of inverted repetition, but mostly just focusing on pulling notes around to the relative chords. 
 
 ### Cyberpunk - Instrumentation
+Synths, synths, synths! Can use strings as chord layers, but primarily will be using synths from various VSTs.
 
 ---
 
@@ -69,5 +72,7 @@ This should be much, *much* slower than other genres. Spacing and slow notes are
 Unlike the others so far, lofi is a great genre for having exact repetition. I think there should be some solid full measures-worth of repetition for sure, and high chances of repetition elsewhere.
 
 ### Lofi - Melody
+Lots of repetition here as well! Definitely high probability of perfect repetition.
 
 ### Lofi - Instrumentation
+Mostly piano and synths, with vinyl filter on top of that.

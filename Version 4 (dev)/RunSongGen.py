@@ -13,6 +13,11 @@ from Genres.DefineGenre import DefineGenre
 # ========= #
 
 
+def printInstruments(track_name, instrument):
+    print("Our " + track_name + " will be performed by " +
+          instrument + ".")
+
+
 def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=True):
     song_info_file = "song_info.txt"
     f = open(script_dir + folder + song_info_file, "w")
@@ -20,8 +25,16 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     genreInfo = DefineGenre(genre)
     genreInfo.build()
 
+    # Print out our song info
     print("This is a song in the key of " + key + " " +
           song_style + ", in the genre of " + genre + ".")
+    instrumentation = genreInfo.return_dict['Structure'].get_instruments()
+    instruments_so_far = set()
+    for track_name in (instrumentation.keys()):
+        instrument = random.choice(
+            list(set(instrumentation[track_name]) - instruments_so_far))
+        instruments_so_far.add(instrument)
+        printInstruments(track_name, instrument)
 
     full_song_dict = {
         "file_name": "fullSong",
@@ -108,7 +121,9 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         elif part == "finalChorus":
             full_song_dict = chorus.add_SongDict(full_song_dict)
             full_song_dict = base_measure.add_SongDict(full_song_dict)
-    midiGenerator = GenMidi(full_song_dict)
+    midiGenerator = GenMidi(
+        full_song_dict,
+        tracks_list=genreInfo.return_dict['Structure'].get_tracks())
     midiGenerator.build()
 
     f.close()
@@ -118,7 +133,7 @@ if __name__ == "__main__":
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     styles = ['major', 'minor']
-    genres = ['anime', 'classical', 'cyberpunk']
+    genres = ['anime', 'classical', 'cyberpunk', 'fantasy', 'lofi']
 
     key = random.choice(note_list)
     # key = 'D#'
@@ -126,10 +141,10 @@ if __name__ == "__main__":
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_2024_11_6\\"
+    folder = "test_2024_11_8\\"
     # song_style = "major"
     song_style = random.choice(styles)
-    # genre = "anime"
+    # genre = "lofi"
     genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,

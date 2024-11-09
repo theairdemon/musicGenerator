@@ -21,7 +21,7 @@ class DefineGenre:
 
         self.return_dict = {'Rhythm': None,
                             'Melody': None,
-                            'Structure': StructureInfo()}
+                            'Structure': None}
 
         if self.genre not in self.genre_dict.keys():
             self.genre = random.choice(list(self.genre_dict.keys()))
@@ -79,6 +79,16 @@ class DefineGenre:
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = anime_melody_info
 
+        # Structural Definitions
+        anime_structure_info = StructureInfo()
+        instrument_dict = {
+            'melody': ['piano', 'violin', 'bells', 'flute'],
+            'chords': ['strings', 'woodwinds', 'piano'],
+            'arpeggios': ['woodwinds', 'piano', 'bells', 'strings']
+        }
+        anime_structure_info.set_instruments(instrument_dict)
+        self.return_dict['Structure'] = anime_structure_info
+
     def classical_info(self):
         # Rhythm Definitions
         classical_rhythm_info = RhythmInfo()
@@ -108,7 +118,7 @@ class DefineGenre:
             'slight': 0.8
         }
         progressions = {
-            'in-measure': 0.3,  # odds of continuing progression throughout a measure
+            'in-measure': 0.0,  # odds of continuing progression throughout a measure
             'inverted': 0.0  # will be implemented later
         }
         note_weights = {
@@ -120,6 +130,16 @@ class DefineGenre:
         classical_melody_info.set_melodic_choices(
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = classical_melody_info
+
+        # Structural Definitions
+        classical_structure_info = StructureInfo()
+        instrument_dict = {
+            'melody': ['piano', 'violin', 'flute'],
+            'chords': ['piano', 'cellos', 'strings', 'woodwinds'],
+            'arpeggios': ['cellos', 'violas', 'strings', 'classical guitar', 'woodwinds']
+        }
+        classical_structure_info.set_instruments(instrument_dict)
+        self.return_dict['Structure'] = classical_structure_info
 
     def cyberpunk_info(self):
         # Rhythm Definitions
@@ -150,7 +170,7 @@ class DefineGenre:
             'slight': 0.2
         }
         progressions = {
-            'in-measure': 0.5,  # odds of continuing progression throughout a measure
+            'in-measure': 0.4,  # odds of continuing progression throughout a measure
             'inverted': 0.0  # will be implemented later
         }
         note_weights = {
@@ -163,11 +183,163 @@ class DefineGenre:
             adjustment_probabilities, progressions, note_weights, rest_weights)
         self.return_dict['Melody'] = cyberpunk_melody_info
 
+        # Structural Definitions
+        cyberpunk_structure_info = StructureInfo()
+        # TODO: work through sound banks
+        # Completed:
+        # Next Up: Pop Transcendence, Dystopian Machine, JSPA, Urban Clouds
+        melody_instruments = ['piano', 'violin', 'synth1', 'cellos']
+        chords_instruments = [
+            'Pop Transcendence - Arpluck',
+            'Pop Transcendence - Heartbeat',
+            'Pop Transcendence - Okay to Cry',
+            'Pop Transcendence - Groovy Flutes']
+        arpeggios_instruments = [
+            'Pop Transcendence - Deep Pulses',
+            'Pop Transcendence - Running From the 80s',
+            'Pop Transcendence - Super Cheese']
+        instrument_dict = {
+            'melody1': melody_instruments,
+            'melody2': melody_instruments,
+            'chords1': chords_instruments,
+            'chords2': chords_instruments,
+            'arpeggios1': arpeggios_instruments,
+            'arpeggios2': arpeggios_instruments,
+        }
+        tracks_list = ['melody1', 'melody2',
+                       'chords1', 'chords2',
+                       'arpeggios1', 'arpeggios2']
+        cyberpunk_structure_info.set_instruments(instrument_dict)
+        cyberpunk_structure_info.set_tracks(tracks_list)
+        self.return_dict['Structure'] = cyberpunk_structure_info
+
     def fantasy_info(self):
-        print('fantasy')
+        # Rhythm Definitions
+        fantasy_rhythm_info = RhythmInfo()
+        fantasy_rhythm_info.set_rhythms([0.25, 0.5, 1], [0.2, 0.4, 0.4])
+        probabilities = {
+            'full': {
+                (1, 3): 0.5,
+                (2, 4): 0.5,
+                (1, 2, 3): 0.8
+            },
+            'half': {
+                (1, 3): 0.7,
+                (2, 4): 0.8,
+                (1, 2, 3): 0.7,
+                (1, 2, 3, 4): 0.6
+            },
+        }
+        fantasy_rhythm_info.set_probabilities(probabilities)
+        self.return_dict['Rhythm'] = fantasy_rhythm_info
+
+        # Melody Definitions
+        fantasy_melody_info = MelodyInfo()
+        adjustment_probabilities = {
+            'perfect': 0.4,
+            'inverted': 0.1,
+            'chord': 0.4,
+            'slight': 0.6
+        }
+        progressions = {
+            'in-measure': 0.4,  # odds of continuing progression throughout a measure
+            'inverted': 0.0  # will be implemented later
+        }
+        note_weights = {
+            0: 0.1,
+            1: 0.7,
+            2: 0.2
+        }
+        rest_weights = [0, 0, 0]
+        fantasy_melody_info.set_melodic_choices(
+            adjustment_probabilities, progressions, note_weights, rest_weights)
+        self.return_dict['Melody'] = fantasy_melody_info
+
+        # Structural Definitions
+        fantasy_structure_info = StructureInfo()
+        instrument_dict = {
+            'melody': ['piano', 'violin', 'flute', 'trumpet', 'bells'],
+            'chords': ['piano', 'cellos', 'strings', 'woodwinds', 'brass'],
+            'arpeggios': ['piano', 'cellos', 'violas', 'strings', 'classical guitar', 'woodwinds', 'brass']
+        }
+        fantasy_structure_info.set_instruments(instrument_dict)
+        self.return_dict['Structure'] = fantasy_structure_info
 
     def lofi_info(self):
-        print('lofi')
+        # Rhythm Definitions
+        lofi_rhythm_info = RhythmInfo()
+        lofi_rhythm_info.set_rhythms([0.5, 1], [0.3, 0.7])
+        probabilities = {
+            'full': {
+                (1, 3): 0.4,
+                (2, 4): 0.5,
+                (1, 2, 3): 0.9
+            },
+            'half': {
+                (1, 3): 0.4,
+                (2, 4): 0.8,
+                (1, 2, 3): 0.9,
+                (1, 2, 3, 4): 0.8
+            },
+        }
+        lofi_rhythm_info.set_probabilities(probabilities)
+        self.return_dict['Rhythm'] = lofi_rhythm_info
+
+        # Melody Definitions
+        lofi_melody_info = MelodyInfo()
+        adjustment_probabilities = {
+            'perfect': 0.8,
+            'inverted': 0.1,
+            'chord': 0.4,
+            'slight': 0.3
+        }
+        progressions = {
+            'in-measure': 0.3,  # odds of continuing progression throughout a measure
+            'inverted': 0.0  # will be implemented later
+        }
+        note_weights = {
+            0: 0.15,
+            1: 0.6,
+            2: 0.25
+        }
+        rest_weights = [0, 0, 0]
+        lofi_melody_info.set_melodic_choices(
+            adjustment_probabilities, progressions, note_weights, rest_weights)
+        self.return_dict['Melody'] = lofi_melody_info
+
+        # Structural Definitions
+        lofi_structure_info = StructureInfo()
+        # TODO: work through sound banks
+        # Completed:
+        # Next Up: Pop Transcendence, Dystopian Machine, JSPA, Urban Clouds
+        melody_instruments = ['piano', 'violin', 'synth1', 'cellos']
+        chords_instruments = [
+            'piano',
+            'Pop Transendence - Im Nostalgic',
+            'Pop Transcendence - Ether',
+            'strings',
+            'woodwinds']
+        arpeggios_instruments = [
+            'piano',
+            'strings',
+            'classical guitar',
+            'woodwinds',
+            'Pop Transcendence - Deep Pulses',
+            'Pop Transcendence - Noisy Sine',
+            'Pop Transcendence - Wood Music Box',
+            'Pop Transcendence - Penultimate Fantasy']
+        instrument_dict = {
+            'melody1': melody_instruments,
+            'melody2': melody_instruments,
+            'chords1': chords_instruments,
+            'chords2': chords_instruments,
+            'arpeggios': arpeggios_instruments
+        }
+        tracks_list = ['melody1', 'melody2',
+                       'chords1', 'chords2', 'arpeggios']
+        lofi_structure_info.set_instruments(instrument_dict)
+        lofi_structure_info.set_tracks(tracks_list)
+        self.return_dict['Structure'] = lofi_structure_info
 
 
 if __name__ == '__main__':
