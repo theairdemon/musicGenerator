@@ -188,26 +188,44 @@ class DefineGenre:
         # TODO: work through sound banks
         # Completed:
         # Next Up: Pop Transcendence, Dystopian Machine, JSPA, Urban Clouds
-        melody_instruments = ['piano', 'violin', 'synth1', 'cellos']
+        melody_instruments = [
+            'piano',
+            'cellos',
+            'Dystopian Machine - Generator',
+            'Dystopian Machine - Maniac']
         chords_instruments = [
             'Pop Transcendence - Arpluck',
             'Pop Transcendence - Heartbeat',
             'Pop Transcendence - Okay to Cry',
-            'Pop Transcendence - Groovy Flutes']
+            'Pop Transcendence - Groovy Flutes',
+            'Dystopian Machine - Lamenting Circuits',
+            'Dystopian Machine - Loading Process',
+            'Dystopian Machine - Divine Chaos',
+            'Dystopian Machine - Acid Wave',
+            'Dystopian Machine - Cybernetic',
+            'Dystopian Machine - Circuit Crush',
+            'Dystopian Machine - Steel City Nights',
+            'Dystopian Machine - Cyber Assault',
+            'JSPA - Industrial Seq',
+            'Urban Clouds - Cold Summer',
+            'Urban Clouds - Slow Siren']
         arpeggios_instruments = [
             'Pop Transcendence - Deep Pulses',
             'Pop Transcendence - Running From the 80s',
-            'Pop Transcendence - Super Cheese']
+            'Pop Transcendence - Super Cheese',
+            'Dystopian Machine - Black Box',
+            'Dystopian Machine - Blackout Night']
         instrument_dict = {
             'melody1': melody_instruments,
             'melody2': melody_instruments,
             'chords1': chords_instruments,
             'chords2': chords_instruments,
+            'chords3': chords_instruments,
             'arpeggios1': arpeggios_instruments,
             'arpeggios2': arpeggios_instruments,
         }
         tracks_list = ['melody1', 'melody2',
-                       'chords1', 'chords2',
+                       'chords1', 'chords2', 'chords3',
                        'arpeggios1', 'arpeggios2']
         cyberpunk_structure_info.set_instruments(instrument_dict)
         cyberpunk_structure_info.set_tracks(tracks_list)
@@ -309,16 +327,25 @@ class DefineGenre:
 
         # Structural Definitions
         lofi_structure_info = StructureInfo()
-        # TODO: work through sound banks
-        # Completed:
-        # Next Up: Pop Transcendence, Dystopian Machine, JSPA, Urban Clouds
-        melody_instruments = ['piano', 'violin', 'synth1', 'cellos']
+        melody_instruments = [
+            'piano',
+            'violin',
+            'cellos',
+            'Pop Transcendence - Deep Pulses',
+            'Pop Transcendence - Liquid',
+            'Pop Transcendence - Quick Misty Pad',
+            'Pop Transcendence - Sweet Echoes',
+            'Pop Transcendence - Strings & Sines',
+            'Dystopian Machine - Silicon City']
         chords_instruments = [
             'piano',
-            'Pop Transendence - Im Nostalgic',
-            'Pop Transcendence - Ether',
             'strings',
-            'woodwinds']
+            'woodwinds',
+            'Pop Transcendence - Im Nostalgic',
+            'Pop Transcendence - Ether',
+            'Dystopian Machine - Life Inside',
+            'JSPA - CS80 Pad',
+            'JSPA - CS80 Strings']
         arpeggios_instruments = [
             'piano',
             'strings',
@@ -327,13 +354,17 @@ class DefineGenre:
             'Pop Transcendence - Deep Pulses',
             'Pop Transcendence - Noisy Sine',
             'Pop Transcendence - Wood Music Box',
-            'Pop Transcendence - Penultimate Fantasy']
+            'Pop Transcendence - Penultimate Fantasy',
+            'Dystopian Machine - Punk Robot',
+            'JSPA - Gentle Synth Brass',
+            'JSPA - CS80 Strings']
         instrument_dict = {
             'melody1': melody_instruments,
             'melody2': melody_instruments,
             'chords1': chords_instruments,
             'chords2': chords_instruments,
-            'arpeggios': arpeggios_instruments
+            'arpeggios1': arpeggios_instruments,
+            'arpeggios2': arpeggios_instruments
         }
         tracks_list = ['melody1', 'melody2',
                        'chords1', 'chords2', 'arpeggios']

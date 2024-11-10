@@ -140,12 +140,12 @@ if __name__ == "__main__":
     minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
-    script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\"
-    folder = "test_2024_11_8\\"
-    # song_style = "major"
-    song_style = random.choice(styles)
-    # genre = "lofi"
-    genre = random.choice(genres)
+    script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\album_2\\"
+    folder = "cyberpunk_1\\"
+    song_style = "minor"
+    # song_style = random.choice(styles)
+    genre = "cyberpunk"
+    # genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)

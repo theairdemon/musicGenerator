@@ -18,6 +18,9 @@ class StructureInfo:
         # Default number of tracks per song part
         self.tracks = ['melody', 'chords', 'arpeggios']
 
+        # TODO: Extra details on the song
+        # Examples: swing groove, reverb, tempo, etc.
+
     def setOrderList(self, new_order_list):
         self.order_list = new_order_list
 
