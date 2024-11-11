@@ -1,0 +1,19 @@
+Verse 1
+C# major
+['I', 'vi', 'ii', 'vii']
+
+Chorus
+C# major
+['I', 'vi', 'IV', 'vii']
+
+Verse 2
+C# major
+['I', 'vi', 'ii', 'V']
+
+Bridge
+C# major
+['I', 'IV', 'vii', 'iii', 'vi', 'IV', 'V']
+
+Minor Bridge
+A# minor
+['i', 'V', 'i', 'VI', 'ii', 'V', 'i']

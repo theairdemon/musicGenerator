@@ -141,10 +141,10 @@ if __name__ == "__main__":
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\album_2\\"
-    folder = "cyberpunk_1\\"
-    song_style = "minor"
+    folder = "anime_2\\"
+    song_style = "major"
     # song_style = random.choice(styles)
-    genre = "cyberpunk"
+    genre = "anime"
     # genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,

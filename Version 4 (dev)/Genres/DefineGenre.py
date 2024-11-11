@@ -80,13 +80,35 @@ class DefineGenre:
         self.return_dict['Melody'] = anime_melody_info
 
         # Structural Definitions
+        melody_instruments = [
+            'piano',
+            'violin',
+            'bells',
+            'flute']
+        chords_instruments = [
+            'strings',
+            'woodwinds',
+            'piano (quiet)']
+        arpeggios_instruments = [
+            'woodwinds',
+            'piano',
+            'bells',
+            'Pop Transcendence - Wooden Music Box',
+            'trumpet (quiet)']
         anime_structure_info = StructureInfo()
         instrument_dict = {
-            'melody': ['piano', 'violin', 'bells', 'flute'],
-            'chords': ['strings', 'woodwinds', 'piano'],
-            'arpeggios': ['woodwinds', 'piano', 'bells', 'strings']
+            'melody': melody_instruments,
+            'chords1': chords_instruments,
+            'chords2': chords_instruments,
+            'arpeggios1': arpeggios_instruments,
+            'arpeggios2': arpeggios_instruments,
+            'arpeggios3': arpeggios_instruments
         }
+        tracks_list = ['melody1',
+                       'chords1', 'chords2',
+                       'arpeggios1', 'arpeggios2', 'arpeggios3']
         anime_structure_info.set_instruments(instrument_dict)
+        anime_structure_info.set_tracks(tracks_list)
         self.return_dict['Structure'] = anime_structure_info
 
     def classical_info(self):
@@ -132,11 +154,15 @@ class DefineGenre:
         self.return_dict['Melody'] = classical_melody_info
 
         # Structural Definitions
+        melody_instruments = ['piano', 'violin', 'flute']
+        chords_instruments = ['piano', 'cellos', 'strings', 'woodwinds']
+        arpeggios_instruments = ['cellos', 'violas',
+                                 'strings', 'classical guitar', 'woodwinds']
         classical_structure_info = StructureInfo()
         instrument_dict = {
-            'melody': ['piano', 'violin', 'flute'],
-            'chords': ['piano', 'cellos', 'strings', 'woodwinds'],
-            'arpeggios': ['cellos', 'violas', 'strings', 'classical guitar', 'woodwinds']
+            'melody': melody_instruments,
+            'chords': chords_instruments,
+            'arpeggios': arpeggios_instruments
         }
         classical_structure_info.set_instruments(instrument_dict)
         self.return_dict['Structure'] = classical_structure_info
@@ -275,12 +301,20 @@ class DefineGenre:
 
         # Structural Definitions
         fantasy_structure_info = StructureInfo()
+        melody_instruments = ['piano', 'violin', 'flute', 'trumpet', 'bells']
+        chords_instruments = ['piano', 'cellos',
+                              'strings', 'woodwinds', 'brass']
+        arpeggios_instruments = ['piano', 'cellos', 'violas',
+                                 'strings', 'classical guitar', 'woodwinds', 'brass']
         instrument_dict = {
-            'melody': ['piano', 'violin', 'flute', 'trumpet', 'bells'],
-            'chords': ['piano', 'cellos', 'strings', 'woodwinds', 'brass'],
-            'arpeggios': ['piano', 'cellos', 'violas', 'strings', 'classical guitar', 'woodwinds', 'brass']
+            'melody': melody_instruments,
+            'chords1': chords_instruments,
+            'chords2': chords_instruments,
+            'arpeggios': arpeggios_instruments
         }
+        tracks_list = ['melody1', 'chords1', 'chords2', 'arpeggios']
         fantasy_structure_info.set_instruments(instrument_dict)
+        fantasy_structure_info.set_tracks(tracks_list)
         self.return_dict['Structure'] = fantasy_structure_info
 
     def lofi_info(self):
