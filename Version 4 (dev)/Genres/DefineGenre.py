@@ -94,7 +94,9 @@ class DefineGenre:
             'piano',
             'bells',
             'Pop Transcendence - Wooden Music Box',
-            'trumpet (quiet)']
+            'trumpet (quiet)',
+            'flute',
+            'clarinet']
         anime_structure_info = StructureInfo()
         instrument_dict = {
             'melody': melody_instruments,

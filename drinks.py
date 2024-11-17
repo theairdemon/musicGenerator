@@ -10,21 +10,25 @@ def whatToDrink(base_liquor_options):
         'gin': [
             'cooperstown',
             'martini (dry)',
+            'martini (perfect)'
             'white negroni',
             'negroni',
             'the last word',
             'corpse reviver #2',
-            'bees knees'],
+            'bees knees',
+            'gin rickey'],
         'whiskey': [
             'boulevardier',
             'manhattan',
             'old fashioned',
             'whiskey sour',
-            'gold rush'],
+            'gold rush',
+            'whiskey highball'],
         'other': [
             'chirulin',
             'espresso martini',
-            'sidecar']
+            'sidecar',
+            'straight absinthe']
     }
 
     if len(base_liquor_options) == 0:
@@ -35,4 +39,5 @@ def whatToDrink(base_liquor_options):
     return random.choice(base_liquor_dict[chosen_liquor])
 
 
-print(whatToDrink(base_liquor_options=['tequila', 'gin', 'whiskey']))
+liquor_list = ['tequila', 'gin', 'whiskey']
+print(whatToDrink(base_liquor_options=liquor_list))
