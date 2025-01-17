@@ -6,7 +6,9 @@ def whatToDrink(base_liquor_options):
         'tequila': [
             'margarita',
             'original johnny silverhand',
-            'tequila corpse reviver'],
+            'tequila corpse reviver',
+            'tequila soda',
+            'french intervention'],
         'gin': [
             'cooperstown',
             'martini (dry)',
@@ -24,23 +26,27 @@ def whatToDrink(base_liquor_options):
             'whiskey sour',
             'gold rush',
             'whiskey highball'],
+        'absinthe': [
+            'straight absinthe with sugar',
+            'necromancer'],
         'other': [
             'chirulin',
             'espresso martini',
             'sidecar',
-            'straight absinthe',
             'protein cocktail abomination']
     }
 
-    if len(base_liquor_options) == 0:
-        chosen_liquor = random.choice(base_liquor_dict.keys())
-    else:
-        chosen_liquor = random.choice(base_liquor_options)
+    weighted_liquors = []
+    for liquor in base_liquor_options:
+        for cocktail in base_liquor_dict[liquor]:
+            weighted_liquors.append(liquor)
+    chosen_liquor = random.choice(weighted_liquors)
 
-    return random.choice(base_liquor_dict[chosen_liquor])
+    chosen_liquor_string = "Base: " + chosen_liquor
+    cocktail_string = "Cocktail: " + \
+        random.choice(base_liquor_dict[chosen_liquor])
+    return "==================\n" + chosen_liquor_string + "\n" + cocktail_string + "\n=================="
 
 
-liquor_list = ['gin', 'whiskey', 'tequila']
-print(whatToDrink(base_liquor_options=liquor_list))
-
-# print('margarita')
+liquor_list = ['gin', 'whiskey', 'tequila', 'absinthe']
+print(whatToDrink(liquor_list))
