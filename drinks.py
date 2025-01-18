@@ -13,6 +13,7 @@ def whatToDrink(base_liquor_options):
             'cooperstown',
             'martini (dry)',
             'martini (perfect)',
+            'martini (dirty)',
             'white negroni',
             'negroni',
             'the last word',
@@ -25,12 +26,14 @@ def whatToDrink(base_liquor_options):
             'old fashioned',
             'whiskey sour',
             'gold rush',
-            'whiskey highball'],
+            'whiskey highball',
+            'whiskey & coke'],
         'absinthe': [
             'straight absinthe with sugar',
             'necromancer'],
         'other': [
             'chirulin',
+            'pisco sour',
             'espresso martini',
             'sidecar',
             'protein cocktail abomination']
