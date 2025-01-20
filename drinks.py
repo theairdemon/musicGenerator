@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 
 def whatToDrink(base_liquor_options):
@@ -31,6 +32,12 @@ def whatToDrink(base_liquor_options):
         'absinthe': [
             'straight absinthe with sugar',
             'necromancer'],
+        'non-liquor': [
+            'blue moon',
+            'guinness',
+            'cranberry long drink',
+            'peach long drink',
+        ],
         'other': [
             'chirulin',
             'pisco sour',
@@ -38,6 +45,8 @@ def whatToDrink(base_liquor_options):
             'sidecar',
             'protein cocktail abomination']
     }
+
+    random.seed(datetime.now().timestamp())
 
     weighted_liquors = []
     for liquor in base_liquor_options:
@@ -51,5 +60,12 @@ def whatToDrink(base_liquor_options):
     return "==================\n" + chosen_liquor_string + "\n" + cocktail_string + "\n=================="
 
 
-liquor_list = ['gin', 'whiskey', 'tequila', 'absinthe']
+liquor_list = [
+    'gin',
+    # 'whiskey',
+    'tequila',
+    'absinthe',
+    # 'non-liquor',
+    'other'
+]
 print(whatToDrink(liquor_list))
