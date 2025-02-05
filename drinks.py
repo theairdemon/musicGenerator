@@ -62,10 +62,11 @@ def whatToDrink(base_liquor_options):
 
 liquor_list = [
     'gin',
-    # 'whiskey',
+    'whiskey',
     'tequila',
     'absinthe',
     # 'non-liquor',
     'other'
 ]
 print(whatToDrink(liquor_list))
+# print(whatToDrink(['whiskey']))
