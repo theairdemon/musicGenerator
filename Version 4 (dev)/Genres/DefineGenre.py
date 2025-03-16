@@ -403,7 +403,8 @@ class DefineGenre:
             'arpeggios2': arpeggios_instruments
         }
         tracks_list = ['melody1', 'melody2',
-                       'chords1', 'chords2', 'arpeggios']
+                       'chords1', 'chords2',
+                       'arpeggios1', 'arpeggios2']
         lofi_structure_info.set_instruments(instrument_dict)
         lofi_structure_info.set_tracks(tracks_list)
         self.return_dict['Structure'] = lofi_structure_info

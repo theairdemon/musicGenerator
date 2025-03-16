@@ -1,0 +1,19 @@
+Verse 1
+A major
+['I', 'vi', 'ii', 'vii']
+
+Chorus
+A major
+['I', 'vi', 'ii', 'vii']
+
+Verse 2
+A major
+['I', 'vi', 'IV', 'vii']
+
+Bridge
+A major
+['I', 'ii', 'V', 'I', 'ii', 'V', 'I']
+
+Minor Bridge
+F# minor
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']

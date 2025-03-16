@@ -1,19 +1,19 @@
 Verse 1
-F# major
+G major
 ['I', 'vi', 'IV', 'V']
 
 Chorus
-F# major
+G major
 ['I', 'vi', 'ii', 'V']
 
 Verse 2
-F# major
-['I', 'vi', 'ii', 'V']
+G major
+['I', 'vi', 'IV', 'vii']
 
 Bridge
-F# major
-['I', 'ii', 'vii', 'iii', 'vi', 'ii', 'vii']
+G major
+['I', 'ii', 'V', 'I', 'IV', 'V', 'I']
 
 Minor Bridge
-D# minor
+E minor
 ['i', 'V', 'i', 'VI', 'ii', 'V', 'i']

@@ -9,7 +9,8 @@ def whatToDrink(base_liquor_options):
             'original johnny silverhand',
             'tequila corpse reviver',
             'tequila soda',
-            'french intervention'],
+            'french intervention',
+            'naked & famous'],
         'gin': [
             'cooperstown',
             'martini (dry)',
@@ -20,7 +21,8 @@ def whatToDrink(base_liquor_options):
             'the last word',
             'corpse reviver #2',
             'bees knees',
-            'gin rickey'],
+            'gin rickey',
+            'alaska'],
         'whiskey': [
             'boulevardier',
             'manhattan',
@@ -28,7 +30,8 @@ def whatToDrink(base_liquor_options):
             'whiskey sour',
             'gold rush',
             'whiskey highball',
-            'whiskey & coke'],
+            'whiskey & coke',
+            "pickleback shot"],
         'absinthe': [
             'straight absinthe with sugar',
             'necromancer'],
@@ -46,13 +49,14 @@ def whatToDrink(base_liquor_options):
             'protein cocktail abomination']
     }
 
-    random.seed(datetime.now().timestamp())
+    # random.seed(datetime.now().timestamp())
 
-    weighted_liquors = []
-    for liquor in base_liquor_options:
-        for cocktail in base_liquor_dict[liquor]:
-            weighted_liquors.append(liquor)
-    chosen_liquor = random.choice(weighted_liquors)
+    # weighted_liquors = []
+    # for liquor in base_liquor_options:
+    #     for cocktail in base_liquor_dict[liquor]:
+    #         weighted_liquors.append(liquor)
+    # chosen_liquor = random.choice(weighted_liquors)
+    chosen_liquor = random.choice(base_liquor_options)
 
     chosen_liquor_string = "Base: " + chosen_liquor
     cocktail_string = "Cocktail: " + \
@@ -66,7 +70,7 @@ liquor_list = [
     'tequila',
     'absinthe',
     # 'non-liquor',
-    'other'
+    # 'other'
 ]
 print(whatToDrink(liquor_list))
 # print(whatToDrink(['whiskey']))
