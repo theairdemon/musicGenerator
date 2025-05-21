@@ -22,7 +22,10 @@ def whatToDrink(base_liquor_options):
             'corpse reviver #2',
             'bees knees',
             'gin rickey',
-            'alaska'],
+            'alaska',
+            'french pearl',
+            'perfect white negroni (from the Wells in DC)',
+            'bijou'],
         'whiskey': [
             'boulevardier',
             'manhattan',
@@ -31,10 +34,15 @@ def whatToDrink(base_liquor_options):
             'gold rush',
             'whiskey highball',
             'whiskey & coke',
-            "pickleback shot"],
+            'pickleback shot',
+            'Snoopy'],
         'absinthe': [
             'straight absinthe with sugar',
             'necromancer'],
+        'rum': [
+            'mai tai',
+            'rum old fashioned'
+        ],
         'non-liquor': [
             'blue moon',
             'guinness',
@@ -69,6 +77,7 @@ liquor_list = [
     'whiskey',
     'tequila',
     'absinthe',
+    'rum'
     # 'non-liquor',
     # 'other'
 ]
