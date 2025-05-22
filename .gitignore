@@ -2,3 +2,6 @@
 shrunkengooglevectors.bin
 *.pyc
 ./.buildozer/*
+.fuse_*
+*/fluidsynth/*
+soundfonts/*
