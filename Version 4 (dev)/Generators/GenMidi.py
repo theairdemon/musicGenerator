@@ -39,9 +39,13 @@ class GenMidi:
                             "_" + self.tracks_list[i])
 
         # add some notes
-        channel = 0
         channel_chords = 0
         channel_melody = 1
+        # channel_melody = 0
+        channel_arp = 2
+        # channel_arp = 0
+        channel_harmonies = 3
+        # channel_harmonies = 0
         volume = 100
 
         last_pitch = 0
@@ -74,7 +78,7 @@ class GenMidi:
                         pitch = pitch3
                     duration = measure[j][1]
 
-                    mf.addNote(current_track, channel, pitch,
+                    mf.addNote(current_track, channel_melody, pitch,
                                measure_time, duration, volume)
 
                     measure_time += duration
@@ -82,7 +86,8 @@ class GenMidi:
             current_track += 1
 
         # default volume for chords and arps
-        support_volume = 65
+        chords_volume = 100
+        arp_volume = 40
 
         # CHORDS
         while "chords" in self.tracks_list[current_track]:
@@ -94,8 +99,8 @@ class GenMidi:
                            self.notes_dict[chord[1]][0], self.notes_dict[chord[2]][0]]
                 duration = 4
                 for pitch in pitches:
-                    mf.addNote(tracks[current_track], channel, pitch,
-                               chord_time, duration, support_volume)
+                    mf.addNote(tracks[current_track], channel_chords, pitch,
+                               chord_time, duration, chords_volume)
             overall_chord_time += len(self.chord_notes) * 4
             current_track += 1
 
@@ -115,8 +120,8 @@ class GenMidi:
                 pitches.append(pitches[1])
                 duration = 1
                 for i in range(4):
-                    mf.addNote(tracks[current_track], channel, pitches[i],
-                               chord_time, duration, support_volume)
+                    mf.addNote(tracks[current_track], channel_arp, pitches[i],
+                               chord_time, duration, arp_volume)
                     chord_time += duration
             overall_chord_time += len(self.chord_notes) * 4
             current_track += 1
@@ -147,8 +152,8 @@ class GenMidi:
                     else:
                         pitch = pitch3
                     duration = measure[j][1]
-                    mf.addNote(track_harmonies[k], channel,
-                               pitch, measure_time, duration, volume)
+                    mf.addNote(track_harmonies[k], channel_harmonies,
+                               pitch, measure_time, duration, chord_volume)
 
                     measure_time += duration
                     last_pitch = pitch

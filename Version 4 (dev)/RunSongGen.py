@@ -130,6 +130,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
 
 
 if __name__ == "__main__":
+    # os.chdir("/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)")
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     styles = ['major', 'minor']
@@ -142,12 +143,13 @@ if __name__ == "__main__":
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
     # script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\album_2\\"
     # folder = "fantasy_2\\"
-    script_dir = "../midi_files/album_2/"
+    # script_dir = os.path.abspath("../midi_files/album_2/")
+    script_dir = "/mnt/DATA/Documents/Github/musicGenerator/midi_files/album_2/"
     folder = "fantasy_2/"
-    song_style = "major"
-    # song_style = random.choice(styles)
-    genre = "fantasy"
-    # genre = random.choice(genres)
+    # song_style = "major"
+    song_style = random.choice(styles)
+    # genre = "fantasy"
+    genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)
