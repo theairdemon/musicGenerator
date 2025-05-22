@@ -33,7 +33,8 @@ int main(int argc, char** argv)
         fluid_player_add(player, argv[1]);
     }
 
-    int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1);
+    // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1);
+    int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
     // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/LustyVoices.sf2",  1);
     int melody_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
     int arp_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1);

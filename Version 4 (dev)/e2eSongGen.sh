@@ -6,7 +6,7 @@ echo "FULL END-TO-END SONG GENERATION"
 echo "=================================="
 echo ""
 echo "Running python MIDI file generation..."
-/home/hunter/.pyenv/shims/python3 RunSongGen.py
+/home/hunter/.pyenv/shims/python3 RunSongGen.py $1 $2 $3
 echo ""
 echo "Building test1 C file..."
 gcc -I./fluidsynth/include test1.c -L./fluidsynth/build/src -lfluidsynth -lm -lpthread -ldl -o test1

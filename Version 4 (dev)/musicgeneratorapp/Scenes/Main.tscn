@@ -1,0 +1,127 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn3xop736jupj"]
+
+[ext_resource type="Script" uid="uid://bt4j0hiaeydgb" path="res://Scripts/Main.gd" id="1_r150o"]
+[ext_resource type="Texture2D" uid="uid://d04bowlrmojl1" path="res://Assets/IMG_1306.JPG" id="2_idj7w"]
+
+[sub_resource type="Theme" id="Theme_idj7w"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo")]
+script = ExtResource("1_r150o")
+debugInfo = NodePath("Control/Node2D/DebugInfo")
+
+[node name="Background Temp" type="Sprite2D" parent="."]
+position = Vector2(640, 368)
+scale = Vector2(0.25463, 0.25463)
+texture = ExtResource("2_idj7w")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_idj7w")
+
+[node name="Play" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 288.0
+offset_right = 720.0
+offset_bottom = 368.0
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Stop" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 384.0
+offset_right = 720.0
+offset_bottom = 464.0
+theme_override_font_sizes/font_size = 40
+text = "Stop"
+
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 560.0
+offset_right = 720.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 32.0
+offset_right = 432.0
+offset_bottom = 55.0
+text = "Python Generation Options"
+horizontal_alignment = 1
+
+[node name="KeyList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 64.0
+offset_right = 176.0
+offset_bottom = 432.0
+item_count = 13
+item_0/text = "Random"
+item_1/text = "C"
+item_2/text = "C#/D♭"
+item_3/text = "D"
+item_4/text = "D#/E♭"
+item_5/text = "E"
+item_6/text = "F"
+item_7/text = "F#/G♭"
+item_8/text = "G"
+item_9/text = "G#/A♭"
+item_10/text = "A"
+item_11/text = "A#/B♭"
+item_12/text = "B"
+
+[node name="GenreList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 240.0
+item_count = 6
+item_0/text = "Random"
+item_1/text = "Anime"
+item_2/text = "Classical"
+item_3/text = "Cyberpunk"
+item_4/text = "Fantasy"
+item_5/text = "Lofi"
+
+[node name="StyleList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 64.0
+offset_right = 432.0
+offset_bottom = 160.0
+item_count = 3
+item_0/text = "Random"
+item_1/text = "Major"
+item_2/text = "Minor"
+
+[node name="Node2D" type="Node2D" parent="Control"]
+
+[node name="ColorRect" type="ColorRect" parent="Control/Node2D"]
+offset_left = 832.0
+offset_top = 192.0
+offset_right = 1216.0
+offset_bottom = 544.0
+color = Color(0.165434, 0.160899, 0.160899, 1)
+
+[node name="DebugInfo" type="RichTextLabel" parent="Control/Node2D"]
+offset_left = 848.0
+offset_top = 208.0
+offset_right = 1200.0
+offset_bottom = 528.0
+theme_override_font_sizes/normal_font_size = 10
+
+[connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Control/Stop" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
+[connection signal="item_selected" from="Control/KeyList" to="." method="_on_key_list_item_selected"]
+[connection signal="item_selected" from="Control/GenreList" to="." method="_on_genre_list_item_selected"]
+[connection signal="item_selected" from="Control/StyleList" to="." method="_on_style_list_item_selected"]

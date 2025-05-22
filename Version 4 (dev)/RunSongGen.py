@@ -2,6 +2,7 @@ import random
 from midiutil.MidiFile import MIDIFile
 from datetime import datetime
 import os
+import sys
 
 # Custom Class Imports
 from SongGen import *
@@ -130,14 +131,34 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
 
 
 if __name__ == "__main__":
-    # os.chdir("/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)")
+    # Available values
     note_list = ['C', 'C#', 'D', 'D#', 'E',
                  'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    styles = ['major', 'minor']
     genres = ['anime', 'classical', 'cyberpunk', 'fantasy', 'lofi']
+    styles = ['major', 'minor']
 
-    key = random.choice(note_list)
-    # key = 'D#'
+    # Process args into usable indices
+    if len(sys.argv) > 1:
+        args = [int(arg) - 1 for arg in sys.argv[1:]]
+        print(args)
+
+        if args[0] == -1:
+            key = random.choice(note_list)
+        else:
+            key = note_list[args[0]]
+        if args[1] == -1:
+            genre = random.choice(genres)
+        else:
+            genre = genres[args[1]]
+        if args[2] == -1:
+            song_style = random.choice(styles)
+        else:
+            song_style = styles[args[2]]
+    else:
+        key = random.choice(note_list)
+        song_style = random.choice(styles)
+        genre = random.choice(genres)
+
     minorKey = note_list[(note_list.index(key) + 9) % len(note_list)]
 
     # OTHER PEOPLE: CHANGE THIS LINE FOR YOUR OWN DIRECTORY path
@@ -146,10 +167,6 @@ if __name__ == "__main__":
     # script_dir = os.path.abspath("../midi_files/album_2/")
     script_dir = "/mnt/DATA/Documents/Github/musicGenerator/midi_files/album_2/"
     folder = "fantasy_2/"
-    # song_style = "major"
-    song_style = random.choice(styles)
-    # genre = "fantasy"
-    genre = random.choice(genres)
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)
