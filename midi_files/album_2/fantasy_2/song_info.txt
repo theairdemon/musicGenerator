@@ -1,15 +1,15 @@
 Verse 1
-C# minor
+D minor
 ['i', 'VI', 'ii', 'V']
 
 Chorus
-C# minor
-['i', 'VI', 'ii', 'V']
+D minor
+['i', 'VI', 'iv', 'V']
 
 Verse 2
-C# minor
+D minor
 ['i', 'VI', 'iv', 'V']
 
 Bridge
-C# minor
+D minor
 ['i', 'V', 'i', 'VI', 'ii', 'V', 'i']

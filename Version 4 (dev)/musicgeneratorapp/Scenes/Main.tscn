@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bt4j0hiaeydgb" path="res://Scripts/Main.gd" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://d04bowlrmojl1" path="res://Assets/IMG_1306.JPG" id="2_idj7w"]
-
-[sub_resource type="Theme" id="Theme_idj7w"]
+[ext_resource type="Theme" uid="uid://dnmpvjir0ebra" path="res://Themes/SimpleBox.tres" id="3_kln2b"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo")]
 script = ExtResource("1_r150o")
@@ -19,7 +18,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = SubResource("Theme_idj7w")
+theme = ExtResource("3_kln2b")
 
 [node name="Play" type="Button" parent="Control"]
 layout_mode = 0
@@ -54,6 +53,7 @@ offset_left = 32.0
 offset_top = 16.0
 offset_right = 384.0
 offset_bottom = 48.0
+theme = ExtResource("3_kln2b")
 text = "Python Generation Options"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -62,7 +62,8 @@ vertical_alignment = 1
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 400.0
+offset_bottom = 368.0
+theme = ExtResource("3_kln2b")
 item_count = 13
 item_0/text = "Random"
 item_1/text = "C"
@@ -83,7 +84,7 @@ layout_mode = 0
 offset_left = 112.0
 offset_top = 32.0
 offset_right = 240.0
-offset_bottom = 208.0
+offset_bottom = 192.0
 item_count = 6
 item_0/text = "Random"
 item_1/text = "Anime"
@@ -110,7 +111,7 @@ offset_left = 144.0
 offset_top = 240.0
 offset_right = 528.0
 offset_bottom = 592.0
-color = Color(0.165434, 0.160899, 0.160899, 1)
+color = Color(0.278447, 0.231067, 0.470436, 1)
 
 [node name="DebugInfo" type="RichTextLabel" parent="Control/DebugInfoParent"]
 offset_left = 160.0
@@ -142,7 +143,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 160.0
+offset_bottom = 144.0
 item_count = 4
 item_0/text = "Piano"
 item_1/text = "Sax"
@@ -163,7 +164,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 160.0
+offset_bottom = 144.0
 item_count = 4
 item_0/text = "Piano"
 item_1/text = "Sax"
@@ -184,7 +185,7 @@ vertical_alignment = 1
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 160.0
+offset_bottom = 144.0
 item_count = 4
 item_0/text = "Piano"
 item_1/text = "Sax"
