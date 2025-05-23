@@ -140,7 +140,6 @@ if __name__ == "__main__":
     # Process args into usable indices
     if len(sys.argv) > 1:
         args = [int(arg) - 1 for arg in sys.argv[1:]]
-        print(args)
 
         if args[0] == -1:
             key = random.choice(note_list)

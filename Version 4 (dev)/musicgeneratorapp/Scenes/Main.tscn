@@ -7,7 +7,7 @@
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo")]
 script = ExtResource("1_r150o")
-debugInfo = NodePath("Control/Node2D/DebugInfo")
+debugInfo = NodePath("Control/DebugInfoParent/DebugInfo")
 
 [node name="Background Temp" type="Sprite2D" parent="."]
 position = Vector2(640, 368)
@@ -48,21 +48,21 @@ offset_bottom = 640.0
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
-[node name="Label" type="Label" parent="Control"]
+[node name="PythonGenerationOptions" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 32.0
-offset_right = 432.0
-offset_bottom = 55.0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 384.0
+offset_bottom = 48.0
 text = "Python Generation Options"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="KeyList" type="ItemList" parent="Control"]
+[node name="KeyList" type="ItemList" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 64.0
-offset_right = 176.0
-offset_bottom = 432.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 400.0
 item_count = 13
 item_0/text = "Random"
 item_1/text = "C"
@@ -78,12 +78,12 @@ item_10/text = "A"
 item_11/text = "A#/B♭"
 item_12/text = "B"
 
-[node name="GenreList" type="ItemList" parent="Control"]
+[node name="GenreList" type="ItemList" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = 192.0
-offset_top = 64.0
-offset_right = 320.0
-offset_bottom = 240.0
+offset_left = 112.0
+offset_top = 32.0
+offset_right = 240.0
+offset_bottom = 208.0
 item_count = 6
 item_0/text = "Random"
 item_1/text = "Anime"
@@ -92,36 +92,111 @@ item_3/text = "Cyberpunk"
 item_4/text = "Fantasy"
 item_5/text = "Lofi"
 
-[node name="StyleList" type="ItemList" parent="Control"]
+[node name="StyleList" type="ItemList" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = 336.0
-offset_top = 64.0
-offset_right = 432.0
-offset_bottom = 160.0
+offset_left = 256.0
+offset_top = 32.0
+offset_right = 352.0
+offset_bottom = 128.0
 item_count = 3
 item_0/text = "Random"
 item_1/text = "Major"
 item_2/text = "Minor"
 
-[node name="Node2D" type="Node2D" parent="Control"]
+[node name="DebugInfoParent" type="Node2D" parent="Control"]
 
-[node name="ColorRect" type="ColorRect" parent="Control/Node2D"]
-offset_left = 832.0
-offset_top = 192.0
-offset_right = 1216.0
-offset_bottom = 544.0
+[node name="ColorRect" type="ColorRect" parent="Control/DebugInfoParent"]
+offset_left = 144.0
+offset_top = 240.0
+offset_right = 528.0
+offset_bottom = 592.0
 color = Color(0.165434, 0.160899, 0.160899, 1)
 
-[node name="DebugInfo" type="RichTextLabel" parent="Control/Node2D"]
-offset_left = 848.0
-offset_top = 208.0
-offset_right = 1200.0
-offset_bottom = 528.0
+[node name="DebugInfo" type="RichTextLabel" parent="Control/DebugInfoParent"]
+offset_left = 160.0
+offset_top = 256.0
+offset_right = 512.0
+offset_bottom = 576.0
 theme_override_font_sizes/normal_font_size = 10
+
+[node name="FluidSynthOptions" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 752.0
+offset_top = 16.0
+offset_right = 1104.0
+offset_bottom = 48.0
+text = "FluidSynth Instruments"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChordsLabel" type="Label" parent="Control/FluidSynthOptions"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 64.0
+text = "Chords"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChordList" type="ItemList" parent="Control/FluidSynthOptions/ChordsLabel"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 160.0
+item_count = 4
+item_0/text = "Piano"
+item_1/text = "Sax"
+item_2/text = "Strings"
+item_3/text = "Voices"
+
+[node name="MelodyLabel" type="Label" parent="Control/FluidSynthOptions"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 224.0
+offset_bottom = 64.0
+text = "Melody"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MelodyList" type="ItemList" parent="Control/FluidSynthOptions/MelodyLabel"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 160.0
+item_count = 4
+item_0/text = "Piano"
+item_1/text = "Sax"
+item_2/text = "Strings"
+item_3/text = "Voices"
+
+[node name="ArpeggioLabel" type="Label" parent="Control/FluidSynthOptions"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 32.0
+offset_right = 352.0
+offset_bottom = 64.0
+text = "Arpeggio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ArpeggioList" type="ItemList" parent="Control/FluidSynthOptions/ArpeggioLabel"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 160.0
+item_count = 4
+item_0/text = "Piano"
+item_1/text = "Sax"
+item_2/text = "Strings"
+item_3/text = "Voices"
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Stop" to="." method="_on_stop_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
-[connection signal="item_selected" from="Control/KeyList" to="." method="_on_key_list_item_selected"]
-[connection signal="item_selected" from="Control/GenreList" to="." method="_on_genre_list_item_selected"]
-[connection signal="item_selected" from="Control/StyleList" to="." method="_on_style_list_item_selected"]
+[connection signal="item_selected" from="Control/PythonGenerationOptions/KeyList" to="." method="_on_key_list_item_selected"]
+[connection signal="item_selected" from="Control/PythonGenerationOptions/GenreList" to="." method="_on_genre_list_item_selected"]
+[connection signal="item_selected" from="Control/PythonGenerationOptions/StyleList" to="." method="_on_style_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthOptions/ChordsLabel/ChordList" to="." method="_on_chord_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthOptions/MelodyLabel/MelodyList" to="." method="_on_melody_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthOptions/ArpeggioLabel/ArpeggioList" to="." method="_on_arpeggio_list_item_selected"]

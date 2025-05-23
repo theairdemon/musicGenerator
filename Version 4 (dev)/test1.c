@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <fluidsynth.h>
 #include <fluidsynth/sfont.h>
 
@@ -33,11 +34,29 @@ int main(int argc, char** argv)
         fluid_player_add(player, argv[1]);
     }
 
+    int default_instruments[3] = {2, 0, 3};
+
+    if (argc > 2) {
+        default_instruments[0] = atoi(argv[2]);
+    }
+    if (argc > 3) {
+        default_instruments[1] = atoi(argv[3]);
+    }
+    if (argc > 4) {
+        default_instruments[2] = atoi(argv[4]);
+    }
+
     // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1);
     int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
     // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/LustyVoices.sf2",  1);
     int melody_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
     int arp_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1);
+
+    int synth_array[4] = {fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1),
+        fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1),
+        fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1),
+        fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/LustyVoices.sf2",  1)
+    };
 
     // int sfcount = fluid_synth_sfcount(synth);
     // for (int si = 0; si < sfcount; si++) {
@@ -58,14 +77,14 @@ int main(int argc, char** argv)
     //     }
     // }
 
-    fluid_synth_sfont_select  (synth, 0, chords_sfid);
-    fluid_synth_program_select(synth, 0, chords_sfid, 0, 0);
+    fluid_synth_sfont_select  (synth, 0, synth_array[default_instruments[0]]);
+    fluid_synth_program_select(synth, 0, synth_array[default_instruments[0]], 0, 0);
 
-    fluid_synth_sfont_select  (synth, 1, melody_sfid);      
-    fluid_synth_program_select(synth, 1, melody_sfid, 0, 0);
+    fluid_synth_sfont_select  (synth, 1, synth_array[default_instruments[1]]);      
+    fluid_synth_program_select(synth, 1, synth_array[default_instruments[1]], 0, 0);
 
-    fluid_synth_sfont_select  (synth, 2, arp_sfid);      
-    fluid_synth_program_select(synth, 2, arp_sfid, 0, 0);
+    fluid_synth_sfont_select  (synth, 2, synth_array[default_instruments[2]]);      
+    fluid_synth_program_select(synth, 2, synth_array[default_instruments[2]], 0, 0);
 
     // Change the player's behavior
     fluid_player_set_tempo(player, FLUID_PLAYER_TEMPO_EXTERNAL_BPM, 110);

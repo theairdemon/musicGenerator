@@ -9,12 +9,18 @@ var selected_key := 0
 var selected_genre := 0
 var selected_style := 0
 
+var instrument_chords := 0
+var instrument_melody:= 0
+var instrument_arp := 0
+
 func _ready():
 	playing_music = false
 
 func generate_music():
 	# Call scripts to generate music and play it
-	OS.create_process("/bin/bash", ["/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)/e2eSongGen.sh", selected_key, selected_genre, selected_style])	
+	OS.create_process("/bin/bash", ["/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)/e2eSongGen.sh", 
+		selected_key, selected_genre, selected_style, 
+		instrument_chords, instrument_melody, instrument_arp])
 	terminal_log()
 
 func terminal_log():
@@ -76,3 +82,13 @@ func _on_genre_list_item_selected(index: int) -> void:
 
 func _on_style_list_item_selected(index: int) -> void:
 	selected_style = index
+
+
+func _on_chord_list_item_selected(index: int) -> void:
+	instrument_chords = index
+
+func _on_melody_list_item_selected(index: int) -> void:
+	instrument_melody = index
+
+func _on_arpeggio_list_item_selected(index: int) -> void:
+	instrument_arp = index
