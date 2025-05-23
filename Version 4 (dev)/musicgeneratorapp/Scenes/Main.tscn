@@ -58,66 +58,91 @@ text = "Python Generation Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="KeyList" type="ItemList" parent="Control/PythonGenerationOptions"]
+[node name="KeyList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
 offset_top = 32.0
-offset_right = 96.0
-offset_bottom = 368.0
+offset_right = 105.0
+offset_bottom = 67.0
 theme = ExtResource("3_kln2b")
+selected = 0
 item_count = 13
-item_0/text = "Random"
-item_1/text = "C"
-item_2/text = "C#/D♭"
-item_3/text = "D"
-item_4/text = "D#/E♭"
-item_5/text = "E"
-item_6/text = "F"
-item_7/text = "F#/G♭"
-item_8/text = "G"
-item_9/text = "G#/A♭"
-item_10/text = "A"
-item_11/text = "A#/B♭"
-item_12/text = "B"
+popup/item_0/text = "Random"
+popup/item_0/id = 0
+popup/item_1/text = "C"
+popup/item_1/id = 1
+popup/item_2/text = "C#/D♭"
+popup/item_2/id = 2
+popup/item_3/text = "D"
+popup/item_3/id = 3
+popup/item_4/text = "D#/E♭"
+popup/item_4/id = 4
+popup/item_5/text = "E"
+popup/item_5/id = 5
+popup/item_6/text = "F"
+popup/item_6/id = 6
+popup/item_7/text = "F#/G♭"
+popup/item_7/id = 7
+popup/item_8/text = "G"
+popup/item_8/id = 8
+popup/item_9/text = "G#/A♭"
+popup/item_9/id = 9
+popup/item_10/text = "A"
+popup/item_10/id = 10
+popup/item_11/text = "A#/B♭"
+popup/item_11/id = 11
+popup/item_12/text = "B"
+popup/item_12/id = 12
 
-[node name="GenreList" type="ItemList" parent="Control/PythonGenerationOptions"]
+[node name="GenreList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
 offset_left = 112.0
 offset_top = 32.0
 offset_right = 240.0
-offset_bottom = 192.0
+offset_bottom = 64.0
+selected = 0
 item_count = 6
-item_0/text = "Random"
-item_1/text = "Anime"
-item_2/text = "Classical"
-item_3/text = "Cyberpunk"
-item_4/text = "Fantasy"
-item_5/text = "Lofi"
+popup/item_0/text = "Random"
+popup/item_0/id = 0
+popup/item_1/text = "Anime"
+popup/item_1/id = 1
+popup/item_2/text = "Classical"
+popup/item_2/id = 2
+popup/item_3/text = "Cyberpunk"
+popup/item_3/id = 3
+popup/item_4/text = "Fantasy"
+popup/item_4/id = 4
+popup/item_5/text = "Lofi"
+popup/item_5/id = 5
 
-[node name="StyleList" type="ItemList" parent="Control/PythonGenerationOptions"]
+[node name="StyleList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 32.0
 offset_right = 352.0
-offset_bottom = 128.0
+offset_bottom = 64.0
+selected = 0
 item_count = 3
-item_0/text = "Random"
-item_1/text = "Major"
-item_2/text = "Minor"
+popup/item_0/text = "Random"
+popup/item_0/id = 0
+popup/item_1/text = "Major"
+popup/item_1/id = 1
+popup/item_2/text = "Minor"
+popup/item_2/id = 2
 
 [node name="DebugInfoParent" type="Node2D" parent="Control"]
 
-[node name="ColorRect" type="ColorRect" parent="Control/DebugInfoParent"]
-offset_left = 144.0
-offset_top = 240.0
-offset_right = 528.0
-offset_bottom = 592.0
-color = Color(0.278447, 0.231067, 0.470436, 1)
+[node name="Panel" type="Panel" parent="Control/DebugInfoParent"]
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 448.0
+offset_bottom = 608.0
+theme = ExtResource("3_kln2b")
 
 [node name="DebugInfo" type="RichTextLabel" parent="Control/DebugInfoParent"]
-offset_left = 160.0
-offset_top = 256.0
-offset_right = 512.0
-offset_bottom = 576.0
+offset_left = 80.0
+offset_top = 272.0
+offset_right = 432.0
+offset_bottom = 592.0
 theme_override_font_sizes/normal_font_size = 10
 
 [node name="FluidSynthOptions" type="Label" parent="Control"]
@@ -139,16 +164,21 @@ text = "Chords"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChordList" type="ItemList" parent="Control/FluidSynthOptions/ChordsLabel"]
+[node name="ChordList" type="OptionButton" parent="Control/FluidSynthOptions/ChordsLabel"]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 144.0
+offset_bottom = 64.0
+selected = 0
 item_count = 4
-item_0/text = "Piano"
-item_1/text = "Sax"
-item_2/text = "Strings"
-item_3/text = "Voices"
+popup/item_0/text = "Piano"
+popup/item_0/id = 0
+popup/item_1/text = "Sax"
+popup/item_1/id = 1
+popup/item_2/text = "Strings"
+popup/item_2/id = 2
+popup/item_3/text = "Voices"
+popup/item_3/id = 3
 
 [node name="MelodyLabel" type="Label" parent="Control/FluidSynthOptions"]
 layout_mode = 0
@@ -160,16 +190,21 @@ text = "Melody"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MelodyList" type="ItemList" parent="Control/FluidSynthOptions/MelodyLabel"]
+[node name="MelodyList" type="OptionButton" parent="Control/FluidSynthOptions/MelodyLabel"]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 144.0
+offset_bottom = 64.0
+selected = 0
 item_count = 4
-item_0/text = "Piano"
-item_1/text = "Sax"
-item_2/text = "Strings"
-item_3/text = "Voices"
+popup/item_0/text = "Piano"
+popup/item_0/id = 0
+popup/item_1/text = "Sax"
+popup/item_1/id = 1
+popup/item_2/text = "Strings"
+popup/item_2/id = 2
+popup/item_3/text = "Voice"
+popup/item_3/id = 3
 
 [node name="ArpeggioLabel" type="Label" parent="Control/FluidSynthOptions"]
 layout_mode = 0
@@ -181,16 +216,21 @@ text = "Arpeggio"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ArpeggioList" type="ItemList" parent="Control/FluidSynthOptions/ArpeggioLabel"]
+[node name="ArpeggioList" type="OptionButton" parent="Control/FluidSynthOptions/ArpeggioLabel"]
 layout_mode = 0
 offset_top = 32.0
 offset_right = 96.0
-offset_bottom = 144.0
+offset_bottom = 64.0
+selected = 0
 item_count = 4
-item_0/text = "Piano"
-item_1/text = "Sax"
-item_2/text = "Strings"
-item_3/text = "Voices"
+popup/item_0/text = "Piano"
+popup/item_0/id = 0
+popup/item_1/text = "Sax"
+popup/item_1/id = 1
+popup/item_2/text = "Strings"
+popup/item_2/id = 2
+popup/item_3/text = "Voice"
+popup/item_3/id = 3
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Stop" to="." method="_on_stop_pressed"]

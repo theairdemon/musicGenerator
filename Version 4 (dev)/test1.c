@@ -36,6 +36,7 @@ int main(int argc, char** argv)
 
     int default_instruments[3] = {2, 0, 3};
 
+    // Define instruments, if they're defined in the args
     if (argc > 2) {
         default_instruments[0] = atoi(argv[2]);
     }
@@ -46,11 +47,13 @@ int main(int argc, char** argv)
         default_instruments[2] = atoi(argv[4]);
     }
 
-    // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1);
-    int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
-    // int chords_sfid  = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/LustyVoices.sf2",  1);
-    int melody_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1);
-    int arp_sfid = fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1);
+    int tempo = 120;
+    int tempo_list[6] = {120, 120, 110, 90, 120, 80};
+    // Reminder of genre order: random (default), anime, classical, cyberpunk, fantasy, lofi
+    if (argc > 5) {
+        tempo = tempo_list[atoi(argv[5])];
+    }
+
 
     int synth_array[4] = {fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1),
         fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1),
@@ -58,6 +61,33 @@ int main(int argc, char** argv)
         fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/LustyVoices.sf2",  1)
     };
 
+    fluid_synth_sfont_select  (synth, 0, synth_array[default_instruments[0]]);
+    fluid_synth_program_select(synth, 0, synth_array[default_instruments[0]], 0, 0);
+
+    fluid_synth_sfont_select  (synth, 1, synth_array[default_instruments[1]]);      
+    fluid_synth_program_select(synth, 1, synth_array[default_instruments[1]], 0, 0);
+
+    fluid_synth_sfont_select  (synth, 2, synth_array[default_instruments[2]]);      
+    fluid_synth_program_select(synth, 2, synth_array[default_instruments[2]], 0, 0);
+
+    // Change the player's behavior
+    fluid_player_set_tempo(player, FLUID_PLAYER_TEMPO_EXTERNAL_BPM, tempo);
+
+    /* start the synthesizer thread */
+    adriver = new_fluid_audio_driver(settings, synth);
+    /* play the midi files, if any */
+    fluid_player_play(player);
+    /* wait for playback termination */
+    fluid_player_join(player);
+    /* cleanup */
+    delete_fluid_audio_driver(adriver);
+    delete_fluid_player(player);
+    delete_fluid_synth(synth);
+    delete_fluid_settings(settings);
+    return 0;
+}
+
+    // Can copy/paste back after synths are defined if we want debugging logs
     // int sfcount = fluid_synth_sfcount(synth);
     // for (int si = 0; si < sfcount; si++) {
     //     fluid_sfont_t* sfont = fluid_synth_get_sfont(synth, si);
@@ -76,30 +106,3 @@ int main(int argc, char** argv)
     //         printf("  bank %3d, prog %3d → %s\n", bank, prog, name);
     //     }
     // }
-
-    fluid_synth_sfont_select  (synth, 0, synth_array[default_instruments[0]]);
-    fluid_synth_program_select(synth, 0, synth_array[default_instruments[0]], 0, 0);
-
-    fluid_synth_sfont_select  (synth, 1, synth_array[default_instruments[1]]);      
-    fluid_synth_program_select(synth, 1, synth_array[default_instruments[1]], 0, 0);
-
-    fluid_synth_sfont_select  (synth, 2, synth_array[default_instruments[2]]);      
-    fluid_synth_program_select(synth, 2, synth_array[default_instruments[2]], 0, 0);
-
-    // Change the player's behavior
-    fluid_player_set_tempo(player, FLUID_PLAYER_TEMPO_EXTERNAL_BPM, 110);
-    // fluid_player_set_loop(player, -1);
-
-    /* start the synthesizer thread */
-    adriver = new_fluid_audio_driver(settings, synth);
-    /* play the midi files, if any */
-    fluid_player_play(player);
-    /* wait for playback termination */
-    fluid_player_join(player);
-    /* cleanup */
-    delete_fluid_audio_driver(adriver);
-    delete_fluid_player(player);
-    delete_fluid_synth(synth);
-    delete_fluid_settings(settings);
-    return 0;
-}
