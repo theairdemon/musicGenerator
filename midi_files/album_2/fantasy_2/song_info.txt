@@ -4,16 +4,16 @@ A major
 
 Chorus
 A major
-['I', 'vi', 'ii', 'V']
+['I', 'vi', 'IV', 'vii']
 
 Verse 2
 A major
-['I', 'vi', 'IV', 'V']
+['I', 'vi', 'IV', 'vii']
 
 Bridge
 A major
-['I', 'IV', 'vii', 'I', 'IV', 'vii', 'I']
+['I', 'ii', 'vii', 'I', 'IV', 'vii', 'iii']
 
 Minor Bridge
 F# minor
-['i', 'V', 'i', 'VI', 'ii', 'V', 'i']
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']

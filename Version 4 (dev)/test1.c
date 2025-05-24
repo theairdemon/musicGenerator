@@ -28,7 +28,9 @@ int main(int argc, char** argv)
     /* process command line arguments */
     /*
     argv[1] - midifile
-    argv[2] - number for which arp instrument (TODO: improve processing which instrument to pick)
+    argv[2] - chord instrument
+    argv[3] - melody instrument
+    argv[4] - arpeggio instrument
     */ 
     if (fluid_is_midifile(argv[1])) {
         fluid_player_add(player, argv[1]);
@@ -47,14 +49,6 @@ int main(int argc, char** argv)
         default_instruments[2] = atoi(argv[4]);
     }
 
-    int tempo = 120;
-    int tempo_list[6] = {120, 120, 110, 90, 120, 80};
-    // Reminder of genre order: random (default), anime, classical, cyberpunk, fantasy, lofi
-    if (argc > 5) {
-        tempo = tempo_list[atoi(argv[5])];
-    }
-
-
     int synth_array[4] = {fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/1_FantasyPiano.sf2", 1),
         fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/198_u20_alto_sax.SF2", 1),
         fluid_synth_sfload(synth, "/mnt/DATA/Documents/Github/musicGenerator/soundfonts/336_Massive_strings.sf2",  1),
@@ -71,7 +65,6 @@ int main(int argc, char** argv)
     fluid_synth_program_select(synth, 2, synth_array[default_instruments[2]], 0, 0);
 
     // Change the player's behavior
-    fluid_player_set_tempo(player, FLUID_PLAYER_TEMPO_EXTERNAL_BPM, tempo);
 
     /* start the synthesizer thread */
     adriver = new_fluid_audio_driver(settings, synth);

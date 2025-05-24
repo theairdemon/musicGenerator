@@ -55,6 +55,7 @@ class DefineGenre:
             },
         }
         anime_rhythm_info.set_probabilities(probabilities)
+        anime_rhythm_info.set_tempo(120)
         self.return_dict['Rhythm'] = anime_rhythm_info
 
         # Melody Definitions
@@ -131,6 +132,7 @@ class DefineGenre:
             },
         }
         classical_rhythm_info.set_probabilities(probabilities)
+        classical_rhythm_info.set_tempo(110)
         self.return_dict['Rhythm'] = classical_rhythm_info
 
         # Melody Definitions
@@ -187,6 +189,7 @@ class DefineGenre:
             },
         }
         cyberpunk_rhythm_info.set_probabilities(probabilities)
+        cyberpunk_rhythm_info.set_tempo(90)
         self.return_dict['Rhythm'] = cyberpunk_rhythm_info
 
         # Melody Definitions
@@ -277,6 +280,7 @@ class DefineGenre:
             },
         }
         fantasy_rhythm_info.set_probabilities(probabilities)
+        fantasy_rhythm_info.set_tempo(120)
         self.return_dict['Rhythm'] = fantasy_rhythm_info
 
         # Melody Definitions
@@ -337,6 +341,7 @@ class DefineGenre:
             },
         }
         lofi_rhythm_info.set_probabilities(probabilities)
+        lofi_rhythm_info.set_tempo(80)
         self.return_dict['Rhythm'] = lofi_rhythm_info
 
         # Melody Definitions

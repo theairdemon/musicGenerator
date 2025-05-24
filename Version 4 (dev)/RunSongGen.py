@@ -46,7 +46,8 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         "notes_dict": {},
         "verses": 1,
         "chord_notes": [],
-        "harmonies": []
+        "harmonies": [],
+        "genre": genreInfo
     }
 
     song_input_dict = {

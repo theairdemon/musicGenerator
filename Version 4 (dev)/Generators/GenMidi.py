@@ -19,6 +19,7 @@ class GenMidi:
         self.notes_dict = song_dict["notes_dict"]
         self.chord_notes = song_dict["chord_notes"]
         self.harmonies = song_dict["harmonies"]
+        self.genre = song_dict["genre"]
         if not tracks_list:
             self.tracks_list = ['melody', 'chords', 'arpeggios']
         else:
@@ -34,9 +35,11 @@ class GenMidi:
         mf = MIDIFile(len(tracks))
 
         time = 0
+        tempo = self.genre.get('Rhythm').tempo
         for i in tracks:
             mf.addTrackName(i, time, self.file_name +
                             "_" + self.tracks_list[i])
+            mf.addTempo(i, time, tempo)
 
         # add some notes
         channel_chords = 0

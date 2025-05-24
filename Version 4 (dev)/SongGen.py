@@ -204,6 +204,7 @@ class SongGeneration:
         new_song_dict["notes_dict"] = self.notes_dict
         new_song_dict["chord_notes"] = self.chord_notes
         new_song_dict["harmonies"] = self.harmonies
+        new_song_dict["genre"] = self.genre
 
         # Run the midi generator
         midiGenerator = GenMidi(new_song_dict)
