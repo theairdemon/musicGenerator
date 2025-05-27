@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var debugInfo: RichTextLabel
+@export var FluidSynthInstrumentsLabel: Label
 
 var pid_file = "/tmp/test1_pid"
 
@@ -65,6 +66,9 @@ func _on_play_pressed() -> void:
 	if !playing_music:
 		generate_music()
 		playing_music = true
+	else:
+		kill_music()
+		generate_music()
 
 func _on_stop_pressed() -> void:
 	if playing_music:
@@ -72,6 +76,7 @@ func _on_stop_pressed() -> void:
 		playing_music = false
 
 func _on_quit_pressed() -> void:
+	kill_music()
 	get_tree().quit() 
 
 
@@ -96,3 +101,14 @@ func _on_arpeggio_list_item_selected(index: int) -> void:
 
 func _on_volume_slider_value_changed(value: float) -> void:
 	synth_gain = value
+
+
+func _on_feeling_lucky_button_pressed() -> void:
+	var total_instruments = FluidSynthInstrumentsLabel.FLUIDSYNTH_INSTRUMENTS.size()
+	instrument_chords = randi_range(0, total_instruments - 1)
+	instrument_melody = randi_range(0, total_instruments - 1)
+	instrument_arp = randi_range(0, total_instruments - 1)
+	
+	FluidSynthInstrumentsLabel.ChordList.select(instrument_chords)
+	FluidSynthInstrumentsLabel.MelodyList.select(instrument_melody)
+	FluidSynthInstrumentsLabel.ArpeggioList.select(instrument_arp)

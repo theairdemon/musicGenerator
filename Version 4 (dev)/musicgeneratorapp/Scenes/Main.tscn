@@ -6,9 +6,10 @@
 [ext_resource type="FontFile" uid="uid://cw6o00n1xd1pl" path="res://Themes/Montserrat-Bold.ttf" id="4_pbw6q"]
 [ext_resource type="Script" uid="uid://bs3x3moxqa76e" path="res://Scripts/FluidSynthInstruments.gd" id="4_rgh2o"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo", "FluidSynthInstrumentsLabel")]
 script = ExtResource("1_r150o")
 debugInfo = NodePath("Control/DebugInfoParent/DebugInfo")
+FluidSynthInstrumentsLabel = NodePath("Control/FluidSynthInstruments")
 
 [node name="Background Temp" type="Sprite2D" parent="."]
 position = Vector2(640, 368)
@@ -31,21 +32,30 @@ offset_bottom = 368.0
 theme_override_font_sizes/font_size = 40
 text = "Play"
 
-[node name="Stop" type="Button" parent="Control"]
+[node name="Pause" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 560.0
-offset_top = 384.0
+offset_top = 400.0
 offset_right = 720.0
-offset_bottom = 464.0
+offset_bottom = 480.0
 theme_override_font_sizes/font_size = 40
-text = "Stop"
+text = "Pause"
+
+[node name="Resume" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 512.0
+offset_right = 736.0
+offset_bottom = 592.0
+theme_override_font_sizes/font_size = 40
+text = "Resume"
 
 [node name="Quit" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 560.0
-offset_right = 720.0
-offset_bottom = 640.0
+offset_left = 1088.0
+offset_top = 608.0
+offset_right = 1248.0
+offset_bottom = 688.0
 theme_override_font_sizes/font_size = 40
 text = "Quit"
 
@@ -238,8 +248,16 @@ max_value = 3.0
 step = 0.2
 value = 1.0
 
+[node name="FeelingLuckyButton" type="Button" parent="Control/FluidSynthInstruments"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 288.0
+offset_bottom = 304.0
+text = "I'm Feeling Lucky"
+
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Control/Stop" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="Control/Pause" to="." method="_on_stop_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/KeyList" to="." method="_on_key_list_item_selected"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/GenreList" to="." method="_on_genre_list_item_selected"]
@@ -249,3 +267,4 @@ value = 1.0
 [connection signal="item_selected" from="Control/FluidSynthInstruments/ArpeggioLabel/ArpeggioList" to="." method="_on_arpeggio_list_item_selected"]
 [connection signal="drag_ended" from="Control/FluidSynthInstruments/VolumeList/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="Control/FluidSynthInstruments/VolumeList/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Control/FluidSynthInstruments/FeelingLuckyButton" to="." method="_on_feeling_lucky_button_pressed"]
