@@ -1,0 +1,15 @@
+Verse 1
+E minor
+['i', 'VI', 'ii', 'V']
+
+Chorus
+E minor
+['i', 'VI', 'iv', 'V']
+
+Verse 2
+E minor
+['i', 'VI', 'ii', 'V']
+
+Bridge
+E minor
+['i', 'V', 'i', 'VI', 'iv', 'V', 'i']

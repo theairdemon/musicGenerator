@@ -15,7 +15,6 @@ class GenMidi:
 
         # The GOOD stuff
         self.melody = song_dict["melody"]
-        self.volumes = song_dict["volumes"]
         self.notes_dict = song_dict["notes_dict"]
         self.chord_notes = song_dict["chord_notes"]
         self.harmonies = song_dict["harmonies"]
@@ -25,17 +24,17 @@ class GenMidi:
         else:
             self.tracks_list = tracks_list
 
-    def build(self):
+    def build(self) -> None:
         # create your MIDI object
         # track_length = 4
         tracks = [i for i in range(len(self.tracks_list))]
-
         track_harmonies = []
-
-        mf = MIDIFile(len(tracks))
-
         time = 0
-        tempo = self.genre.get('Rhythm').tempo
+        genre = self.genre.genre
+        tempo = self.genre.get('MidiInfo').tempo
+        volumes = self.genre.get('MidiInfo').volumes
+        
+        mf = MIDIFile(len(tracks))
         for i in tracks:
             mf.addTrackName(i, time, self.file_name +
                             "_" + self.tracks_list[i])
@@ -44,26 +43,21 @@ class GenMidi:
         # add some notes
         channel_chords = 0
         channel_melody = 1
-        # channel_melody = 0
         channel_arp = 2
-        # channel_arp = 0
-        channel_harmonies = 3
-        # channel_harmonies = 0
-        volume = 100
 
         last_pitch = 0
         current_track = 0
-
+        count_channel = 0
         while "melody" in self.tracks_list[current_track]:
             # MELODY
+            current_channel = channel_melody + (count_channel * 3)
             for i in range(0, len(self.melody)):
                 measure = self.melody[i]
-                volumes = self.volumes[i]
                 measure_time = i * 4
+                swing_counter = 0
 
                 for j in range(0, len(measure)):
-                    volume = volumes[j]
-                    note = measure[j][0]
+                    note, duration = measure[j]
                     pitch1 = self.notes_dict[note][1]
                     pitch2 = self.notes_dict[note][2]
                     pitch3 = self.notes_dict[note][3]
@@ -79,18 +73,32 @@ class GenMidi:
                         pitch = pitch2
                     else:
                         pitch = pitch3
-                    duration = measure[j][1]
 
-                    mf.addNote(current_track, channel_melody, pitch,
-                               measure_time, duration, volume)
+                    if genre == 'lofi' and duration == 0.5:
+                        swing_counter += 1
+                        if swing_counter % 2 == 1:
+                            duration = 0.67
+                        else:
+                            duration = 0.33
+                    
+                    if genre == 'classical':
+                        if pitch > 72:
+                            pitch -= 12
+                    # print(pitch, measure_time, duration)
+
+                    mf.addNote(current_track, current_channel, pitch,
+                               measure_time, duration, volumes['melody'])
+                    
+                    if genre == 'classical':
+                        mf.addNote(current_track, current_channel, pitch + 12,
+                               measure_time + 1, duration, volumes['melody'])
+                        mf.addNote(current_track, current_channel, pitch + 24,
+                               measure_time + 2, duration, volumes['melody'])
 
                     measure_time += duration
                     last_pitch = pitch
             current_track += 1
-
-        # default volume for chords and arps
-        chords_volume = 100
-        arp_volume = 40
+            count_channel += 1
 
         # CHORDS
         while "chords" in self.tracks_list[current_track]:
@@ -103,7 +111,7 @@ class GenMidi:
                 duration = 4
                 for pitch in pitches:
                     mf.addNote(tracks[current_track], channel_chords, pitch,
-                               chord_time, duration, chords_volume)
+                               chord_time, duration, volumes['chords'])
             overall_chord_time += len(self.chord_notes) * 4
             current_track += 1
 
@@ -124,47 +132,48 @@ class GenMidi:
                 duration = 1
                 for i in range(4):
                     mf.addNote(tracks[current_track], channel_arp, pitches[i],
-                               chord_time, duration, arp_volume)
+                               chord_time, duration, volumes['arp'])
                     chord_time += duration
             overall_chord_time += len(self.chord_notes) * 4
             current_track += 1
             if current_track >= len(self.tracks_list):
                 break
 
-        last_pitch = 0
-        for k in range(len(self.harmonies)):
-            for i in range(len(self.harmonies[k])):
-                measure = self.harmonies[k][i]
-                measure_time = i * 4
+        # write it to disk
+        fullFileName = self.folder_location + \
+            self.file_location + self.file_name + ".mid"
+        f = open(fullFileName, 'w')
+        f.close()
+        with open(fullFileName, 'wb') as outf:
+            mf.writeFile(outf)
 
-                for j in range(len(measure)):
-                    note = measure[j][0]
-                    pitch1 = self.notes_dict[note][1]
-                    pitch2 = self.notes_dict[note][2]
-                    pitch3 = self.notes_dict[note][3]
+# HARMONIES
+# Testing, might add back later idk
+# for k in range(len(self.harmonies)):
+#     for i in range(len(self.harmonies[k])):
+#         measure = self.harmonies[k][i]
+#         measure_time = i * 4
 
-                    dist1 = (pitch1 - last_pitch)**2
-                    dist2 = (pitch2 - last_pitch)**2
-                    dist3 = (pitch3 - last_pitch)**2
-                    distances = [dist1, dist2, dist3]
+#         for j in range(len(measure)):
+#             note = measure[j][0]
+#             pitch1 = self.notes_dict[note][1]
+#             pitch2 = self.notes_dict[note][2]
+#             pitch3 = self.notes_dict[note][3]
 
-                    if min(distances) == dist1:
-                        pitch = pitch1
-                    elif min(distances) == dist2:
-                        pitch = pitch2
-                    else:
-                        pitch = pitch3
-                    duration = measure[j][1]
-                    mf.addNote(track_harmonies[k], channel_harmonies,
-                               pitch, measure_time, duration, chord_volume)
+#             dist1 = (pitch1 - last_pitch)**2
+#             dist2 = (pitch2 - last_pitch)**2
+#             dist3 = (pitch3 - last_pitch)**2
+#             distances = [dist1, dist2, dist3]
 
-                    measure_time += duration
-                    last_pitch = pitch
+#             if min(distances) == dist1:
+#                 pitch = pitch1
+#             elif min(distances) == dist2:
+#                 pitch = pitch2
+#             else:
+#                 pitch = pitch3
+#             duration = measure[j][1]
+#             mf.addNote(track_harmonies[k], channel_harmonies,
+#                         pitch, measure_time, duration, chord_volume)
 
-            # write it to disk
-            fullFileName = self.folder_location + \
-                self.file_location + self.file_name + ".mid"
-            f = open(fullFileName, 'w')
-            f.close()
-            with open(fullFileName, 'wb') as outf:
-                mf.writeFile(outf)
+#             measure_time += duration
+#             last_pitch = pitch

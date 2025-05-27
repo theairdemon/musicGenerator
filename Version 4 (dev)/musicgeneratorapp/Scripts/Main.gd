@@ -12,6 +12,7 @@ var selected_style := 0
 var instrument_chords := 0
 var instrument_melody:= 0
 var instrument_arp := 0
+var synth_gain := 1.0
 
 func _ready():
 	playing_music = false
@@ -20,11 +21,12 @@ func generate_music():
 	# Call scripts to generate music and play it
 	OS.create_process("/bin/bash", ["/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)/e2eSongGen.sh", 
 		selected_key, selected_genre, selected_style, 
-		instrument_chords, instrument_melody, instrument_arp])
+		instrument_chords, instrument_melody, instrument_arp, synth_gain])
 	terminal_log()
 
 func terminal_log():
-	await get_tree().create_timer(1.0).timeout 
+	debugInfo.clear()
+	await get_tree().create_timer(1.0).timeout
 
 	if FileAccess.file_exists("/tmp/test_shell_log.txt"):
 		var log = FileAccess.open("/tmp/test_shell_log.txt", FileAccess.READ)
@@ -55,7 +57,6 @@ func kill_music():
 		OS.create_process("/usr/bin/kill", ["-9", pid_str])
 
 	DirAccess.remove_absolute("/tmp/test1_pid")
-	debugInfo.clear()
 
 # =====================
 # BUTTON CONTROLS
@@ -92,3 +93,6 @@ func _on_melody_list_item_selected(index: int) -> void:
 
 func _on_arpeggio_list_item_selected(index: int) -> void:
 	instrument_arp = index
+
+func _on_volume_slider_value_changed(value: float) -> void:
+	synth_gain = value

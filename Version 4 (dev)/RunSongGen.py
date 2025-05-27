@@ -29,13 +29,13 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     # Print out our song info
     print("This is a song in the key of " + key + " " +
           song_style + ", in the genre of " + genre + ".")
-    instrumentation = genreInfo.return_dict['Structure'].get_instruments()
+    instrumentation = genreInfo.get('Structure').get_instruments()
     instruments_so_far = set()
     for track_name in (instrumentation.keys()):
         instrument = random.choice(
             list(set(instrumentation[track_name]) - instruments_so_far))
         instruments_so_far.add(instrument)
-        printInstruments(track_name, instrument)
+        # printInstruments(track_name, instrument)
 
     full_song_dict = {
         "file_name": "fullSong",
@@ -125,7 +125,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
             full_song_dict = base_measure.add_SongDict(full_song_dict)
     midiGenerator = GenMidi(
         full_song_dict,
-        tracks_list=genreInfo.return_dict['Structure'].get_tracks())
+        tracks_list=genreInfo.get('Structure').get_tracks())
     midiGenerator.build()
 
     f.close()
@@ -165,8 +165,8 @@ if __name__ == "__main__":
     # script_dir = "D:\\Documents\\Github\\musicGenerator\\midi_files\\album_2\\"
     # folder = "fantasy_2\\"
     # script_dir = os.path.abspath("../midi_files/album_2/")
-    script_dir = "/mnt/DATA/Documents/Github/musicGenerator/midi_files/album_2/"
-    folder = "fantasy_2/"
+    script_dir = "/mnt/DATA/Documents/Github/musicGenerator/midi_files/"
+    folder = "app_testing/"
     startRoot = True
     fullSongGen(key, minorKey, folder, song_style,
                 genre, script_dir, startRoot=startRoot)

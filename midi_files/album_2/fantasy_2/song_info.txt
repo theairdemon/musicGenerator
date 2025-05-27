@@ -1,15 +1,15 @@
 Verse 1
-G# minor
-['i', 'VI', 'ii', 'V']
+G minor
+['i', 'VI', 'iv', 'V']
 
 Chorus
-G# minor
+G minor
 ['i', 'VI', 'ii', 'V']
 
 Verse 2
-G# minor
+G minor
 ['i', 'VI', 'iv', 'V']
 
 Bridge
-G# minor
+G minor
 ['i', 'V', 'i', 'VI', 'ii', 'V', 'i']

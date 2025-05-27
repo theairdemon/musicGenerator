@@ -20,9 +20,6 @@ class RhythmInfo:
             },
         }
 
-        # Default tempo
-        self.tempo = 120
-
     def set_rhythms(self, rhythms, rhythm_weights):
         self.all_rhythms = rhythms
         self.all_rhythm_weights = rhythm_weights
@@ -31,6 +28,3 @@ class RhythmInfo:
 
     def set_probabilities(self, new_probabilities):
         self.probabilities = new_probabilities
-    
-    def set_tempo(self, new_tempo):
-        self.tempo = new_tempo

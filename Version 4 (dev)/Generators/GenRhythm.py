@@ -17,7 +17,7 @@ class GenRhythm:
         # Tracking variables for rhythm repetition
         self.repetitions = {}
 
-    def build(self):
+    def build(self) -> None:
         self.setRhythmValues()
         self.genRhythm()
         return self.rhythm
@@ -25,7 +25,7 @@ class GenRhythm:
     # ============== #
     # SET GENRE INFO #
     # ============== #
-    def setRhythmValues(self):
+    def setRhythmValues(self) -> None:
         self.rhythm_info = self.genre.get('Rhythm')
         self.repetition = self.rhythm_info.probabilities
         self.setRepetition()
@@ -33,11 +33,11 @@ class GenRhythm:
     # ============ #
     # BUILD RHYTHM #
     # ============ #
-    def genRhythm(self):
+    def genRhythm(self) -> None:
         for i in range(1, self.length+1):
             self.genMeasure(i)
 
-    def genMeasure(self, idx):
+    def genMeasure(self, idx) -> None:
         total = 0
         measure = []
 
@@ -76,8 +76,8 @@ class GenRhythm:
     # ================ #
     # HELPER FUNCTIONS #
     # ================ #
-    def copyMeasure(self, idx):
-        # looping over our repetition dictionaries
+    def copyMeasure(self, idx) -> tuple[int, list[float]]:   
+    # looping over our repetition dictionaries
         # first check if we're repeating the full measure
         for measure_set in self.repetition['full']:
             if idx in measure_set[1:] and self.repetition['full'][measure_set]:
@@ -98,7 +98,7 @@ class GenRhythm:
         # if there's no repetition, then we just return 0 and an empty array
         return 0, []
 
-    def setRepetition(self):
+    def setRepetition(self) -> None:
         # loop over our dictionaries
         for measure_size in list(self.repetition.keys()):
             for measure_set in list(self.repetition[measure_size].keys()):

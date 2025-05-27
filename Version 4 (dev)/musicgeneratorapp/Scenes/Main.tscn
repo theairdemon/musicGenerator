@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn3xop736jupj"]
+[gd_scene load_steps=6 format=3 uid="uid://dn3xop736jupj"]
 
 [ext_resource type="Script" uid="uid://bt4j0hiaeydgb" path="res://Scripts/Main.gd" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://d04bowlrmojl1" path="res://Assets/IMG_1306.JPG" id="2_idj7w"]
 [ext_resource type="Theme" uid="uid://dnmpvjir0ebra" path="res://Themes/SimpleBox.tres" id="3_kln2b"]
+[ext_resource type="FontFile" uid="uid://cw6o00n1xd1pl" path="res://Themes/Montserrat-Bold.ttf" id="4_pbw6q"]
+[ext_resource type="Script" uid="uid://bs3x3moxqa76e" path="res://Scripts/FluidSynthInstruments.gd" id="4_rgh2o"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("debugInfo")]
 script = ExtResource("1_r150o")
@@ -144,9 +146,10 @@ offset_left = 80.0
 offset_top = 272.0
 offset_right = 432.0
 offset_bottom = 592.0
+theme_override_fonts/normal_font = ExtResource("4_pbw6q")
 theme_override_font_sizes/normal_font_size = 10
 
-[node name="FluidSynthOptions" type="Label" parent="Control"]
+[node name="FluidSynthInstruments" type="Label" parent="Control" node_paths=PackedStringArray("ChordList", "MelodyList", "ArpeggioList")]
 layout_mode = 0
 offset_left = 752.0
 offset_top = 32.0
@@ -155,33 +158,30 @@ offset_bottom = 64.0
 text = "FluidSynth Instruments"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("4_rgh2o")
+ChordList = NodePath("ChordsLabel/ChordList")
+MelodyList = NodePath("MelodyLabel/MelodyList")
+ArpeggioList = NodePath("ArpeggioLabel/ArpeggioList")
 
-[node name="ChordsLabel" type="Label" parent="Control/FluidSynthOptions"]
+[node name="ChordsLabel" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
+offset_left = -48.0
 offset_top = 32.0
-offset_right = 96.0
+offset_right = 48.0
 offset_bottom = 64.0
 text = "Chords"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChordList" type="OptionButton" parent="Control/FluidSynthOptions/ChordsLabel"]
+[node name="ChordList" type="OptionButton" parent="Control/FluidSynthInstruments/ChordsLabel"]
 layout_mode = 0
+offset_left = -32.0
 offset_top = 32.0
-offset_right = 96.0
+offset_right = 128.0
 offset_bottom = 67.0
 selected = 0
-item_count = 4
-popup/item_0/text = "Piano"
-popup/item_0/id = 0
-popup/item_1/text = "Sax"
-popup/item_1/id = 1
-popup/item_2/text = "Strings"
-popup/item_2/id = 2
-popup/item_3/text = "Voices"
-popup/item_3/id = 3
 
-[node name="MelodyLabel" type="Label" parent="Control/FluidSynthOptions"]
+[node name="MelodyLabel" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
 offset_left = 128.0
 offset_top = 32.0
@@ -191,47 +191,52 @@ text = "Melody"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MelodyList" type="OptionButton" parent="Control/FluidSynthOptions/MelodyLabel"]
+[node name="MelodyList" type="OptionButton" parent="Control/FluidSynthInstruments/MelodyLabel"]
 layout_mode = 0
+offset_left = -32.0
 offset_top = 32.0
-offset_right = 96.0
+offset_right = 128.0
 offset_bottom = 67.0
 selected = 0
-item_count = 4
-popup/item_0/text = "Piano"
-popup/item_0/id = 0
-popup/item_1/text = "Sax"
-popup/item_1/id = 1
-popup/item_2/text = "Strings"
-popup/item_2/id = 2
-popup/item_3/text = "Voice"
-popup/item_3/id = 3
 
-[node name="ArpeggioLabel" type="Label" parent="Control/FluidSynthOptions"]
+[node name="ArpeggioLabel" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
-offset_left = 256.0
+offset_left = 304.0
 offset_top = 32.0
-offset_right = 352.0
+offset_right = 400.0
 offset_bottom = 64.0
 text = "Arpeggio"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ArpeggioList" type="OptionButton" parent="Control/FluidSynthOptions/ArpeggioLabel"]
+[node name="ArpeggioList" type="OptionButton" parent="Control/FluidSynthInstruments/ArpeggioLabel"]
 layout_mode = 0
+offset_left = -32.0
 offset_top = 32.0
-offset_right = 96.0
+offset_right = 128.0
 offset_bottom = 67.0
 selected = 0
-item_count = 4
-popup/item_0/text = "Piano"
-popup/item_0/id = 0
-popup/item_1/text = "Sax"
-popup/item_1/id = 1
-popup/item_2/text = "Strings"
-popup/item_2/id = 2
-popup/item_3/text = "Voice"
-popup/item_3/id = 3
+
+[node name="VolumeList" type="Label" parent="Control/FluidSynthInstruments"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 112.0
+offset_right = 224.0
+offset_bottom = 144.0
+text = "Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="Control/FluidSynthInstruments/VolumeList"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 54.0
+min_value = 0.2
+max_value = 3.0
+step = 0.2
+value = 1.0
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Stop" to="." method="_on_stop_pressed"]
@@ -239,6 +244,8 @@ popup/item_3/id = 3
 [connection signal="item_selected" from="Control/PythonGenerationOptions/KeyList" to="." method="_on_key_list_item_selected"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/GenreList" to="." method="_on_genre_list_item_selected"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/StyleList" to="." method="_on_style_list_item_selected"]
-[connection signal="item_selected" from="Control/FluidSynthOptions/ChordsLabel/ChordList" to="." method="_on_chord_list_item_selected"]
-[connection signal="item_selected" from="Control/FluidSynthOptions/MelodyLabel/MelodyList" to="." method="_on_melody_list_item_selected"]
-[connection signal="item_selected" from="Control/FluidSynthOptions/ArpeggioLabel/ArpeggioList" to="." method="_on_arpeggio_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthInstruments/ChordsLabel/ChordList" to="." method="_on_chord_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthInstruments/MelodyLabel/MelodyList" to="." method="_on_melody_list_item_selected"]
+[connection signal="item_selected" from="Control/FluidSynthInstruments/ArpeggioLabel/ArpeggioList" to="." method="_on_arpeggio_list_item_selected"]
+[connection signal="drag_ended" from="Control/FluidSynthInstruments/VolumeList/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="Control/FluidSynthInstruments/VolumeList/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

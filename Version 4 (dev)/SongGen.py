@@ -200,7 +200,6 @@ class SongGeneration:
 
         # The GOOD stuff
         new_song_dict["melody"] = self.melody
-        new_song_dict["volumes"] = self.volumes
         new_song_dict["notes_dict"] = self.notes_dict
         new_song_dict["chord_notes"] = self.chord_notes
         new_song_dict["harmonies"] = self.harmonies

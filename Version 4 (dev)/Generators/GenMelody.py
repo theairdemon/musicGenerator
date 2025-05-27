@@ -20,7 +20,7 @@ class GenMelody:
         self.melody_info = None
         self.volumes = []
 
-    def build(self):
+    def build(self) -> tuple[list[float], list[int]]:
         self.melody_info = self.genre.get('Melody')
         self.genMelody()
         return self.melody, self.volumes
@@ -28,12 +28,12 @@ class GenMelody:
     # ============ #
     # BUILD MELODY #
     # ============ #
-    def genMelody(self):
+    def genMelody(self) -> None:
         for i in range(0, self.length):
             self.melody.append(self.genMeasure(i))
             self.volumes.append(self.genVolume(i))
 
-    def genMeasure(self, idx):
+    def genMeasure(self, idx) -> list[float]:
         starting_note = random.choice(self.chord_notes[idx])
         measure = [[starting_note, self.rhythm[idx][0]]]
 
