@@ -75,7 +75,7 @@ def whatToDrink(base_liquor_options):
 liquor_list = [
     'gin',
     'whiskey',
-    'tequila',
+    # 'tequila',
     'absinthe',
     'rum'
     # 'non-liquor',

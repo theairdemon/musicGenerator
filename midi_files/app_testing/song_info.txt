@@ -1,15 +1,3 @@
 Verse 1
-F minor
-['i', 'VI', 'ii', 'V']
-
-Chorus
-F minor
-['i', 'VI', 'iv', 'V']
-
-Verse 2
-F minor
-['i', 'VI', 'iv', 'V']
-
-Bridge
-F minor
-['i', 'V', 'i', 'VI', 'iv', 'V', 'i']
+C major
+['I', 'vi', 'ii', 'vii']
