@@ -5,3 +5,5 @@ shrunkengooglevectors.bin
 .fuse_*
 */fluidsynth/*
 soundfonts/*
+**/__pycache__/
+__pycache__/
