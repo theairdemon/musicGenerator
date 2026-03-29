@@ -7,3 +7,4 @@ shrunkengooglevectors.bin
 soundfonts/*
 **/__pycache__/
 __pycache__/
+.vscode/
