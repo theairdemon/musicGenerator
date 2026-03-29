@@ -1,3 +1,0 @@
-Verse 1
-C major
-['I', 'vi', 'ii', 'vii']

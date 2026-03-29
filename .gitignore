@@ -8,3 +8,6 @@ soundfonts/*
 **/__pycache__/
 __pycache__/
 .vscode/
+obj/
+midi_files/
+poems/
