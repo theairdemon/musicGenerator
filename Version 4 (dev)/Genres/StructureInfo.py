@@ -1,22 +1,26 @@
 class StructureInfo:
     def __init__(self):
         # Default verse order for songs
-        self.order_list = ['verse1', 'verse1',
-                           'chorus', 'chorus',
-                           'verse2', 'verse2',
-                           'chorus', 'chorus',
-                           'bridge',
-                           'chorus', 'chorus', "finalChorus"]
+        self.order_list = [
+            "verse1",
+            "verse1",
+            "chorus",
+            "chorus",
+            "verse2",
+            "verse2",
+            "chorus",
+            "chorus",
+            "bridge",
+            "chorus",
+            "chorus",
+            "finalChorus",
+        ]
 
         # Default dictionary of instruments
-        self.instruments = {
-            'melody': ['any'],
-            'chords': ['any'],
-            'arpeggios': ['any']
-        }
+        self.instruments = {"melody": ["any"], "chords": ["any"], "arpeggios": ["any"]}
 
         # Default number of tracks per song part
-        self.tracks = ['melody', 'chords', 'arpeggios']
+        self.tracks = ["melody", "chords", "arpeggios"]
 
         # TODO: Extra details on the song
         # Examples: swing groove, reverb, tempo, etc.

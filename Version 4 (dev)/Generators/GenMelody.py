@@ -1,7 +1,9 @@
-from Genres.DefineGenre import *
 import random
 import sys
-sys.path.append('D:\Documents\Github\musicGenerator\Version 4 (dev)')
+
+from Genres.DefineGenre import *
+
+sys.path.append("D:\Documents\Github\musicGenerator\Version 4 (dev)")
 
 # Custom module imports
 
@@ -21,7 +23,7 @@ class GenMelody:
         self.volumes = []
 
     def build(self) -> tuple[list[float], list[int]]:
-        self.melody_info = self.genre.get('Melody')
+        self.melody_info = self.genre.get("Melody")
         self.genMelody()
         return self.melody, self.volumes
 
@@ -44,8 +46,7 @@ class GenMelody:
         # 2. if the length of the note is more than a quarter, only play a note from the chord (but still close to the previous note preferably)
         # 3. pick a random note in the scale, somewhere within 2 of the original
         if idx > 1:
-            repeated_idx, does_repeat, ratio = self.comparePreviousMeasures(
-                idx)
+            repeated_idx, does_repeat, ratio = self.comparePreviousMeasures(idx)
             if does_repeat:
                 measure = self.adjustMeasure(repeated_idx, idx, ratio)
 
@@ -57,7 +58,7 @@ class GenMelody:
         return measure
 
     def genNote(self, measure, measure_idx, idx, progression):
-        prev_note = measure[idx-1][0]
+        prev_note = measure[idx - 1][0]
         note = prev_note
         scale_idx = self.scale.index(prev_note)
 
@@ -70,15 +71,17 @@ class GenMelody:
                 note_indices.append(-1 * note_idx)
 
         note_choices = {
-            n: self.scale[(scale_idx + n) % len(self.scale)] for n in note_indices}
+            n: self.scale[(scale_idx + n) % len(self.scale)] for n in note_indices
+        }
 
         r_note = random.uniform(0, 1)
         current_weights = 0
         for key in list(self.melody_info.note_weights.keys()):
             current_weights += self.melody_info.note_weights[key]
             if r_note <= current_weights:
-                random_choices = [
-                    key, -1 * key] if progression == 0 else [progression * key]
+                random_choices = (
+                    [key, -1 * key] if progression == 0 else [progression * key]
+                )
                 note = note_choices[random.choice(random_choices)]
                 return [note, self.rhythm[measure_idx][idx]]
 
@@ -128,7 +131,7 @@ class GenMelody:
 
     def determineProgression(self):
         r = random.uniform(0, 1)
-        if r <= self.melody_info.progressions['in-measure']:
+        if r <= self.melody_info.progressions["in-measure"]:
             return random.choice([-1, 1])
         return 0
 
@@ -136,7 +139,7 @@ class GenMelody:
     # Begins at starting note, adjusts all others accordingly
     # Returns the adjusted measure in the measure-array format
     def adjustMeasure(self, previous_idx, idx, ratio):
-        cut_length = int(len(self.melody[previous_idx])/ratio)
+        cut_length = int(len(self.melody[previous_idx]) / ratio)
         # reference measure, for easy comparison
         ref_measure = self.melody[previous_idx][:cut_length]
         # working measure, to be changed throughout the adjustments
@@ -144,23 +147,25 @@ class GenMelody:
 
         # if perfect replication, then return measure as-is, no changes
         r_perfect = random.uniform(0, 1)
-        if r_perfect <= self.melody_info.measure_adjustments['perfect']:
+        if r_perfect <= self.melody_info.measure_adjustments["perfect"]:
             return working_measure
 
         # if inverted, then invert the direction of the notes, and continue
         r_inverted = random.uniform(0, 1)
-        if r_inverted <= self.melody_info.measure_adjustments['inverted']:
+        if r_inverted <= self.melody_info.measure_adjustments["inverted"]:
             working_measure = [
-                [working_measure[-1 * (i+1)][0], working_measure[i][1]] for i in range(len(working_measure))]
+                [working_measure[-1 * (i + 1)][0], working_measure[i][1]]
+                for i in range(len(working_measure))
+            ]
 
         # if chord, then set the starting note to the same chord position as the ref_measure and adjust all other notes correspondingly, and return
         r_chord = random.uniform(0, 1)
-        if r_chord <= self.melody_info.measure_adjustments['chord']:
+        if r_chord <= self.melody_info.measure_adjustments["chord"]:
             return self.chordBasedMeasure(previous_idx, idx, working_measure)
 
         # if slight, then go through and adjust starting note and any >= 1/4th notes to the closest chord note in the trending direction, adjusting the following notes correspondingly
         r_slight = random.uniform(0, 1)
-        if r_slight <= self.melody_info.measure_adjustments['slight']:
+        if r_slight <= self.melody_info.measure_adjustments["slight"]:
             return self.slightBasedMeasure(previous_idx, idx, working_measure)
 
         return working_measure
@@ -177,11 +182,13 @@ class GenMelody:
             # this guarantees the first note is always in our chord
             if note[0] in previous_chord_notes and note[0] not in chord_notes:
                 previous_note_idx = self.scale.index(note[0])
-                chord_note_differences = [self.scale.index(
-                    elem) - previous_note_idx for elem in chord_notes]
+                chord_note_differences = [
+                    self.scale.index(elem) - previous_note_idx for elem in chord_notes
+                ]
                 closest_note_diff = min(chord_note_differences, key=abs)
-                closest_note_idx = (previous_note_idx +
-                                    closest_note_diff) % len(self.scale)
+                closest_note_idx = (previous_note_idx + closest_note_diff) % len(
+                    self.scale
+                )
                 closest_note = self.scale[closest_note_idx]
                 fixed_measure.append([closest_note, note[1]])
             else:
@@ -195,19 +202,18 @@ class GenMelody:
         previous_measure = self.melody[previous_idx]
         previous_starting_note = previous_measure[0][0]
         # find chord note position
-        chord_note_idx = self.chord_notes[previous_idx].index(
-            previous_starting_note)
+        chord_note_idx = self.chord_notes[previous_idx].index(previous_starting_note)
         # find position of relative chord notes for current measure
         starting_note = self.chord_notes[idx][chord_note_idx]
         # now find difference between scale positions of these notes
-        note_difference = self.scale.index(
-            starting_note) - self.scale.index(previous_starting_note)
+        note_difference = self.scale.index(starting_note) - self.scale.index(
+            previous_starting_note
+        )
 
         fixed_measure = []
         for note in measure:
             previous_note_idx = self.scale.index(note[0])
-            new_note_idx = (previous_note_idx +
-                            note_difference) % len(self.scale)
+            new_note_idx = (previous_note_idx + note_difference) % len(self.scale)
             fixed_measure.append([self.scale[new_note_idx], note[1]])
 
         return fixed_measure
@@ -225,7 +231,7 @@ class GenMelody:
     def compareOneMeasure(self, previous_idx, idx, ratio):
         current_measure = self.rhythm[idx]
         previous_measure = self.rhythm[previous_idx]
-        cut_length = int(len(previous_measure)/ratio)
+        cut_length = int(len(previous_measure) / ratio)
 
         # if full measure is the same (ratio = 1), lengths should be the same
         # if half measure is the same (ratio = 2), then length >= cut_length

@@ -16,31 +16,33 @@ class MelodyInfo:
 
         # sequential, don't need to sum to 1
         self.measure_adjustments = {
-            'perfect': 0.0,  # identical repetition
-            'inverted': 0.0,  # invert progression
-            'chord': 0.0,  # same scale movement, but starting on current chord root
-            'slight': 0.0  # pull longer notes to current chord notes
+            "perfect": 0.0,  # identical repetition
+            "inverted": 0.0,  # invert progression
+            "chord": 0.0,  # same scale movement, but starting on current chord root
+            "slight": 0.0,  # pull longer notes to current chord notes
         }
 
         # individual, don't need to sum to 1
         self.progressions = {
-            'in-measure': 0.0,  # within 1 measure
-            'inverted': 0.0,  # invert from previous measure
+            "in-measure": 0.0,  # within 1 measure
+            "inverted": 0.0,  # invert from previous measure
         }
 
         # needs to sum to 1
-        self.note_weights = {
-            0: 0.0,
-            1: 0.0,
-            2: 0.0
-        }
+        self.note_weights = {0: 0.0, 1: 0.0, 2: 0.0}
 
         # first value is the odds of rests anywhere in a measure
         # if first value is 0, then we check second value, for rests in the second half
         # if that's 0 as well, then we check the third value, for rests on the final beat(s)
         self.rest_weights = [0, 0, 0]
 
-    def set_melodic_choices(self, adjustment_probabilities, progressions, note_weights, rest_weights=[0, 0, 0]):
+    def set_melodic_choices(
+        self,
+        adjustment_probabilities,
+        progressions,
+        note_weights,
+        rest_weights=[0, 0, 0],
+    ):
         self.measure_adjustments = adjustment_probabilities
         self.progressions = progressions
         self.note_weights = note_weights

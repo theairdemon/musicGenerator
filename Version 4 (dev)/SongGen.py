@@ -1,14 +1,14 @@
+import os
 import random
+from datetime import datetime
 
 from midiutil.MidiFile import MIDIFile
-from datetime import datetime
-import os
 
 # Custom Classes
 from Generators.GenChords import GenChords
 from Generators.GenMelody import GenMelody
-from Generators.GenRhythm import GenRhythm
 from Generators.GenMidi import GenMidi
+from Generators.GenRhythm import GenRhythm
 
 
 class SongGeneration:
@@ -40,8 +40,20 @@ class SongGeneration:
         # DEFINING CONSTANTS #
         # ================== #
         # List of all possible notes, rhythms, and rhythm weights
-        self.all_notes = ['C', 'C#', 'D', 'D#', 'E',
-                          'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+        self.all_notes = [
+            "C",
+            "C#",
+            "D",
+            "D#",
+            "E",
+            "F",
+            "F#",
+            "G",
+            "G#",
+            "A",
+            "A#",
+            "B",
+        ]
 
         # ====================== #
         #  MIDI FILE CONVERSIONS #
@@ -54,7 +66,11 @@ class SongGeneration:
         treble3 = 84
         for i in range(0, len(self.all_notes)):
             self.notes_dict[self.all_notes[i]] = [
-                bass + i, treble1 + i, treble2 + i, treble3 + i]
+                bass + i,
+                treble1 + i,
+                treble2 + i,
+                treble3 + i,
+            ]
 
         # ================ #
         #  CLASS VARIABLES #
@@ -66,15 +82,22 @@ class SongGeneration:
         self.melody = []
         self.volumes = []
         self.rhythm = []
-        self.harmony_names = ["3rd_down", "3rd_up",
-                              "4th_up", "5th_up", "8_up", "8_down"]
+        self.harmony_names = [
+            "3rd_down",
+            "3rd_up",
+            "4th_up",
+            "5th_up",
+            "8_up",
+            "8_down",
+        ]
         self.harmonies = []
         for name in self.harmony_names:
             self.harmonies.append([])
 
     def __str__(self):
-        return_string = str(self.key) + " " + \
-            str(self.style) + "\n" + str(self.chords) + "\n"
+        return_string = (
+            str(self.key) + " " + str(self.style) + "\n" + str(self.chords) + "\n"
+        )
         return return_string
 
     # TODO: add ramp up from verses to chorus maybe idk
@@ -87,11 +110,7 @@ class SongGeneration:
 
         # Chord Generation
         chordGenerator = GenChords(
-            self.scale,
-            self.style,
-            self.length,
-            self.verse_type,
-            self.startRoot
+            self.scale, self.style, self.length, self.verse_type, self.startRoot
         )
         self.chords, self.chord_notes = chordGenerator.build()
 
@@ -101,7 +120,8 @@ class SongGeneration:
 
         # Melody Generation
         melodyGenerator = GenMelody(
-            self.genre, self.scale, self.chords, self.chord_notes, self.rhythm)
+            self.genre, self.scale, self.chords, self.chord_notes, self.rhythm
+        )
         self.melody, self.volumes = melodyGenerator.build()
 
         self.run_MIDI()
@@ -112,11 +132,7 @@ class SongGeneration:
         self.gen_scale()
 
         chordGenerator = GenChords(
-            self.scale,
-            self.style,
-            self.length,
-            self.verse_type,
-            True
+            self.scale, self.style, self.length, self.verse_type, True
         )
         self.chords, self.chord_notes = chordGenerator.build()
         self.chords = self.chords[:1]
@@ -132,7 +148,7 @@ class SongGeneration:
     def gen_scale(self):
         i = self.all_notes.index(self.key)
         l = len(self.all_notes)
-        if self.style == 'major':
+        if self.style == "major":
             self.scale.append(self.all_notes[i])
             self.scale.append(self.all_notes[(i + 2) % l])
             self.scale.append(self.all_notes[(i + 4) % l])
@@ -140,7 +156,7 @@ class SongGeneration:
             self.scale.append(self.all_notes[(i + 7) % l])
             self.scale.append(self.all_notes[(i + 9) % l])
             self.scale.append(self.all_notes[(i + 11) % l])
-        elif self.style == 'minor':
+        elif self.style == "minor":
             self.scale.append(self.all_notes[i])
             self.scale.append(self.all_notes[(i + 2) % l])
             self.scale.append(self.all_notes[(i + 3) % l])
@@ -176,11 +192,9 @@ class SongGeneration:
 
                     note_i = self.scale.index(note[0])
                     if i == 0 or i == 5:
-                        h_note = self.scale[(note_i - h_value) %
-                                            len(self.scale)]
+                        h_note = self.scale[(note_i - h_value) % len(self.scale)]
                     else:
-                        h_note = self.scale[(note_i + h_value) %
-                                            len(self.scale)]
+                        h_note = self.scale[(note_i + h_value) % len(self.scale)]
 
                     harmony[-1].append([h_note, note[1]])
                     h_value += 1

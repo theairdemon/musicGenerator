@@ -2,8 +2,8 @@
 # print(test_dict[(1, 0)])
 
 
-test_list = [1,2 ,3, 4, 5, 6, 7]
-test_dict = {i: i*200 for i in test_list }
+test_list = [1, 2, 3, 4, 5, 6, 7]
+test_dict = {i: i * 200 for i in test_list}
 print(test_dict)
 
 

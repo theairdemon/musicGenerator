@@ -1,13 +1,14 @@
-import random
-from midiutil.MidiFile import MIDIFile
-from datetime import datetime
 import os
+import random
 import sys
+from datetime import datetime
 
-# Custom Class Imports
-from SongGen import *
+from midiutil.MidiFile import MIDIFile
+
 from Generators.GenMidi import GenMidi
 from Genres.DefineGenre import DefineGenre
+# Custom Class Imports
+from SongGen import *
 
 # ========= #
 # FULL SONG #
@@ -15,8 +16,7 @@ from Genres.DefineGenre import DefineGenre
 
 
 def printInstruments(track_name, instrument):
-    print("Our " + track_name + " will be performed by " +
-          instrument + ".")
+    print("Our " + track_name + " will be performed by " + instrument + ".")
 
 
 def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=True):
@@ -27,13 +27,21 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     genreInfo.build()
 
     # Print out our song info
-    print("This is a song in the key of " + key + " " +
-          song_style + ", in the genre of " + genre + ".")
-    instrumentation = genreInfo.get('Structure').get_instruments()
+    print(
+        "This is a song in the key of "
+        + key
+        + " "
+        + song_style
+        + ", in the genre of "
+        + genre
+        + "."
+    )
+    instrumentation = genreInfo.get("Structure").get_instruments()
     instruments_so_far = set()
-    for track_name in (instrumentation.keys()):
+    for track_name in instrumentation.keys():
         instrument = random.choice(
-            list(set(instrumentation[track_name]) - instruments_so_far))
+            list(set(instrumentation[track_name]) - instruments_so_far)
+        )
         instruments_so_far.add(instrument)
         # printInstruments(track_name, instrument)
 
@@ -47,7 +55,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         "verses": 1,
         "chord_notes": [],
         "harmonies": [],
-        "genre": genreInfo
+        "genre": genreInfo,
     }
 
     song_input_dict = {
@@ -60,7 +68,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         "genre": genreInfo,
         "file_name": "verse1",
         "file_location": folder,
-        "folder_location": script_dir
+        "folder_location": script_dir,
     }
 
     # Writing verse 1 to the folder
@@ -110,7 +118,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
         f.write(str(minorBridge))
 
     # Build our full song, start to finish, one midi file
-    for part in genreInfo.get('Structure').getOrderList():
+    for part in genreInfo.get("Structure").getOrderList():
         if part == "verse1":
             full_song_dict = verse1.add_SongDict(full_song_dict)
         elif part == "verse2":
@@ -124,8 +132,8 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
             full_song_dict = chorus.add_SongDict(full_song_dict)
             full_song_dict = base_measure.add_SongDict(full_song_dict)
     midiGenerator = GenMidi(
-        full_song_dict,
-        tracks_list=genreInfo.get('Structure').get_tracks())
+        full_song_dict, tracks_list=genreInfo.get("Structure").get_tracks()
+    )
     midiGenerator.build()
 
     f.close()
@@ -133,10 +141,9 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
 
 if __name__ == "__main__":
     # Available values
-    note_list = ['C', 'C#', 'D', 'D#', 'E',
-                 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    genres = ['anime', 'classical', 'cyberpunk', 'fantasy', 'lofi']
-    styles = ['major', 'minor']
+    note_list = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    genres = ["anime", "classical", "cyberpunk", "fantasy", "lofi"]
+    styles = ["major", "minor"]
 
     # Process args into usable indices
     if len(sys.argv) > 1:
@@ -168,5 +175,6 @@ if __name__ == "__main__":
     script_dir = "/mnt/DATA/Documents/Github/musicGenerator/midi_files/"
     folder = "app_testing/"
     startRoot = True
-    fullSongGen(key, minorKey, folder, song_style,
-                genre, script_dir, startRoot=startRoot)
+    fullSongGen(
+        key, minorKey, folder, song_style, genre, script_dir, startRoot=startRoot
+    )

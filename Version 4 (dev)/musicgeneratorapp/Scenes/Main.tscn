@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bt4j0hiaeydgb" path="res://Scripts/Main.gd" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://d04bowlrmojl1" path="res://Assets/IMG_1306.JPG" id="2_idj7w"]
-[ext_resource type="Theme" uid="uid://dnmpvjir0ebra" path="res://Themes/SimpleBox.tres" id="3_kln2b"]
+[ext_resource type="Theme" uid="uid://b00vktgwpg3t5" path="res://Themes/gruvbox.tres" id="3_pbw6q"]
 [ext_resource type="FontFile" uid="uid://cw6o00n1xd1pl" path="res://Themes/Montserrat-Bold.ttf" id="4_pbw6q"]
 [ext_resource type="Script" uid="uid://bs3x3moxqa76e" path="res://Scripts/FluidSynthInstruments.gd" id="4_rgh2o"]
 
@@ -12,6 +12,7 @@ debugInfo = NodePath("Control/DebugInfoParent/DebugInfo")
 FluidSynthInstrumentsLabel = NodePath("Control/FluidSynthInstruments")
 
 [node name="Background Temp" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(640, 368)
 scale = Vector2(0.25463, 0.25463)
 texture = ExtResource("2_idj7w")
@@ -21,7 +22,12 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme = ExtResource("3_kln2b")
+theme = ExtResource("3_pbw6q")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
 
 [node name="Play" type="Button" parent="Control"]
 layout_mode = 0
@@ -65,7 +71,6 @@ offset_left = 80.0
 offset_top = 64.0
 offset_right = 400.0
 offset_bottom = 96.0
-theme = ExtResource("3_kln2b")
 text = "Python Generation Options"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -76,7 +81,6 @@ offset_left = -16.0
 offset_top = 32.0
 offset_right = 96.0
 offset_bottom = 67.0
-theme = ExtResource("3_kln2b")
 selected = 0
 item_count = 13
 popup/item_0/text = "Random"
@@ -149,7 +153,6 @@ offset_left = 64.0
 offset_top = 256.0
 offset_right = 448.0
 offset_bottom = 608.0
-theme = ExtResource("3_kln2b")
 
 [node name="DebugInfo" type="RichTextLabel" parent="Control/DebugInfoParent"]
 offset_left = 80.0
@@ -189,7 +192,6 @@ offset_left = -32.0
 offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 67.0
-selected = 0
 
 [node name="MelodyLabel" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
@@ -207,7 +209,6 @@ offset_left = -32.0
 offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 67.0
-selected = 0
 
 [node name="ArpeggioLabel" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
@@ -225,7 +226,6 @@ offset_left = -32.0
 offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 67.0
-selected = 0
 
 [node name="VolumeList" type="Label" parent="Control/FluidSynthInstruments"]
 layout_mode = 0
