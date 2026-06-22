@@ -3,12 +3,29 @@ import random
 
 class GenChords:
 
-    def __init__(self, scale, style, length, verse_type, startRoot):
-        # Input Parameters
-        self.scale = scale
+    def __init__(
+        self,
+        scale_major,
+        scale_minor,
+        style,
+        length,
+        verse_type,
+        startRoot,
+        prebuilt_name="random",
+        using_prebuilt=False,
+    ):
+        # Common parameters across all styles of songs
+        self.scale_major = scale_major
+        self.scale_minor = scale_minor
         self.style = style
+
+        # ================================= #
+        # FOR GENERATING CHORD PROGRESSIONS #
+        # ================================= #
         self.length = length
+        # verse_type -> basically checking bridge or not lol
         self.verse_type = verse_type
+        # startRoot -> determines whether we start or finish on the root chord
         self.startRoot = startRoot
 
         # ================== #
@@ -43,14 +60,59 @@ class GenChords:
             4 if self.style == "major" else 5
         )  # for use in chord prog picking
 
+        # =============================== #
+        # FOR USING PREBUILT PROGRESSIONS #
+        # =============================== #
+        # prebuilt -> something new I'm experimenting with
+        # Adding some prebuilt chord structures like I-V-vi-IV, Pachelbel's Canon, etc.
+        self.prebuilt_name = prebuilt_name
+        self.using_prebuilt = using_prebuilt
+
+        # ===================== #
+        # PREBUILT PROGRESSIONS #
+        # ===================== #
+        self.prebuilt_chords_maj = {
+            "pop_four": ["I", "V", "vi", "IV"],
+            "pachelbel": ["I", "V", "vi", "iii", "IV", "I", "IV", "V"],
+        }
+        self.prebuilt_chords_min = {
+            "wonderwall": ["i", "III", "VII", "IV"],
+            # TODO: how to get this to be "double-time"? Interesting problem
+            "bo_burnham": ["i", "i", "iv", "iv", "VII", "VII", "III", "V"],
+            # TODO: figure out 7th chords
+            "in_the_pines": ["i", "i", "iv", "i", "i", "V", "i", "i"],
+        }
+
     def build(self):
-        self.gen_chords()
+        if self.using_prebuilt:
+            self.gen_prebuilt_chords()
+        else:
+            self.gen_chords()
         self.convert_chords()
         return self.chords, self.chord_notes
 
     # ======================== #
     # BUILD CHORDS PROGRESSION #
     # ======================== #
+    def gen_prebuilt_chords(self):
+        if self.prebuilt_name != "random":
+            if self.prebuilt_name in self.prebuilt_chords_maj:
+                self.chords = self.prebuilt_chords_maj[self.prebuilt_name]
+            elif self.prebuilt_name in self.prebuilt_chords_min:
+                self.chords = self.prebuilt_chords_min[self.prebuilt_name]
+        else:
+            if self.style == "major":
+                self.prebuilt_name = random.choice(
+                    list(self.prebuilt_chords_maj.keys())
+                )
+                self.chords = self.prebuilt_chords_maj[self.prebuilt_name]
+            elif self.style == "minor":
+                self.prebuilt_name = random.choice(
+                    list(self.prebuilt_chords_min.keys())
+                )
+                self.chords = self.prebuilt_chords_min[self.prebuilt_name]
+        print(f"Using prebuilt progression: {self.prebuilt_name}")
+
     def gen_chords(self):
         chords = ["I"] if self.style == "major" else ["i"]
         sub_value = 2
@@ -82,6 +144,7 @@ class GenChords:
             tempChords = chords[1:]
             tempChords.append(chords[0])
             self.chords = tempChords
+        print(f"Generated chords: {self.chords}")
 
     # ======================= #
     # CONVERT CHORDS TO NOTES #
@@ -90,17 +153,56 @@ class GenChords:
         # adding the specific notes for each chord
         # if adding more chords, add the notes for those chords here
         for chord in self.chords:
-            if chord == "I" or chord == "i":  # 1, 3, 5
-                self.chord_notes.append([self.scale[0], self.scale[2], self.scale[4]])
-            elif chord == "ii":  # 2, 4, 6
-                self.chord_notes.append([self.scale[1], self.scale[3], self.scale[5]])
-            elif chord == "iii" or chord == "III":  # 3, 5, 7
-                self.chord_notes.append([self.scale[2], self.scale[4], self.scale[6]])
-            elif chord == "IV" or chord == "iv":  # 4, 6, 1
-                self.chord_notes.append([self.scale[3], self.scale[5], self.scale[0]])
-            elif chord == "V":  # 5, 7, 2
-                self.chord_notes.append([self.scale[4], self.scale[6], self.scale[1]])
-            elif chord == "vi" or chord == "VI":  # 6, 1, 3
-                self.chord_notes.append([self.scale[5], self.scale[0], self.scale[2]])
-            elif chord == "vii" or chord == "VII":  # 7, 2, 4
-                self.chord_notes.append([self.scale[6], self.scale[1], self.scale[3]])
+            match chord:
+                case "I":  # 1, 3, 5
+                    self.chord_notes.append(
+                        [self.scale_major[0], self.scale_major[2], self.scale_major[4]]
+                    )
+                case "i":  # 1, 3, 5
+                    self.chord_notes.append(
+                        [self.scale_minor[0], self.scale_minor[2], self.scale_minor[4]]
+                    )
+                case "ii":  # 2, 4, 6
+                    self.chord_notes.append(
+                        [self.scale_major[1], self.scale_major[3], self.scale_major[5]]
+                    )
+                # TODO: Same output for III and iii?
+                # III is really only used in minor scales, so we need the minor not major
+                # iii is only used in major scales
+                # e.g. C E Am F becomes minor scale III V i VI
+                case "III":  # 3, 5, 7
+                    self.chord_notes.append(
+                        [self.scale_minor[2], self.scale_minor[4], self.scale_minor[6]]
+                    )
+                case "iii":  # 3, 5, 7
+                    self.chord_notes.append(
+                        [self.scale_major[2], self.scale_major[4], self.scale_major[6]]
+                    )
+                case "IV":  # 4, 6, 1
+                    self.chord_notes.append(
+                        [self.scale_major[3], self.scale_major[5], self.scale_major[0]]
+                    )
+                case "iv":  # 4, 6, 1
+                    self.chord_notes.append(
+                        [self.scale_minor[3], self.scale_minor[5], self.scale_minor[0]]
+                    )
+                case "V":  # 5, 7, 2
+                    self.chord_notes.append(
+                        [self.scale_major[4], self.scale_major[6], self.scale_major[1]]
+                    )
+                case "vi":  # 6, 1, 3
+                    self.chord_notes.append(
+                        [self.scale_major[5], self.scale_major[0], self.scale_major[2]]
+                    )
+                case "VI":  # 6, 1, 3
+                    self.chord_notes.append(
+                        [self.scale_major[5], self.scale_major[0], self.scale_major[2]]
+                    )
+                case "vii":  # 7, 2, 4
+                    self.chord_notes.append(
+                        [self.scale_major[6], self.scale_major[1], self.scale_major[3]]
+                    )
+                case "VII":  # 7, 2, 4
+                    self.chord_notes.append(
+                        [self.scale_major[6], self.scale_major[1], self.scale_major[3]]
+                    )

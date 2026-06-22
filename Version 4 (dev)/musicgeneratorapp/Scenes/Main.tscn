@@ -67,20 +67,49 @@ text = "Quit"
 
 [node name="PythonGenerationOptions" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 64.0
 offset_top = 64.0
-offset_right = 400.0
+offset_right = 464.0
 offset_bottom = 96.0
 text = "Python Generation Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="KeyLabel" type="Label" parent="Control/PythonGenerationOptions"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 80.0
+offset_bottom = 64.0
+text = "Key"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GenreLabel" type="Label" parent="Control/PythonGenerationOptions"]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 32.0
+offset_right = 224.0
+offset_bottom = 64.0
+text = "Genre"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StyleLabel" type="Label" parent="Control/PythonGenerationOptions"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 32.0
+offset_right = 368.0
+offset_bottom = 64.0
+text = "Style"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="KeyList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = -16.0
-offset_top = 32.0
-offset_right = 96.0
-offset_bottom = 67.0
+offset_top = 64.0
+offset_right = 112.0
+offset_bottom = 99.0
 selected = 0
 item_count = 13
 popup/item_0/text = "Random"
@@ -112,10 +141,10 @@ popup/item_12/id = 12
 
 [node name="GenreList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 32.0
-offset_right = 240.0
-offset_bottom = 67.0
+offset_left = 144.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 99.0
 selected = 0
 item_count = 6
 popup/item_0/text = "Random"
@@ -133,10 +162,10 @@ popup/item_5/id = 5
 
 [node name="StyleList" type="OptionButton" parent="Control/PythonGenerationOptions"]
 layout_mode = 0
-offset_left = 256.0
-offset_top = 32.0
-offset_right = 368.0
-offset_bottom = 67.0
+offset_left = 288.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 99.0
 selected = 0
 item_count = 3
 popup/item_0/text = "Random"
@@ -151,13 +180,13 @@ popup/item_2/id = 2
 [node name="Panel" type="Panel" parent="Control/DebugInfoParent"]
 offset_left = 64.0
 offset_top = 256.0
-offset_right = 448.0
+offset_right = 464.0
 offset_bottom = 608.0
 
 [node name="DebugInfo" type="RichTextLabel" parent="Control/DebugInfoParent"]
 offset_left = 80.0
 offset_top = 272.0
-offset_right = 432.0
+offset_right = 448.0
 offset_bottom = 592.0
 theme_override_fonts/normal_font = ExtResource("4_pbw6q")
 theme_override_font_sizes/normal_font_size = 10
@@ -258,6 +287,7 @@ text = "I'm Feeling Lucky"
 
 [connection signal="pressed" from="Control/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Control/Pause" to="." method="_on_stop_pressed"]
+[connection signal="pressed" from="Control/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/KeyList" to="." method="_on_key_list_item_selected"]
 [connection signal="item_selected" from="Control/PythonGenerationOptions/GenreList" to="." method="_on_genre_list_item_selected"]

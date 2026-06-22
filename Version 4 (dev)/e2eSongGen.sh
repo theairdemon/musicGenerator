@@ -22,4 +22,3 @@ gcc -I./fluidsynth/include test1.c -L./fluidsynth/build/src -lfluidsynth -lm -lp
 echo "Playing MIDI files through fluidsynth..."
 ./test1 ../midi_files/app_testing/fullSong.mid $4 $5 $6 $7 &
 echo $! >/tmp/test1_pid
-

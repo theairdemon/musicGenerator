@@ -25,6 +25,12 @@ func generate_music():
 		instrument_chords, instrument_melody, instrument_arp, synth_gain])
 	terminal_log()
 
+func resume_music():
+	# Call scripts to generate music and play it
+	OS.create_process("/bin/bash", ["/mnt/DATA/Documents/Github/musicGenerator/Version 4 (dev)/resumeFluidsynth.sh", 
+		instrument_chords, instrument_melody, instrument_arp, synth_gain])
+	terminal_log()
+
 func terminal_log():
 	debugInfo.clear()
 	await get_tree().create_timer(1.0).timeout
@@ -69,6 +75,11 @@ func _on_play_pressed() -> void:
 	else:
 		kill_music()
 		generate_music()
+
+func _on_resume_pressed() -> void:
+	if !playing_music:
+		resume_music()
+		playing_music = true
 
 func _on_stop_pressed() -> void:
 	if playing_music:

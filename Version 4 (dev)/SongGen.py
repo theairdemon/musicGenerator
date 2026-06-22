@@ -106,13 +106,22 @@ class SongGeneration:
     # MAIN SONG GENERATION CONTROL #
     # ============================ #
     def gen_song(self):
-        self.gen_scale()
+        self.scale = self.gen_scale(self.style)
 
         # Chord Generation
         chordGenerator = GenChords(
-            self.scale, self.style, self.length, self.verse_type, self.startRoot
+            scale_major=self.gen_scale("major"),
+            scale_minor=self.gen_scale("minor"),
+            style=self.style,
+            length=self.length,
+            verse_type=self.verse_type,
+            startRoot=self.startRoot,
+            prebuilt_name="pop_four",
+            # using_prebuilt=random.choice([True, False]),
+            using_prebuilt=True,
         )
         self.chords, self.chord_notes = chordGenerator.build()
+        self.length = len(self.chords)
 
         # Rhythm Generation
         rhythmGenerator = GenRhythm(len(self.chords), self.genre)
@@ -120,7 +129,12 @@ class SongGeneration:
 
         # Melody Generation
         melodyGenerator = GenMelody(
-            self.genre, self.scale, self.chords, self.chord_notes, self.rhythm
+            genre=self.genre,
+            primary_scale=self.scale,
+            secondary_scale=self.gen_scale("major"),
+            chords=self.chords,
+            chord_notes=self.chord_notes,
+            rhythm=self.rhythm,
         )
         self.melody, self.volumes = melodyGenerator.build()
 
@@ -129,10 +143,15 @@ class SongGeneration:
     # Small generation helper; builds 1 measure with the root chord and
     # a single sustained root note
     def gen_base_measure(self):
-        self.gen_scale()
+        self.scale = self.gen_scale(self.style)
 
         chordGenerator = GenChords(
-            self.scale, self.style, self.length, self.verse_type, True
+            scale_major=self.gen_scale("major"),
+            scale_minor=self.gen_scale("minor"),
+            style=self.style,
+            length=self.length,
+            verse_type=self.verse_type,
+            startRoot=True,
         )
         self.chords, self.chord_notes = chordGenerator.build()
         self.chords = self.chords[:1]
@@ -144,26 +163,27 @@ class SongGeneration:
     # =========== #
     # BUILD SCALE #
     # =========== #
-
-    def gen_scale(self):
+    def gen_scale(self, style):
         i = self.all_notes.index(self.key)
         l = len(self.all_notes)
-        if self.style == "major":
-            self.scale.append(self.all_notes[i])
-            self.scale.append(self.all_notes[(i + 2) % l])
-            self.scale.append(self.all_notes[(i + 4) % l])
-            self.scale.append(self.all_notes[(i + 5) % l])
-            self.scale.append(self.all_notes[(i + 7) % l])
-            self.scale.append(self.all_notes[(i + 9) % l])
-            self.scale.append(self.all_notes[(i + 11) % l])
-        elif self.style == "minor":
-            self.scale.append(self.all_notes[i])
-            self.scale.append(self.all_notes[(i + 2) % l])
-            self.scale.append(self.all_notes[(i + 3) % l])
-            self.scale.append(self.all_notes[(i + 5) % l])
-            self.scale.append(self.all_notes[(i + 7) % l])
-            self.scale.append(self.all_notes[(i + 8) % l])
-            self.scale.append(self.all_notes[(i + 10) % l])
+        scale = []
+        if style == "major":
+            scale.append(self.all_notes[i])
+            scale.append(self.all_notes[(i + 2) % l])
+            scale.append(self.all_notes[(i + 4) % l])
+            scale.append(self.all_notes[(i + 5) % l])
+            scale.append(self.all_notes[(i + 7) % l])
+            scale.append(self.all_notes[(i + 9) % l])
+            scale.append(self.all_notes[(i + 11) % l])
+        elif style == "minor":
+            scale.append(self.all_notes[i])
+            scale.append(self.all_notes[(i + 2) % l])
+            scale.append(self.all_notes[(i + 3) % l])
+            scale.append(self.all_notes[(i + 5) % l])
+            scale.append(self.all_notes[(i + 7) % l])
+            scale.append(self.all_notes[(i + 8) % l])
+            scale.append(self.all_notes[(i + 10) % l])
+        return scale
 
     # ============= #
     # BUILD HARMONY #
