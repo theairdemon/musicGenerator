@@ -1,6 +1,7 @@
 import random
 import sys
 
+from Builders.ScaleBuilder import ScaleBuilder
 from Genres.DefineGenre import *
 
 sys.path.append("D:\Documents\Github\musicGenerator\Version 4 (dev)")
@@ -10,12 +11,9 @@ sys.path.append("D:\Documents\Github\musicGenerator\Version 4 (dev)")
 
 class GenMelody:
 
-    def __init__(
-        self, genre, primary_scale, secondary_scale, chords, chord_notes, rhythm
-    ):
+    def __init__(self, genre, scale, chords, chord_notes, rhythm):
         self.genre = genre
-        self.primary_scale = primary_scale
-        self.secondary_scale = secondary_scale
+        self.scale = scale
         self.chords = chords
         self.chord_notes = chord_notes
         self.length = len(chords)
@@ -42,11 +40,7 @@ class GenMelody:
         starting_note = random.choice(self.chord_notes[idx])
         measure = [[starting_note, self.rhythm[idx][0]]]
 
-        measure_scale_name = self._pick_scale(idx)
-        if measure_scale_name == "secondary":
-            measure_scale = self.secondary_scale
-        else:
-            measure_scale = self.primary_scale
+        measure_scale = self._pick_chord_scale(idx)
 
         # loop over the rhythm and build notes from it
         # rough outline:
@@ -71,7 +65,7 @@ class GenMelody:
     def genNote(self, measure, measure_idx, idx, progression, measure_scale):
         prev_note = measure[idx - 1][0]
         note = prev_note
-        scale_idx = self._check_index(prev_note)
+        scale_idx = self._check_index(prev_note, idx)
 
         # Make a list of the possible note_indices we can move to
         note_indices = []
@@ -195,9 +189,10 @@ class GenMelody:
             # pull that note to the closest chord note we have
             # this guarantees the first note is always in our chord
             if note[0] in previous_chord_notes and note[0] not in chord_notes:
-                previous_note_idx = self._check_index(note[0])
+                previous_note_idx = self._check_index(note[0], idx)
                 chord_note_differences = [
-                    self._check_index(elem) - previous_note_idx for elem in chord_notes
+                    self._check_index(elem, idx) - previous_note_idx
+                    for elem in chord_notes
                 ]
                 closest_note_diff = min(chord_note_differences, key=abs)
                 closest_note_idx = (previous_note_idx + closest_note_diff) % len(
@@ -220,13 +215,13 @@ class GenMelody:
         # find position of relative chord notes for current measure
         starting_note = self.chord_notes[idx][chord_note_idx]
         # now find difference between scale positions of these notes
-        note_difference = self._check_index(starting_note) - self._check_index(
-            previous_starting_note
+        note_difference = self._check_index(starting_note, idx) - self._check_index(
+            previous_starting_note, idx
         )
 
         fixed_measure = []
         for note in measure:
-            previous_note_idx = self._check_index(note[0])
+            previous_note_idx = self._check_index(note[0], idx)
             new_note_idx = (previous_note_idx + note_difference) % len(measure_scale)
             fixed_measure.append([measure_scale[new_note_idx], note[1]])
 
@@ -260,25 +255,43 @@ class GenMelody:
 
     # Scale-agnostic checking index
     # Might need tweaking but should stop outright failures
-    def _check_index(self, elem):
-        if elem in self.primary_scale:
-            return self.primary_scale.index(elem)
-        elif elem in self.secondary_scale:
-            return self.secondary_scale.index(elem)
+    def _check_index(self, elem, idx):
+        if elem in self.scale:
+            return self.scale.index(elem)
+        if idx >= len(self.chord_notes):
+            return 0
         else:
-            print(f"elem = {elem}, not found in any scale sry")
-            raise ValueError
+            if self.chord_notes[idx][0] in self.scale:
+                return self.scale.index(self.chord_notes[idx][0])
+            else:
+                temp_scale = self._pick_chord_scale(idx)
+                if elem in temp_scale:
+                    return temp_scale.index(elem)
+        # If all else fails, just return index of very first note
+        return 0
 
     # Find the right scale for this measure
-    def _pick_scale(self, idx):
-        primary_count = 0
-        secondary_count = 0
-        for note in self.chord_notes[idx]:
-            if note in self.primary_scale:
-                primary_count += 1
-            if note in self.secondary_scale:
-                secondary_count += 1
-        if primary_count >= secondary_count:
-            return "primary"
+    def _pick_chord_scale(self, idx):
+        if self._is_chord_in_scale(self.chord_notes[idx], self.scale):
+            return self.scale
         else:
-            return "secondary"
+            scaleBuilder = ScaleBuilder(self.chord_notes[idx][0], "major")
+            major_scale = scaleBuilder.build_scale()
+            minor_scale = scaleBuilder.build_scale(style="minor")
+            if self._is_chord_in_scale(self.chord_notes[idx], major_scale):
+                return major_scale
+            elif self._is_chord_in_scale(self.chord_notes[idx], minor_scale):
+                return minor_scale
+            else:
+                print("Issue with parsing chord into scale from some reason, weird lol")
+                return self.scale
+
+    def _is_chord_in_scale(self, chord_notes, scale):
+        count = 0
+        for note in chord_notes:
+            if note in scale:
+                count += 1
+        if count == 3:
+            return True
+        else:
+            return False

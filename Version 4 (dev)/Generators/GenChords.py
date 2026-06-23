@@ -1,12 +1,13 @@
 import random
 
+from Builders.ChordBuilder import ChordBuilder
+
 
 class GenChords:
 
     def __init__(
         self,
-        scale_major,
-        scale_minor,
+        key,
         style,
         length,
         verse_type,
@@ -15,8 +16,7 @@ class GenChords:
         using_prebuilt=False,
     ):
         # Common parameters across all styles of songs
-        self.scale_major = scale_major
-        self.scale_minor = scale_minor
+        self.key = key
         self.style = style
 
         # ================================= #
@@ -111,7 +111,7 @@ class GenChords:
                     list(self.prebuilt_chords_min.keys())
                 )
                 self.chords = self.prebuilt_chords_min[self.prebuilt_name]
-        print(f"Using prebuilt progression: {self.prebuilt_name}")
+        print(f"Using prebuilt progression: {self.prebuilt_name}, {self.chords}")
 
     def gen_chords(self):
         chords = ["I"] if self.style == "major" else ["i"]
@@ -150,59 +150,6 @@ class GenChords:
     # CONVERT CHORDS TO NOTES #
     # ======================= #
     def convert_chords(self):
-        # adding the specific notes for each chord
-        # if adding more chords, add the notes for those chords here
+        chordBuilder = ChordBuilder(self.key)
         for chord in self.chords:
-            match chord:
-                case "I":  # 1, 3, 5
-                    self.chord_notes.append(
-                        [self.scale_major[0], self.scale_major[2], self.scale_major[4]]
-                    )
-                case "i":  # 1, 3, 5
-                    self.chord_notes.append(
-                        [self.scale_minor[0], self.scale_minor[2], self.scale_minor[4]]
-                    )
-                case "ii":  # 2, 4, 6
-                    self.chord_notes.append(
-                        [self.scale_major[1], self.scale_major[3], self.scale_major[5]]
-                    )
-                # TODO: Same output for III and iii?
-                # III is really only used in minor scales, so we need the minor not major
-                # iii is only used in major scales
-                # e.g. C E Am F becomes minor scale III V i VI
-                case "III":  # 3, 5, 7
-                    self.chord_notes.append(
-                        [self.scale_minor[2], self.scale_minor[4], self.scale_minor[6]]
-                    )
-                case "iii":  # 3, 5, 7
-                    self.chord_notes.append(
-                        [self.scale_major[2], self.scale_major[4], self.scale_major[6]]
-                    )
-                case "IV":  # 4, 6, 1
-                    self.chord_notes.append(
-                        [self.scale_major[3], self.scale_major[5], self.scale_major[0]]
-                    )
-                case "iv":  # 4, 6, 1
-                    self.chord_notes.append(
-                        [self.scale_minor[3], self.scale_minor[5], self.scale_minor[0]]
-                    )
-                case "V":  # 5, 7, 2
-                    self.chord_notes.append(
-                        [self.scale_major[4], self.scale_major[6], self.scale_major[1]]
-                    )
-                case "vi":  # 6, 1, 3
-                    self.chord_notes.append(
-                        [self.scale_major[5], self.scale_major[0], self.scale_major[2]]
-                    )
-                case "VI":  # 6, 1, 3
-                    self.chord_notes.append(
-                        [self.scale_major[5], self.scale_major[0], self.scale_major[2]]
-                    )
-                case "vii":  # 7, 2, 4
-                    self.chord_notes.append(
-                        [self.scale_major[6], self.scale_major[1], self.scale_major[3]]
-                    )
-                case "VII":  # 7, 2, 4
-                    self.chord_notes.append(
-                        [self.scale_major[6], self.scale_major[1], self.scale_major[3]]
-                    )
+            self.chord_notes.append(chordBuilder.build_chord(chord))

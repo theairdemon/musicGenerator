@@ -5,6 +5,7 @@ from datetime import datetime
 from midiutil.MidiFile import MIDIFile
 
 # Custom Classes
+from Builders.ScaleBuilder import ScaleBuilder
 from Generators.GenChords import GenChords
 from Generators.GenMelody import GenMelody
 from Generators.GenMidi import GenMidi
@@ -106,17 +107,17 @@ class SongGeneration:
     # MAIN SONG GENERATION CONTROL #
     # ============================ #
     def gen_song(self):
-        self.scale = self.gen_scale(self.style)
+        scaleBuilder = ScaleBuilder(key=self.key, style=self.style)
+        self.scale = scaleBuilder.build_scale()
 
         # Chord Generation
         chordGenerator = GenChords(
-            scale_major=self.gen_scale("major"),
-            scale_minor=self.gen_scale("minor"),
+            key=self.key,
             style=self.style,
             length=self.length,
             verse_type=self.verse_type,
             startRoot=self.startRoot,
-            prebuilt_name="pop_four",
+            prebuilt_name="random",
             # using_prebuilt=random.choice([True, False]),
             using_prebuilt=True,
         )
@@ -130,8 +131,7 @@ class SongGeneration:
         # Melody Generation
         melodyGenerator = GenMelody(
             genre=self.genre,
-            primary_scale=self.scale,
-            secondary_scale=self.gen_scale("major"),
+            scale=self.scale,
             chords=self.chords,
             chord_notes=self.chord_notes,
             rhythm=self.rhythm,
@@ -143,11 +143,11 @@ class SongGeneration:
     # Small generation helper; builds 1 measure with the root chord and
     # a single sustained root note
     def gen_base_measure(self):
-        self.scale = self.gen_scale(self.style)
+        scaleBuilder = ScaleBuilder(key=self.key, style=self.style)
+        self.scale = scaleBuilder.build_scale()
 
         chordGenerator = GenChords(
-            scale_major=self.gen_scale("major"),
-            scale_minor=self.gen_scale("minor"),
+            key=self.key,
             style=self.style,
             length=self.length,
             verse_type=self.verse_type,
@@ -159,31 +159,6 @@ class SongGeneration:
         self.melody = [[[self.key, 4]]]
         self.volumes = [[100]]
         self.run_MIDI()
-
-    # =========== #
-    # BUILD SCALE #
-    # =========== #
-    def gen_scale(self, style):
-        i = self.all_notes.index(self.key)
-        l = len(self.all_notes)
-        scale = []
-        if style == "major":
-            scale.append(self.all_notes[i])
-            scale.append(self.all_notes[(i + 2) % l])
-            scale.append(self.all_notes[(i + 4) % l])
-            scale.append(self.all_notes[(i + 5) % l])
-            scale.append(self.all_notes[(i + 7) % l])
-            scale.append(self.all_notes[(i + 9) % l])
-            scale.append(self.all_notes[(i + 11) % l])
-        elif style == "minor":
-            scale.append(self.all_notes[i])
-            scale.append(self.all_notes[(i + 2) % l])
-            scale.append(self.all_notes[(i + 3) % l])
-            scale.append(self.all_notes[(i + 5) % l])
-            scale.append(self.all_notes[(i + 7) % l])
-            scale.append(self.all_notes[(i + 8) % l])
-            scale.append(self.all_notes[(i + 10) % l])
-        return scale
 
     # ============= #
     # BUILD HARMONY #

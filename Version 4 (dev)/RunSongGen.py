@@ -27,15 +27,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     genreInfo.build()
 
     # Print out our song info
-    print(
-        "This is a song in the key of "
-        + key
-        + " "
-        + song_style
-        + ", in the genre of "
-        + genre
-        + "."
-    )
+    print(f"This is a song in the key of {key} {song_style}, in the genre of {genre}.")
     instrumentation = genreInfo.get("Structure").get_instruments()
     instruments_so_far = set()
     for track_name in instrumentation.keys():
@@ -72,12 +64,14 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     }
 
     # Writing verse 1 to the folder
+    print("Verse 1")
     verse1 = SongGeneration(song_input_dict)
     verse1.gen_song()
     f.write("Verse 1\n")
     f.write(str(verse1))
 
     # Writing chorus to the folder
+    print("Chorus")
     song_input_dict["verse_type"] = "chorus"
     song_input_dict["file_name"] = "chorus"
     chorus = SongGeneration(song_input_dict)
@@ -86,6 +80,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     f.write(str(chorus))
 
     # Writing verse 2 to the folder
+    print("Verse 2")
     song_input_dict["verse_type"] = "verse"
     song_input_dict["file_name"] = "verse2"
     verse2 = SongGeneration(song_input_dict)
@@ -94,6 +89,7 @@ def fullSongGen(key, minorKey, folder, song_style, genre, script_dir, startRoot=
     f.write(str(verse2))
 
     # Writing the bridge to the folder
+    print("Bridge")
     song_input_dict["length"] = 7
     song_input_dict["verse_type"] = "bridge"
     song_input_dict["file_name"] = "bridge"
