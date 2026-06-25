@@ -118,10 +118,11 @@ class SongGeneration:
             verse_type=self.verse_type,
             startRoot=self.startRoot,
             prebuilt_name="random",
-            # using_prebuilt=random.choice([True, False]),
-            using_prebuilt=True,
+            using_prebuilt=random.choice([True, False]),
+            # using_prebuilt=True,
         )
         self.chords, self.chord_notes = chordGenerator.build()
+        # print(self.chord_notes)
         self.length = len(self.chords)
 
         # Rhythm Generation

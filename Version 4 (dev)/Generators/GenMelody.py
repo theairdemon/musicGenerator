@@ -276,11 +276,21 @@ class GenMelody:
             return self.scale
         else:
             scaleBuilder = ScaleBuilder(self.chord_notes[idx][0], "major")
-            major_scale = scaleBuilder.build_scale()
+            major_scale = scaleBuilder.build_scale(style="major")
             minor_scale = scaleBuilder.build_scale(style="minor")
+            chord_major_scale = scaleBuilder.build_scale(
+                self.chord_notes[idx][0], style="major"
+            )
+            chord_minor_scale = scaleBuilder.build_scale(
+                self.chord_notes[idx][0], style="minor"
+            )
             if self._is_chord_in_scale(self.chord_notes[idx], major_scale):
                 return major_scale
             elif self._is_chord_in_scale(self.chord_notes[idx], minor_scale):
+                return minor_scale
+            elif self._is_chord_in_scale(self.chord_notes[idx], chord_major_scale):
+                return major_scale
+            elif self._is_chord_in_scale(self.chord_notes[idx], chord_minor_scale):
                 return minor_scale
             else:
                 print("Issue with parsing chord into scale from some reason, weird lol")

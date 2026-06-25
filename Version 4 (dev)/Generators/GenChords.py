@@ -150,6 +150,6 @@ class GenChords:
     # CONVERT CHORDS TO NOTES #
     # ======================= #
     def convert_chords(self):
-        chordBuilder = ChordBuilder(self.key)
+        chordBuilder = ChordBuilder(self.key, self.style)
         for chord in self.chords:
             self.chord_notes.append(chordBuilder.build_chord(chord))
